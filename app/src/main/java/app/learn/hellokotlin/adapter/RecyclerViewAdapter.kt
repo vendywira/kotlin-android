@@ -1,18 +1,17 @@
-package app.learn.hellokotlin
+package app.learn.hellokotlin.adapter
 
 import android.content.Context
 import android.support.v7.widget.RecyclerView
-import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import app.learn.hellokotlin.R
+import app.learn.hellokotlin.model.Item
+import app.learn.hellokotlin.ui.ItemView
 import com.bumptech.glide.Glide
-import com.squareup.picasso.Picasso
 import kotlinx.android.extensions.LayoutContainer
-import kotlinx.android.synthetic.main.item_list.*
-import kotlinx.android.synthetic.main.item_list.view.*
-import kotlinx.android.synthetic.main.notification_template_custom_big.view.*
+import org.jetbrains.anko.AnkoContext
 
 class RecyclerViewAdapter(
         private val context: Context,
@@ -21,7 +20,7 @@ class RecyclerViewAdapter(
     : RecyclerView.Adapter<RecyclerViewAdapter.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) =
-            ViewHolder(LayoutInflater.from(context).inflate(R.layout.item_list, parent, false), null)
+            ViewHolder(ItemView().createView(AnkoContext.create(context, parent)), null)
 
     override fun getItemCount(): Int = items.size
 
@@ -29,12 +28,12 @@ class RecyclerViewAdapter(
 
     class ViewHolder(view: View, override val containerView: View?) : RecyclerView.ViewHolder(view), LayoutContainer {
 
-        fun bindItem(items : Item, listener: (Item) -> Unit) {
-//            name.text = items.name
-//            items.image?.let { Picasso.get().load(it).into(image) }
+        val name = itemView.findViewById<TextView>(R.id.name_id)
+        val image = itemView.findViewById<ImageView>(R.id.image_id)
 
-            itemView.name.text = items.name
-            Glide.with(itemView.context).load(items.image).into(itemView.image)
+        fun bindItem(items : Item, listener: (Item) -> Unit) {
+            name.text = items.name
+            Glide.with(itemView.context).load(items.image).into(image)
 
             itemView.setOnClickListener {
                 listener(items)
