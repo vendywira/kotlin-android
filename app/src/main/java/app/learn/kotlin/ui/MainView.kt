@@ -1,14 +1,14 @@
-package app.learn.hellokotlin.ui
+package app.learn.kotlin.ui
 
 import android.support.v7.widget.LinearLayoutManager
 import android.util.Log
 import android.view.View
-import app.learn.hellokotlin.Activity.DetailClubActivity
-import app.learn.hellokotlin.Activity.MainActivity
-import app.learn.hellokotlin.Activity.MainActivity.Companion.items
-import app.learn.hellokotlin.R
-import app.learn.hellokotlin.adapter.RecyclerViewAdapter
-import app.learn.hellokotlin.model.Constant
+import app.learn.kotlin.Activity.DetailClubActivity
+import app.learn.kotlin.Activity.MainActivity
+import app.learn.kotlin.Activity.MainActivity.Companion.items
+import app.learn.kotlin.R
+import app.learn.kotlin.adapter.RecyclerViewAdapter
+import app.learn.kotlin.model.Constant
 import org.jetbrains.anko.*
 import org.jetbrains.anko.recyclerview.v7.recyclerView
 

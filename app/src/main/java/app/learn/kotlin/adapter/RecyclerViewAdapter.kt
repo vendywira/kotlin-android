@@ -1,4 +1,4 @@
-package app.learn.hellokotlin.adapter
+package app.learn.kotlin.adapter
 
 import android.content.Context
 import android.support.v7.widget.RecyclerView
@@ -6,9 +6,9 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
-import app.learn.hellokotlin.R
-import app.learn.hellokotlin.model.Item
-import app.learn.hellokotlin.ui.ItemView
+import app.learn.kotlin.R
+import app.learn.kotlin.model.Item
+import app.learn.kotlin.ui.ItemView
 import com.bumptech.glide.Glide
 import kotlinx.android.extensions.LayoutContainer
 import org.jetbrains.anko.AnkoContext

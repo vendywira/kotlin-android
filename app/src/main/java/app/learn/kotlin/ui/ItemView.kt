@@ -1,10 +1,10 @@
-package app.learn.hellokotlin.ui
+package app.learn.kotlin.ui
 
 import android.view.Gravity
 import android.view.View
 import android.view.ViewGroup
 import android.widget.LinearLayout
-import app.learn.hellokotlin.R
+import app.learn.kotlin.R
 import org.jetbrains.anko.*
 
 class ItemView : AnkoComponent<ViewGroup> {

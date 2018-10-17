@@ -1,10 +1,10 @@
-package app.learn.hellokotlin.Activity
+package app.learn.kotlin.Activity
 
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
-import app.learn.hellokotlin.R
-import app.learn.hellokotlin.model.Item
-import app.learn.hellokotlin.ui.MainView
+import app.learn.kotlin.R
+import app.learn.kotlin.model.Item
+import app.learn.kotlin.ui.MainView
 import org.jetbrains.anko.setContentView
 
 class MainActivity : AppCompatActivity() {

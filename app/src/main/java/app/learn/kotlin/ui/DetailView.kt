@@ -1,13 +1,13 @@
-package app.learn.hellokotlin.ui
+package app.learn.kotlin.ui
 
 import android.os.Build
 import android.support.annotation.RequiresApi
 import android.view.Gravity
 import android.view.View
 import android.widget.LinearLayout
-import app.learn.hellokotlin.Activity.DetailClubActivity
-import app.learn.hellokotlin.R
-import app.learn.hellokotlin.model.Item
+import app.learn.kotlin.Activity.DetailClubActivity
+import app.learn.kotlin.R
+import app.learn.kotlin.model.Item
 import com.bumptech.glide.Glide
 import org.jetbrains.anko.*
 
