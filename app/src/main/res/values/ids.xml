@@ -6,4 +6,7 @@
     <item type="id" name="detail_image" />
     <item type="id" name="detail_name" />
     <item type="id" name="detail_content"/>
+    <item type="id" name="progress_bar"/>
+    <item type="id" name="swipe_refresh"/>
+    <item type="id" name="spinner"/>
 </resources>

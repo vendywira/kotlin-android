@@ -1,29 +1,46 @@
 package app.learn.kotlin.ui
 
-import android.support.v7.widget.LinearLayoutManager
-import android.util.Log
 import android.view.View
-import app.learn.kotlin.Activity.DetailClubActivity
+import android.widget.LinearLayout
 import app.learn.kotlin.Activity.MainActivity
-import app.learn.kotlin.Activity.MainActivity.Companion.items
 import app.learn.kotlin.R
-import app.learn.kotlin.adapter.RecyclerViewAdapter
-import app.learn.kotlin.model.Constant
 import org.jetbrains.anko.*
 import org.jetbrains.anko.recyclerview.v7.recyclerView
+import org.jetbrains.anko.support.v4.swipeRefreshLayout
 
 class MainView : AnkoComponent<MainActivity> {
 
     override fun createView(ui: AnkoContext<MainActivity>): View = with(ui) {
-        verticalLayout{
-            lparams(matchParent, matchParent)
+        linearLayout {
+            lparams (width = matchParent, height = wrapContent)
+            orientation = LinearLayout.VERTICAL
+            topPadding = dip(16)
+            leftPadding = dip(16)
+            rightPadding = dip(16)
 
-            recyclerView {
-                id = R.id.club_list_id
-                lparams(matchParent, matchParent)
-                layoutManager = LinearLayoutManager(context)
-                adapter = RecyclerViewAdapter(context, items) {
-                    startActivity<DetailClubActivity>(Constant.EXTRA_CONTENT.name to it)
+            spinner {
+                id = R.id.spinner
+            }
+            swipeRefreshLayout {
+                id = R.id.swipe_refresh
+                setColorSchemeResources(R.color.colorAccent,
+                        android.R.color.holo_green_light,
+                        android.R.color.holo_orange_light,
+                        android.R.color.holo_red_light)
+
+                relativeLayout{
+                    lparams (width = matchParent, height = wrapContent)
+
+                    recyclerView {
+                        id = R.id.club_list_id
+                        lparams (width = matchParent, height = wrapContent)
+                    }
+
+                    progressBar {
+                        id = R.id.progress_bar
+                    }.lparams{
+                        centerHorizontally()
+                    }
                 }
             }
         }
