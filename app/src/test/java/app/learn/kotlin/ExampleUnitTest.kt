@@ -1,4 +1,4 @@
-package app.learn.hellokotlin
+package app.learn.kotlin
 
 import org.junit.Test
 

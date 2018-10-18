@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <item type="id" name="club_list_id" />
+    <item type="id" name="name_id" />
+    <item type="id" name="image_id" />
+    <item type="id" name="detail_image" />
+    <item type="id" name="detail_name" />
+    <item type="id" name="detail_content"/>
+</resources>
