@@ -21,7 +21,7 @@ class ItemView : AnkoComponent<ViewGroup> {
 
             textView {
                 id = R.id.name_id
-                text = "Barcelona FC"
+                text = resources.getString(R.string.defult_club_name)
             }.lparams(matchParent, wrapContent){
                 margin = dip(10)
                 gravity = Gravity.CENTER_VERTICAL

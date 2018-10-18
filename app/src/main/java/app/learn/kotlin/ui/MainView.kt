@@ -23,7 +23,6 @@ class MainView : AnkoComponent<MainActivity> {
                 lparams(matchParent, matchParent)
                 layoutManager = LinearLayoutManager(context)
                 adapter = RecyclerViewAdapter(context, items) {
-                    Log.d("test", it.toString())
                     startActivity<DetailClubActivity>(Constant.EXTRA_CONTENT.name to it)
                 }
             }

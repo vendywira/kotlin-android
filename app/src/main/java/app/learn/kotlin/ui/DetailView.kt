@@ -19,7 +19,7 @@ class DetailView(var item : Item) : AnkoComponent<DetailClubActivity> {
             orientation = LinearLayout.VERTICAL
             lparams(matchParent, matchParent)
 
-            imageView() {
+            imageView {
                 Glide.with(this).load(item.image).into(this)
                 id = R.id.detail_image
                 padding = dip(20)
