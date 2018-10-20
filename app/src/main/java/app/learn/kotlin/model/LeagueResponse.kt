@@ -4,4 +4,4 @@ import android.os.Parcelable
 import kotlinx.android.parcel.Parcelize
 
 @Parcelize
-data class TeamResponse (val teams: List<Team>? = null) : Parcelable
+data class LeagueResponse (val leagues: List<League>? = null) : Parcelable

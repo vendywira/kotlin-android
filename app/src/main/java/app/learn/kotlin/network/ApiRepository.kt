@@ -2,9 +2,9 @@ package app.learn.kotlin.network
 
 import java.net.URL
 
-class ApiRepository {
+class ApiRepository : ApiRepositoryService {
 
-    fun doRequest(url: String): String {
+    override fun doRequest(url: String): String {
         return URL(url).readText()
     }
 }

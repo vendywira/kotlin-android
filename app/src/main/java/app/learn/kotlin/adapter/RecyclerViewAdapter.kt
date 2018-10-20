@@ -8,7 +8,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import app.learn.kotlin.R
 import app.learn.kotlin.model.Team
-import app.learn.kotlin.ui.ItemView
+import app.learn.kotlin.ui.ItemUi
 import com.bumptech.glide.Glide
 import kotlinx.android.extensions.LayoutContainer
 import org.jetbrains.anko.AnkoContext
@@ -20,7 +20,7 @@ class RecyclerViewAdapter(
     : RecyclerView.Adapter<RecyclerViewAdapter.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) =
-            ViewHolder(ItemView().createView(AnkoContext.create(context, parent)), null)
+            ViewHolder(ItemUi().createView(AnkoContext.create(context, parent)), null)
 
     override fun getItemCount(): Int = items.size
 

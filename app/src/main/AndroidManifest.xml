@@ -3,6 +3,7 @@
     package="app.learn.kotlin">
 
     <application
+        android:name=".AppController"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
@@ -16,7 +17,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name="app.learn.kotlin.Activity.DetailClubActivity"/>
+        <!--<activity android:name="app.learn.kotlin.Activity.DetailClubActivity"/>-->
     </application>
     <uses-permission android:name="android.permission.INTERNET"/>
 </manifest>

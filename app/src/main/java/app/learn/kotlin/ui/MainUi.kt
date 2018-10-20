@@ -8,7 +8,7 @@ import org.jetbrains.anko.*
 import org.jetbrains.anko.recyclerview.v7.recyclerView
 import org.jetbrains.anko.support.v4.swipeRefreshLayout
 
-class MainView : AnkoComponent<MainActivity> {
+class MainUi : AnkoComponent<MainActivity> {
 
     override fun createView(ui: AnkoContext<MainActivity>): View = with(ui) {
         linearLayout {

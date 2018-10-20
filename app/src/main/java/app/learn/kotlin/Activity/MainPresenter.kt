@@ -1,29 +1,10 @@
 package app.learn.kotlin.Activity
 
-import app.learn.kotlin.model.TeamResponse
-import app.learn.kotlin.network.ApiRepository
-import app.learn.kotlin.network.TheSportDBApi
-import com.google.gson.Gson
-import org.jetbrains.anko.doAsync
-import org.jetbrains.anko.uiThread
+import app.learn.kotlin.base.BasePresenterSevice
 
-class MainPresenter (
-        private val view: MainService,
-        private val apiRepository: ApiRepository,
-        private val gson: Gson) {
+interface MainPresenter : BasePresenterSevice {
 
-    fun getTeamList(league: String?) {
-        view.showLoading()
-        doAsync {
-            val data = gson.fromJson(apiRepository
-                    .doRequest(TheSportDBApi.getTeams(league)),
-                    TeamResponse::class.java
-            )
+    fun getLaugueList()
 
-            uiThread {
-                view.hideLoading()
-                view.showTeamList(data.teams)
-            }
-        }
-    }
+    fun getTeamList(leagueName: String)
 }
