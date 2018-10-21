@@ -1,4 +1,4 @@
-package app.learn.kotlin.base
+package app.learn.kotlin.mvp.base
 
 import android.widget.ProgressBar
 

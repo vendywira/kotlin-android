@@ -1,10 +1,10 @@
-package app.learn.kotlin.base
+package app.learn.kotlin.mvp.base
 
 import app.learn.kotlin.helper.RxUtils
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.disposables.Disposable
 
-abstract class BasePresenter : BasePresenterSevice {
+abstract class BasePresenterImpl : BasePresenter {
 
     private var disposableHolder: CompositeDisposable? = null
 

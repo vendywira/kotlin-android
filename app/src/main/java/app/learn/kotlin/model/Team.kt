@@ -1,8 +1,8 @@
 package app.learn.kotlin.model
 
 import android.os.Parcelable
-import kotlinx.android.parcel.Parcelize
 import com.google.gson.annotations.SerializedName
+import kotlinx.android.parcel.Parcelize
 
 @Parcelize
 data class Team (

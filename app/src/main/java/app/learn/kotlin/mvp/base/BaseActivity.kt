@@ -1,4 +1,4 @@
-package app.learn.kotlin.base
+package app.learn.kotlin.mvp.base
 
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
@@ -7,7 +7,7 @@ import app.learn.kotlin.helper.visible
 import org.jetbrains.anko.contentView
 import org.jetbrains.anko.design.snackbar
 
-abstract class BaseActivity<out T : BasePresenterSevice> : AppCompatActivity(), BaseView {
+abstract class BaseActivity<out T : BasePresenter> : AppCompatActivity(), BaseView {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

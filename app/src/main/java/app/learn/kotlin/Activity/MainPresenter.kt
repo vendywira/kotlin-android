@@ -1,8 +1,8 @@
 package app.learn.kotlin.Activity
 
-import app.learn.kotlin.base.BasePresenterSevice
+import app.learn.kotlin.mvp.base.BasePresenter
 
-interface MainPresenter : BasePresenterSevice {
+interface MainPresenter : BasePresenter {
 
     fun getLaugueList()
 

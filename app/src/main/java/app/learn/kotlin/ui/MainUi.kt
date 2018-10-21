@@ -19,10 +19,10 @@ class MainUi : AnkoComponent<MainActivity> {
             rightPadding = dip(16)
 
             spinner {
-                id = R.id.spinner
+                id = R.id.base_spinner_id
             }
             swipeRefreshLayout {
-                id = R.id.swipe_refresh
+                id = R.id.base_swipe_refresh
                 setColorSchemeResources(R.color.colorAccent,
                         android.R.color.holo_green_light,
                         android.R.color.holo_orange_light,
@@ -37,7 +37,7 @@ class MainUi : AnkoComponent<MainActivity> {
                     }
 
                     progressBar {
-                        id = R.id.progress_bar
+                        id = R.id.base_progress_bar_id
                     }.lparams{
                         centerHorizontally()
                     }

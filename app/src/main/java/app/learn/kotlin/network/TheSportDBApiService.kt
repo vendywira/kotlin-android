@@ -1,5 +1,6 @@
 package app.learn.kotlin.network
 
+import app.learn.kotlin.model.EventResponse
 import app.learn.kotlin.model.LeagueResponse
 import app.learn.kotlin.model.TeamResponse
 import io.reactivex.Observable
@@ -13,4 +14,10 @@ interface TheSportDBApiService {
 
     @GET("api/v1/json/1/search_all_teams.php")
     fun getAllTeams(@Query("l") league: String) : Observable<TeamResponse>
+
+    @GET("api/v1/json/1/eventspastleague.php")
+    fun getLastMatchByLeagueId(@Query("id") leagueId: String): Observable<EventResponse>
+
+    @GET("api/v1/json/1/eventsnextleague.php")
+    fun getNextMatchByLeagueId(@Query("id") leagueId: String): Observable<EventResponse>
 }

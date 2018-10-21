@@ -5,4 +5,7 @@ import com.google.gson.annotations.SerializedName
 import kotlinx.android.parcel.Parcelize
 
 @Parcelize
-data class TeamResponse (val teams: List<Team>? = null) : Parcelable
+data class EventResponse (
+        @field:SerializedName("events", alternate = ["event"])
+        val events: List<Event>? = null
+) : Parcelable

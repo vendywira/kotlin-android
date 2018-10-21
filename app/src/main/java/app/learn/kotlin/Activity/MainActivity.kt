@@ -7,10 +7,10 @@ import android.view.View
 import android.widget.*
 import app.learn.kotlin.R
 import app.learn.kotlin.adapter.RecyclerViewAdapter
-import app.learn.kotlin.base.BaseActivity
 import app.learn.kotlin.model.LeagueResponse
 import app.learn.kotlin.model.Team
 import app.learn.kotlin.model.TeamResponse
+import app.learn.kotlin.mvp.base.BaseActivity
 import app.learn.kotlin.ui.MainUi
 import dagger.android.AndroidInjection
 import org.jetbrains.anko.ctx
@@ -38,10 +38,10 @@ class MainActivity : BaseActivity<MainPresenter>(), MainView {
 
     override fun onReadyView() {
         MainUi().setContentView(this)
-        spinner = find(R.id.spinner)
+        spinner = find(R.id.base_spinner_id)
         listTeam = find(R.id.club_list_id)
-        swipeRefresh = find(R.id.swipe_refresh)
-        progressBar = find(R.id.progress_bar)
+        swipeRefresh = find(R.id.base_swipe_refresh)
+        progressBar = find(R.id.base_progress_bar_id)
         AndroidInjection.inject(this)
 
         presenter?.getLaugueList()

@@ -6,7 +6,26 @@
     <item type="id" name="detail_image" />
     <item type="id" name="detail_name" />
     <item type="id" name="detail_content"/>
-    <item type="id" name="progress_bar"/>
-    <item type="id" name="swipe_refresh"/>
-    <item type="id" name="spinner"/>
+    <item type="id" name="base_progress_bar_id"/>
+    <item type="id" name="base_swipe_refresh"/>
+    <item type="id" name="base_spinner_id"/>
+    <item type="id" name="base_view_pager"/>
+
+    <item name="tv_title" type="id" />
+    <item name="tv_home_team_name" type="id" />
+    <item name="tv_home_team_score" type="id" />
+    <item name="tv_away_team_score" type="id" />
+    <item name="tv_away_team_name" type="id" />
+    <item name="tv_match_date" type="id" />
+    <item name="sw_refresh" type="id" />
+    <item name="iv_icon" type="id" />
+    <item name="iv_home_team_icon" type="id" />
+    <item name="iv_away_team_icon" type="id" />
+    <item name="tv_home_team_line_up" type="id" />
+    <item name="tv_away_team_line_up" type="id" />
+    <item name="tv_player_name" type="id" />
+    <item name="tv_player_position" type="id" />
+    <item name="iv_player" type="id" />
+    <item name="iv_alert" type="id" />
+    <item name="base_recycle_view_id" type="id" />
 </resources>

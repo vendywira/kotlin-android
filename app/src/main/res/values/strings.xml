@@ -1,6 +1,9 @@
 <resources>
     <string name="app_name">Football club</string>
     <string name="defult_club_name">Barcelona FC</string>
+    <string name="vs">vs</string>
+    <string name="tab_title_prev">Last Match</string>
+    <string name="tab_title_next">Next Match</string>
     <string-array name="club_name">
         <item>Barcelona FC</item>
         <item>Real Madrid FC</item>
