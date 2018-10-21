@@ -2,8 +2,6 @@ package app.learn.kotlin.mvp.base
 
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
-import app.learn.kotlin.helper.invisible
-import app.learn.kotlin.helper.visible
 import org.jetbrains.anko.contentView
 import org.jetbrains.anko.design.snackbar
 
@@ -19,14 +17,6 @@ abstract class BaseActivity<out T : BasePresenter> : AppCompatActivity(), BaseVi
     protected abstract fun onReadyView()
 
     protected abstract fun getPresenter() : T?
-
-    override fun showLoading() {
-        getProgressBar()?.visible()
-    }
-
-    override fun hideLoading() {
-        getProgressBar()?.invisible()
-    }
 
     override fun showMessage(message: String) {
         this.contentView?.rootView?.let {

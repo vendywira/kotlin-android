@@ -16,7 +16,7 @@ import org.jetbrains.anko.support.v4.swipeRefreshLayout
 
 class BaseRecycleView<T> : AnkoComponent<T> {
     lateinit var spinner: Spinner
-    lateinit var swipeRefreshLayout: SwipeRefreshLayout
+    lateinit var swipeRefresh: SwipeRefreshLayout
     lateinit var recycleView: RecyclerView
     lateinit var progressBar: ProgressBar
 
@@ -37,7 +37,7 @@ class BaseRecycleView<T> : AnkoComponent<T> {
                 height = wrapContent
                 margin = dip(16)
             }
-            swipeRefreshLayout = swipeRefreshLayout {
+            swipeRefresh = swipeRefreshLayout {
                 id = R.id.base_swipe_refresh
                 setColorSchemeResources(R.color.colorAccent,
                         android.R.color.holo_green_light,

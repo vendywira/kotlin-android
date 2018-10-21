@@ -1,9 +1,15 @@
 <resources>
-    <string name="app_name">Football club</string>
+    <string name="app_name">Football Club</string>
     <string name="defult_club_name">Barcelona FC</string>
     <string name="vs">vs</string>
     <string name="tab_title_prev">Last Match</string>
     <string name="tab_title_next">Next Match</string>
+    <string name="label_lineups">Lineups</string>
+    <string name="label_goal_keeper">Goal Keeper</string>
+    <string name="label_defense">Defense</string>
+    <string name="label_midfield">Midfield</string>
+    <string name="label_forward">Foward</string>
+    <string name="label_substitutes">Subtitutes</string>
     <string-array name="club_name">
         <item>Barcelona FC</item>
         <item>Real Madrid FC</item>

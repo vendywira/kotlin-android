@@ -1,13 +1,13 @@
 package app.learn.kotlin.mvp.event.match
 
-import app.learn.kotlin.model.ConstantEnum
+import app.learn.kotlin.model.Constant
 import app.learn.kotlin.model.EventResponse
 import app.learn.kotlin.mvp.base.BasePresenterImpl
 import app.learn.kotlin.network.TheSportDBApiService
 import io.reactivex.android.schedulers.AndroidSchedulers
 import javax.inject.Inject
 
-class MatchPresenterImpl@Inject constructor (
+class MatchPresenterImpl @Inject constructor (
         private val view: MatchView,
         private val apiService: TheSportDBApiService)
     : BasePresenterImpl(), MatchPresenter {
@@ -17,7 +17,7 @@ class MatchPresenterImpl@Inject constructor (
                 .observeOn(AndroidSchedulers.mainThread())
                 .doOnSubscribe { view.showLoading() }
                 .doOnTerminate { view.hideLoading() }
-                .doOnError { view.showMessage(ConstantEnum.FAILED_GET_DATA.name) }
+                .doOnError { view.showMessage(Constant.FAILED_GET_DATA) }
                 .onErrorReturn { EventResponse() }
                 .subscribe {
                     view.setViewModel(it)
@@ -29,7 +29,7 @@ class MatchPresenterImpl@Inject constructor (
                 .observeOn(AndroidSchedulers.mainThread())
                 .doOnSubscribe { view.showLoading() }
                 .doOnTerminate { view.hideLoading() }
-                .doOnError { view.showMessage(ConstantEnum.FAILED_GET_DATA.name) }
+                .doOnError { view.showMessage(Constant.FAILED_GET_DATA) }
                 .onErrorReturn { EventResponse() }
                 .subscribe {
                     view.setViewModel(it)
@@ -41,7 +41,7 @@ class MatchPresenterImpl@Inject constructor (
                 .observeOn(AndroidSchedulers.mainThread())
                 .doOnSubscribe { view.showLoading() }
                 .doOnTerminate { view.hideLoading() }
-                .doOnError { view.showMessage(ConstantEnum.FAILED_GET_DATA.name) }
+                .doOnError { view.showMessage(Constant.FAILED_GET_DATA) }
                 .subscribe {
                     view.setLeagues(it)
                 })

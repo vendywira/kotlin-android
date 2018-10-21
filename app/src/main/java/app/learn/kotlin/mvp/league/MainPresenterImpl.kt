@@ -1,6 +1,6 @@
-package app.learn.kotlin.Activity
+package app.learn.kotlin.mvp.league
 
-import app.learn.kotlin.model.ConstantEnum
+import app.learn.kotlin.model.Constant
 import app.learn.kotlin.model.LeagueResponse
 import app.learn.kotlin.model.TeamResponse
 import app.learn.kotlin.mvp.base.BasePresenterImpl
@@ -18,7 +18,7 @@ class MainPresenterImpl @Inject constructor (
                 .observeOn(AndroidSchedulers.mainThread())
                 .doOnSubscribe { view.showLoading() }
                 .doOnTerminate { view.hideLoading() }
-                .doOnError { view.showMessage(ConstantEnum.FAILED_GET_DATA.name) }
+                .doOnError { view.showMessage(Constant.FAILED_GET_DATA) }
                 .onErrorReturn { LeagueResponse() }
                 .subscribe {
                     view.getListLaugue(it)
@@ -30,7 +30,7 @@ class MainPresenterImpl @Inject constructor (
                 .observeOn(AndroidSchedulers.mainThread())
                 .doOnSubscribe { view.showLoading() }
                 .doOnTerminate { view.hideLoading() }
-                .doOnError { view.showMessage(ConstantEnum.FAILED_GET_DATA.name) }
+                .doOnError { view.showMessage(Constant.FAILED_GET_DATA) }
                 .onErrorReturn { TeamResponse() }
                 .subscribe {
                     view.showTeamList(it)

@@ -1,4 +1,4 @@
-package app.learn.kotlin.Activity
+package app.learn.kotlin.mvp.league
 
 import android.support.v4.widget.SwipeRefreshLayout
 import android.support.v7.widget.LinearLayoutManager
@@ -6,12 +6,12 @@ import android.support.v7.widget.RecyclerView
 import android.view.View
 import android.widget.*
 import app.learn.kotlin.R
-import app.learn.kotlin.adapter.RecyclerViewAdapter
+import app.learn.kotlin.helper.invisible
+import app.learn.kotlin.helper.visible
 import app.learn.kotlin.model.LeagueResponse
 import app.learn.kotlin.model.Team
 import app.learn.kotlin.model.TeamResponse
 import app.learn.kotlin.mvp.base.BaseActivity
-import app.learn.kotlin.ui.MainUi
 import dagger.android.AndroidInjection
 import org.jetbrains.anko.ctx
 import org.jetbrains.anko.find
@@ -45,7 +45,7 @@ class MainActivity : BaseActivity<MainPresenter>(), MainView {
         AndroidInjection.inject(this)
 
         presenter?.getLaugueList()
-        adapter = RecyclerViewAdapter(this, clubList)  {
+        adapter = RecyclerViewAdapter(this, clubList) {
             val toast = Toast.makeText(applicationContext, it.name, Toast.LENGTH_SHORT)
             toast.show()
         }
@@ -90,5 +90,13 @@ class MainActivity : BaseActivity<MainPresenter>(), MainView {
 
             override fun onNothingSelected(parent: AdapterView<*>) {}
         }
+    }
+
+    override fun showLoading() {
+        progressBar?.visible()
+    }
+
+    override fun hideLoading() {
+        progressBar?.invisible()
     }
 }

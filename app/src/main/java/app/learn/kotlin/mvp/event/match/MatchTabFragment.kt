@@ -6,7 +6,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import app.learn.kotlin.R
-import app.learn.kotlin.adapter.ViewPagerAdapter
 import app.learn.kotlin.model.Constant.MATCH_NEXT_MATCH
 import app.learn.kotlin.model.Constant.MATCH_PREV_MATCH
 import app.learn.kotlin.mvp.base.BaseTabLayout
@@ -22,7 +21,7 @@ class MatchTabFragment : Fragment() {
         content = BaseTabLayout()
         val view = content.createView(AnkoContext.create(ctx, this))
         val viewPagerAdapter = childFragmentManager?.let {
-            ViewPagerAdapter(it)
+            MatchViewPagerAdapter(it)
         }
         viewPagerAdapter?.let {
             it.addFragment(getString(R.string.tab_title_prev), MatchFragment.newInstance(MATCH_PREV_MATCH))

@@ -20,4 +20,10 @@ interface TheSportDBApiService {
 
     @GET("api/v1/json/1/eventsnextleague.php")
     fun getNextMatchByLeagueId(@Query("id") leagueId: String): Observable<EventResponse>
+
+    @GET("api/v1/json/1/lookupevent.php")
+    fun getEventByEventId(@Query("id") eventId: String): Observable<EventResponse>
+
+    @GET("api/v1/json/1/lookupteam.php")
+    fun getTeamByTeamId(@Query("id") teamId: String): Observable<TeamResponse>
 }

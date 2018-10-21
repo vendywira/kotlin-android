@@ -11,7 +11,7 @@ import app.learn.kotlin.R
 import org.jetbrains.anko.*
 import org.jetbrains.anko.cardview.v7.cardView
 
-class MatchUi : AnkoComponent<ViewGroup> {
+class MatchUI : AnkoComponent<ViewGroup> {
 
     override fun createView(ui: AnkoContext<ViewGroup>): View = with(ui) {
         cardView {

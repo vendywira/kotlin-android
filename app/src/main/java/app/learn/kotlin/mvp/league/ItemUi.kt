@@ -1,4 +1,4 @@
-package app.learn.kotlin.ui
+package app.learn.kotlin.mvp.league
 
 import android.view.Gravity
 import android.view.View

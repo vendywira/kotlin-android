@@ -14,7 +14,7 @@ class MatchAdapter(private val listOfMatch: List<MatchModelVO>,
     : RecyclerView.Adapter<MatchAdapter.MatchHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MatchHolder {
-        return MatchHolder(MatchUi().createView(AnkoContext.create(parent.context, parent)))
+        return MatchHolder(MatchUI().createView(AnkoContext.create(parent.context, parent)))
     }
 
     override fun getItemCount(): Int = listOfMatch.size

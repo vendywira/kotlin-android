@@ -11,15 +11,19 @@ import android.view.ViewGroup
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.ProgressBar
+import app.learn.kotlin.helper.invisible
+import app.learn.kotlin.helper.visible
 import app.learn.kotlin.model.*
 import app.learn.kotlin.model.Constant.MATCH_NEXT_MATCH
 import app.learn.kotlin.model.Constant.MATCH_PREV_MATCH
+import app.learn.kotlin.model.Constant.TAG_MENU
 import app.learn.kotlin.mvp.base.BaseFragment
 import app.learn.kotlin.mvp.base.BaseRecycleView
+import app.learn.kotlin.mvp.event.detail.MatchDetailActivity
 import dagger.android.support.AndroidSupportInjection
 import org.jetbrains.anko.AnkoContext
+import org.jetbrains.anko.startActivity
 import org.jetbrains.anko.support.v4.ctx
-import org.jetbrains.anko.support.v4.toast
 import javax.inject.Inject
 
 class MatchFragment : BaseFragment<MatchPresenter>(), MatchView {
@@ -37,12 +41,6 @@ class MatchFragment : BaseFragment<MatchPresenter>(), MatchView {
     private var leaguesResponses: MutableList<League> = mutableListOf()
 
     companion object {
-        const val TAG_MENU_PREV_MATCH = "TAG_MENU_PREV_MATCH"
-        const val TAG_MENU_NEXT_MATCH = "TAG_MENU_NEXT_MATCH"
-        const val TAG_MENU_FAVORITE = "TAG_MENU_FAVORITE"
-        const val TAG_MENU = "menu"
-        const val TAG_EVENT_ID = "event_id"
-
         fun newInstance(tag: String): MatchFragment {
             val fragment = MatchFragment()
             val bundle = Bundle()
@@ -55,7 +53,6 @@ class MatchFragment : BaseFragment<MatchPresenter>(), MatchView {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         tagMenu = arguments?.getString(TAG_MENU) ?: MATCH_PREV_MATCH
-        leagueId = "4328"
     }
 
     override fun onAttach(context: Context?) {
@@ -74,9 +71,11 @@ class MatchFragment : BaseFragment<MatchPresenter>(), MatchView {
         val view = contentUi.createView(AnkoContext.create(ctx, this))
         progressBar = contentUi.progressBar
         presenter.getAllLeague()
-        matchAdapter = MatchAdapter(listOfMatch, {position -> toast(listOfMatch[position].toString())})
+        matchAdapter = MatchAdapter(listOfMatch
+        ) { position -> ctx.startActivity<MatchDetailActivity>(
+                Constant.MATCH_EVENT_ID to listOfMatch[position].eventId)}
         contentUi.recycleView.adapter = matchAdapter
-        contentUi.swipeRefreshLayout.setOnRefreshListener {
+        contentUi.swipeRefresh.setOnRefreshListener {
             getMatch()
         }
         return view
@@ -131,32 +130,12 @@ class MatchFragment : BaseFragment<MatchPresenter>(), MatchView {
         }
     }
 
-    /*override fun onCreateOptionsMenu(menu: Menu?, inflater: MenuInflater?) {
-        inflater?.inflate(R.menu.search, menu)
-
-        val item = menu?.findItem(R.id.search)
-        val sv = SearchView((activity as MainActivity).supportActionBar?.themedContext)
-        item?.setShowAsAction(MenuItemImpl.SHOW_AS_ACTION_COLLAPSE_ACTION_VIEW or MenuItemImpl.SHOW_AS_ACTION_IF_ROOM)
-        item?.actionView = sv
-        sv.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
-            override fun onQueryTextSubmit(query: String): Boolean {
-                filterData(query)
-                return false
-            }
-
-            override fun onQueryTextChange(newText: String): Boolean {
-                filterData(newText)
-                return false
-            }
-        })
-        super.onCreateOptionsMenu(menu, inflater)
+    override fun showLoading() {
+        contentUi.swipeRefresh.isRefreshing = false
+        progressBar?.visible()
     }
 
-    fun filterData(keyword: String) {
-        if (keyword.isNotBlank())
-            presenter.searchMatch(keyword)
-        else
-            getMatch()
-    }*/
-
+    override fun hideLoading() {
+        progressBar?.invisible()
+    }
 }

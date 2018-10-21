@@ -1,10 +1,10 @@
-package app.learn.kotlin.adapter
+package app.learn.kotlin.mvp.event.match
 
 import android.support.v4.app.Fragment
 import android.support.v4.app.FragmentManager
 import android.support.v4.app.FragmentPagerAdapter
 
-class ViewPagerAdapter(fm: FragmentManager) : FragmentPagerAdapter(fm) {
+class MatchViewPagerAdapter(fm: FragmentManager) : FragmentPagerAdapter(fm) {
 
     private val fragmentList = mutableListOf<Fragment>()
     private val fragmentTitleList = mutableListOf<String>()

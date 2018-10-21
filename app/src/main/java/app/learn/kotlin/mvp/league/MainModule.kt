@@ -1,4 +1,4 @@
-package app.learn.kotlin.Activity
+package app.learn.kotlin.mvp.league
 
 import app.learn.kotlin.di.scope.ActivityScope
 import dagger.Binds

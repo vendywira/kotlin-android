@@ -1,4 +1,4 @@
-package app.learn.kotlin.adapter
+package app.learn.kotlin.mvp.league
 
 import android.content.Context
 import android.support.v7.widget.RecyclerView
@@ -8,7 +8,6 @@ import android.widget.ImageView
 import android.widget.TextView
 import app.learn.kotlin.R
 import app.learn.kotlin.model.Team
-import app.learn.kotlin.ui.ItemUi
 import com.bumptech.glide.Glide
 import kotlinx.android.extensions.LayoutContainer
 import org.jetbrains.anko.AnkoContext

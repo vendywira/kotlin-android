@@ -5,7 +5,7 @@ import android.support.v7.app.AppCompatActivity
 import app.learn.kotlin.R
 import app.learn.kotlin.R.layout.activity_main
 
-class TestActivity : AppCompatActivity() {
+class MatchActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

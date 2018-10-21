@@ -1,8 +1,7 @@
-package app.learn.kotlin.ui
+package app.learn.kotlin.mvp.league
 
 import android.view.View
 import android.widget.LinearLayout
-import app.learn.kotlin.Activity.MainActivity
 import app.learn.kotlin.R
 import org.jetbrains.anko.*
 import org.jetbrains.anko.recyclerview.v7.recyclerView
