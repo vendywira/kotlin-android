@@ -27,7 +27,7 @@ fun ImageView.loadImageUrl(url: String) {
 inline fun <reified T> Gson.fromJson(json: String) = this.fromJson<T>(json, object: TypeToken<T>() {}.type)
 
 val mapper: ModelMapper
-    get() = ModelMapperUtils.getInstance()
+    get() = ModelMapperUtils.configuration()
 
 val Context.database: DatabaseUtils
     get() = DatabaseUtils.getInstance(applicationContext)
