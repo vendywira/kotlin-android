@@ -67,6 +67,14 @@ dependencies {
     implementation "com.android.support:recyclerview-v7:$support_version"
     implementation "com.android.support:design:$support_version"
 
+    // Object mapper
+    implementation "org.mapstruct:mapstruct:$mapstruct_version"
+    annotationProcessor "org.mapstruct:mapstruct-processor:$mapstruct_version"
+    kapt "org.mapstruct:mapstruct:$mapstruct_version"
+    kapt "org.mapstruct:mapstruct-processor:$mapstruct_version"
+
+    implementation "org.modelmapper:modelmapper:2.3.0"
+
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'com.android.support.test:runner:1.0.2'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'

@@ -7,7 +7,7 @@
     android:layout_height="match_parent"
     android:background="@color/gray"
     android:orientation="vertical"
-    tools:context=".mvp.event.match.MatchActivity">
+    tools:context=".feature.event.match.MatchActivity">
 
     <FrameLayout
         android:id="@+id/content_layout"

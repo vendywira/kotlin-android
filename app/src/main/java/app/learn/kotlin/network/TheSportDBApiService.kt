@@ -1,8 +1,8 @@
 package app.learn.kotlin.network
 
-import app.learn.kotlin.model.EventResponse
-import app.learn.kotlin.model.LeagueResponse
-import app.learn.kotlin.model.TeamResponse
+import app.learn.kotlin.model.response.EventResponse
+import app.learn.kotlin.model.response.LeagueResponse
+import app.learn.kotlin.model.response.TeamResponse
 import io.reactivex.Observable
 import retrofit2.http.GET
 import retrofit2.http.Query
