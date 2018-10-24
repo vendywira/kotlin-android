@@ -1,4 +1,4 @@
-package app.learn.kotlin.ui
+package app.learn.kotlin.mvp.league
 
 import android.view.Gravity
 import android.view.View
@@ -7,7 +7,7 @@ import android.widget.LinearLayout
 import app.learn.kotlin.R
 import org.jetbrains.anko.*
 
-class ItemView : AnkoComponent<ViewGroup> {
+class ItemUi : AnkoComponent<ViewGroup> {
     override fun createView(ui: AnkoContext<ViewGroup>): View = with(ui) {
         linearLayout {
             orientation = LinearLayout.HORIZONTAL

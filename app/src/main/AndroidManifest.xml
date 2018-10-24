@@ -3,20 +3,22 @@
     package="app.learn.kotlin">
 
     <application
+        android:name=".AppController"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name="app.learn.kotlin.Activity.MainActivity">
+        <activity android:name="app.learn.kotlin.mvp.event.match.MatchActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name="app.learn.kotlin.Activity.DetailClubActivity"/>
+        <activity android:name=".mvp.event.detail.MatchDetailActivity"/>
     </application>
-
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 </manifest>
