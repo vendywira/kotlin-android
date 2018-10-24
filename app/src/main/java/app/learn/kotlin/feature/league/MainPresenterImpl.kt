@@ -1,9 +1,8 @@
 package app.learn.kotlin.feature.league
 
-import app.learn.kotlin.model.Constant
-import app.learn.kotlin.model.response.LeagueResponse
-import app.learn.kotlin.model.response.TeamResponse
 import app.learn.kotlin.feature.base.BasePresenterImpl
+import app.learn.kotlin.model.Constant
+import app.learn.kotlin.model.response.ListResponse
 import app.learn.kotlin.network.TheSportDBApiService
 import io.reactivex.android.schedulers.AndroidSchedulers
 import javax.inject.Inject
@@ -19,7 +18,7 @@ class MainPresenterImpl @Inject constructor (
                 .doOnSubscribe { view.showLoading() }
                 .doOnTerminate { view.hideLoading() }
                 .doOnError { view.showMessage(Constant.FAILED_GET_DATA) }
-                .onErrorReturn { LeagueResponse() }
+                .onErrorReturn { ListResponse() }
                 .subscribe {
                     view.getListLaugue(it)
                 })
@@ -31,7 +30,7 @@ class MainPresenterImpl @Inject constructor (
                 .doOnSubscribe { view.showLoading() }
                 .doOnTerminate { view.hideLoading() }
                 .doOnError { view.showMessage(Constant.FAILED_GET_DATA) }
-                .onErrorReturn { TeamResponse() }
+                .onErrorReturn { ListResponse() }
                 .subscribe {
                     view.showTeamList(it)
                 })

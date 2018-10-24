@@ -95,12 +95,12 @@ class MatchFragment : BaseFragment<MatchPresenter>(), MatchView {
 
     override fun getSelectedLeagueId(): String? = leagueId
 
-    override fun setViewModel(eventResponse: EventResponse?) {
+    override fun setViewModel(eventResponse: ListResponse<Event>?) {
         listOfMatch.clear()
         eventResponses.clear()
         eventResponse?.let { it ->
-            eventResponses.addAll(it.events.orEmpty())
-            it.events?.forEach {
+            eventResponses.addAll(it.contents.orEmpty())
+            it.contents?.forEach {
                 listOfMatch.add(MatchModelVO(it.eventId, it.strDate.orEmpty(), it.teamHomeName.orEmpty(),
                         it.teamHomeScore ?: 0, it.teamAwayName.orEmpty(), it.teamAwayScore ?: 0))
             }
@@ -108,10 +108,10 @@ class MatchFragment : BaseFragment<MatchPresenter>(), MatchView {
         matchAdapter.notifyDataSetChanged()
     }
 
-    override fun setLeagues(leagueResponse: LeagueResponse?) {
+    override fun setLeagues(leagueResponse: ListResponse<League>?) {
         leagueResponse?.let { response ->
-            leaguesResponses.addAll(response.leagues.orEmpty())
-            response.leagues?.forEach {
+            leaguesResponses.addAll(response.contents.orEmpty())
+            response.contents?.forEach {
                 leagues.add(it.name.orEmpty())
             }
         }

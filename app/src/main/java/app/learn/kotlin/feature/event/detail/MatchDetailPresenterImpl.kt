@@ -16,13 +16,13 @@ class MatchDetailPresenterImpl @Inject constructor (
                 .doOnSubscribe { view.showLoading() }
                 .doOnTerminate { view.hideLoading() }
                 .doOnNext {
-                    it?.events?.get(0)?.let {
+                    it?.contents?.get(0)?.let {
                         getTeamDetail(it.idHomeTeam.orEmpty())
                         getTeamDetail(it.idAwayTeam.orEmpty())
                     }
                 }
                 .subscribe {
-                    it?.events?.get(0)?.let {
+                    it?.contents?.get(0)?.let {
                         view.setEventDetailModel(it)
                     }
                 })
@@ -32,7 +32,7 @@ class MatchDetailPresenterImpl @Inject constructor (
         super.addDisposable(apiService.getTeamByTeamId(teamId)
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe {
-                    it?.teams?.get(0)?.let {
+                    it?.contents?.get(0)?.let {
                         view.setTeamDetailModel(it)
                     }
                 })

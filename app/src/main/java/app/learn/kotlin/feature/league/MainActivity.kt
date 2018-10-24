@@ -6,12 +6,12 @@ import android.support.v7.widget.RecyclerView
 import android.view.View
 import android.widget.*
 import app.learn.kotlin.R
+import app.learn.kotlin.feature.base.BaseActivity
 import app.learn.kotlin.helper.invisible
 import app.learn.kotlin.helper.visible
-import app.learn.kotlin.model.response.LeagueResponse
+import app.learn.kotlin.model.response.League
+import app.learn.kotlin.model.response.ListResponse
 import app.learn.kotlin.model.response.Team
-import app.learn.kotlin.model.response.TeamResponse
-import app.learn.kotlin.feature.base.BaseActivity
 import dagger.android.AndroidInjection
 import org.jetbrains.anko.ctx
 import org.jetbrains.anko.find
@@ -64,18 +64,18 @@ class MainActivity : BaseActivity<MainPresenter>(), MainView {
 
     override fun leagueName(): String = leagueName
 
-    override fun showTeamList(teamResponse: TeamResponse?) {
+    override fun showTeamList(teamResponse: ListResponse<Team>?) {
         swipeRefresh.isRefreshing = false
         clubList.clear()
-        teamResponse?.teams?.let {
+        teamResponse?.contents?.let {
             clubList.addAll(it)
         }
         adapter.notifyDataSetChanged()
     }
 
-    override fun getListLaugue(leagueResponse: LeagueResponse?) {
+    override fun getListLaugue(leagueResponse: ListResponse<League>?) {
         leagues.clear()
-        leagueResponse?.leagues?.forEach {
+        leagueResponse?.contents?.forEach {
             leagues.add(it.name)
         }
 
