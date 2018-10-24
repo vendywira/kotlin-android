@@ -6,6 +6,7 @@ import android.widget.ProgressBar
 import app.learn.kotlin.feature.base.BaseActivity
 import app.learn.kotlin.helper.invisible
 import app.learn.kotlin.helper.loadImageUrl
+import app.learn.kotlin.helper.mapper
 import app.learn.kotlin.helper.visible
 import app.learn.kotlin.model.Constant
 import app.learn.kotlin.model.entity.FavoriteEvent
@@ -13,8 +14,8 @@ import app.learn.kotlin.model.response.Event
 import app.learn.kotlin.model.response.Team
 import dagger.android.AndroidInjection
 import org.jetbrains.anko.setContentView
-import org.modelmapper.ModelMapper
 import javax.inject.Inject
+
 
 
 
@@ -75,10 +76,9 @@ class MatchDetailActivity : BaseActivity<MatchDetailPresenter>(), MatchDetailVie
             contentUI.tvAwaySubstitutes.text = it.awayLineupSubstitutes
         }
 
-//        val data = converter.convertTo(event)
-        val modelMapper = ModelMapper()
-        val data = modelMapper.map<FavoriteEvent>(event, FavoriteEvent::class.java)
-        Log.d("log converter", "${event.toString()} -> ${data.toString()}")
+
+        var data: FavoriteEvent = mapper.map(event, FavoriteEvent::class.java)
+        Log.d("log converter dada", data.toString())
     }
 
     override fun setTeamDetailModel(team: Team) {
@@ -92,11 +92,11 @@ class MatchDetailActivity : BaseActivity<MatchDetailPresenter>(), MatchDetailVie
     }
 
     override fun showLoading() {
-        progressBar?.visible()
+        progressBar.visible()
     }
 
     override fun hideLoading() {
-        progressBar?.invisible()
+        progressBar.invisible()
     }
 
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {
