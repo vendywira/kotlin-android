@@ -98,8 +98,8 @@ class MatchFragment : BaseFragment<MatchPresenter>(), MatchView {
         listOfMatch.clear()
         eventResponses.clear()
         eventResponse?.let { it ->
-            eventResponses.addAll(it.events.orEmpty())
-            it.events?.forEach {
+            eventResponses.addAll(it.contents.orEmpty())
+            it.contents?.forEach {
                 listOfMatch.add(MatchModelVO(it.idEvent, it.strDate.orEmpty(), it.strHomeTeam.orEmpty(),
                         it.intHomeScore.orEmpty(), it.strAwayTeam.orEmpty(), it.intAwayScore.orEmpty()))
             }
@@ -132,10 +132,10 @@ class MatchFragment : BaseFragment<MatchPresenter>(), MatchView {
 
     override fun showLoading() {
         contentUi.swipeRefresh.isRefreshing = false
-        progressBar?.visible()
+        progressBar.visible()
     }
 
     override fun hideLoading() {
-        progressBar?.invisible()
+        progressBar.invisible()
     }
 }

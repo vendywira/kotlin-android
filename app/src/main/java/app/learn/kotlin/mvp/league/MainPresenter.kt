@@ -4,7 +4,7 @@ import app.learn.kotlin.mvp.base.BasePresenter
 
 interface MainPresenter : BasePresenter {
 
-    fun getLaugueList()
+    fun getLeagueList()
 
     fun getTeamList(leagueName: String)
 }

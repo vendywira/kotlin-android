@@ -16,13 +16,13 @@ class MatchDetailPresenterImpl @Inject constructor (
                 .doOnSubscribe { view.showLoading() }
                 .doOnTerminate { view.hideLoading() }
                 .doOnNext {
-                    it?.events?.get(0)?.let {
+                    it?.contents?.get(0)?.let {
                         getTeamDetail(it.idHomeTeam.orEmpty())
                         getTeamDetail(it.idAwayTeam.orEmpty())
                     }
                 }
                 .subscribe {
-                    it?.events?.get(0)?.let {
+                    it?.contents?.get(0)?.let {
                         view.setEventDetailModel(it)
                     }
                 })

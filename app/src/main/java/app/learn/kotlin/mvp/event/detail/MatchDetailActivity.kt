@@ -82,11 +82,11 @@ class MatchDetailActivity : BaseActivity<MatchDetailPresenter>(), MatchDetailVie
     }
 
     override fun showLoading() {
-        progressBar?.visible()
+        progressBar.visible()
     }
 
     override fun hideLoading() {
-        progressBar?.invisible()
+        progressBar.invisible()
     }
 
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {

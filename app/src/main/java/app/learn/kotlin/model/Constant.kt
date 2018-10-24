@@ -1,7 +1,6 @@
 package app.learn.kotlin.model
 
 object Constant {
-    const val EXTRA_CONTENT = "extra-content"
     const val FAILED_GET_DATA = "FAILED_GET_DATA"
     const val MATCH_PREV_MATCH = "MATCH_PREV_MATCH"
     const val MATCH_NEXT_MATCH = "MATCH_NEXT_MATCH"

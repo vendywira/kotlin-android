@@ -13,7 +13,7 @@ class MainPresenterImpl @Inject constructor (
         private val apiService: TheSportDBApiService)
     : BasePresenterImpl(), MainPresenter {
 
-    override fun getLaugueList() {
+    override fun getLeagueList() {
         super.addDisposable(apiService.getAllLeagues()
                 .observeOn(AndroidSchedulers.mainThread())
                 .doOnSubscribe { view.showLoading() }
