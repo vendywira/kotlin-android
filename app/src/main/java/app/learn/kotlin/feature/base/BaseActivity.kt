@@ -9,12 +9,12 @@ abstract class BaseActivity<out T : BasePresenter> : AppCompatActivity(), BaseVi
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        onReadyView()
+        onInitView()
 
         getPresenter()?.run { this.onAttach() }
     }
 
-    protected abstract fun onReadyView()
+    protected abstract fun onInitView()
 
     protected abstract fun getPresenter() : T?
 

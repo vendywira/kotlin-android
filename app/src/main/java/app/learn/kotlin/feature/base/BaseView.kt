@@ -2,7 +2,7 @@ package app.learn.kotlin.feature.base
 
 import android.widget.ProgressBar
 
-open interface BaseView {
+open interface BaseView{
 
     fun getProgressBar() : ProgressBar?
 

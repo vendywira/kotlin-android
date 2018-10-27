@@ -1,12 +1,17 @@
 package app.learn.kotlin.helper
 
+import android.content.ContentValues
 import android.content.Context
+import android.os.Parcel
+import android.view.MenuItem
 import android.view.View
 import android.widget.ImageView
 import com.bumptech.glide.Glide
+import com.fasterxml.jackson.databind.ObjectMapper
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 import org.modelmapper.ModelMapper
+import java.text.SimpleDateFormat
 
 fun View.visible() {
     visibility = View.VISIBLE
@@ -20,6 +25,22 @@ fun View.gone() {
     this.visibility = View.GONE
 }
 
+fun MenuItem.visible() {
+    isVisible = true
+}
+
+fun MenuItem.invisible() {
+    isVisible = false
+}
+
+fun MenuItem.enable() {
+    isEnabled = true
+}
+
+fun MenuItem.disable() {
+    isEnabled = false
+}
+
 fun ImageView.loadImageUrl(url: String) {
     Glide.with(this.rootView.context).load(url).into(this)
 }
@@ -29,5 +50,31 @@ inline fun <reified T> Gson.fromJson(json: String) = this.fromJson<T>(json, obje
 val mapper: ModelMapper
     get() = ModelMapperUtils.configuration()
 
+val objectMapper = ObjectMapper()
+
+fun convertObjectToPair(ob: Any): ContentValues {
+    var parcel: Parcel = Parcel.obtain()
+    parcel.writeMap(objectMapper.convertValue(ob, Map::class.java))
+    parcel.setDataPosition(0);
+    return ContentValues.CREATOR.createFromParcel(parcel)
+}
+
+fun convertMapToContentValues(map: Map<*, *>): ContentValues {
+    var parcel: Parcel = Parcel.obtain()
+    parcel.writeMap(map)
+    parcel.setDataPosition(0);
+    return ContentValues.CREATOR.createFromParcel(parcel)
+}
+
 val Context.database: DatabaseUtils
     get() = DatabaseUtils.getInstance(applicationContext)
+
+fun toSimpleString(strDate: String?): String? {
+    return try {
+       SimpleDateFormat("dd/MM/yy").parse(strDate).let {
+            SimpleDateFormat("EEE, d MMM yyyy").format(it)
+        }
+    } catch (e: Exception) {
+        strDate
+    }
+}

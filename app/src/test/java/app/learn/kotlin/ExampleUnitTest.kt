@@ -27,7 +27,7 @@ class ExampleUnitTest {
 //        var converter = Mappers.getMapper(ObjectMapper::class.java)
 //        var response = converter.convertEvent(event)
 
-//        var result = converter.convertTo<Event, FavoriteEvent>(event)
+//        var result = converter.convertTo<Event, FavoriteEventEntity>(event)
 //        print(response.toString())
 
     }

@@ -1,6 +1,6 @@
 package app.learn.kotlin.model.entity
 
-data class FavoriteTeam (
+data class FavoriteTeamEntity (
     val id: Int,
     val teamId: String,
     val teamName: String,

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".feature.event.match.MatchActivity">
+
+    <item
+        android:id="@+id/menu_unfavorite"
+        android:orderInCategory="300"
+        android:title="unfavorite"
+        android:icon="@drawable/ic_unselected_favorite"
+        app:showAsAction="ifRoom">
+    </item>
+
+    <item
+        android:id="@+id/menu_favorite"
+        android:orderInCategory="300"
+        android:title="favorite"
+        android:icon="@drawable/ic_selected_favorite"
+        app:showAsAction="ifRoom">
+    </item>
+
+</menu>

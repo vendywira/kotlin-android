@@ -5,10 +5,11 @@ import android.content.Context
 import app.learn.kotlin.di.scope.ApplicationContext
 import app.learn.kotlin.di.scope.ApplicationScope
 import app.learn.kotlin.network.NetworkModule
+import app.learn.kotlin.repository.RepositoryModule
 import dagger.Module
 import dagger.Provides
 
-@Module(includes = arrayOf(NetworkModule::class))
+@Module(includes = [NetworkModule::class, RepositoryModule::class])
 class AppModule {
 
     @ApplicationScope

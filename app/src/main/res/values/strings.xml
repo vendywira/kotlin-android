@@ -10,6 +10,13 @@
     <string name="label_midfield">Midfield</string>
     <string name="label_forward">Foward</string>
     <string name="label_substitutes">Subtitutes</string>
+    <string name="favorites">Favorites</string>
+    <string name="next_match">Next Match</string>
+    <string name="prev_match">Previous Mattch</string>
+    <string name="label_goals">Goals</string>
+    <string name="label_shots">Shots</string>
+    <string name="label_line_up">Lineups</string>
+    <string name="label_foward">Foward</string>
     <string-array name="club_name">
         <item>Barcelona FC</item>
         <item>Real Madrid FC</item>

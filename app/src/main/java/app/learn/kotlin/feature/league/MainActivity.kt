@@ -36,7 +36,7 @@ class MainActivity : BaseActivity<MainPresenter>(), MainView {
     private var leagues : MutableList<String?> = mutableListOf()
     private var clubList: MutableList<Team> = mutableListOf()
 
-    override fun onReadyView() {
+    override fun onInitView() {
         MainUi().setContentView(this)
         spinner = find(R.id.base_spinner_id)
         listTeam = find(R.id.club_list_id)
