@@ -2,15 +2,7 @@
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_height="match_parent"
     android:layout_width="match_parent"
-    xmlns:tools="http://schemas.android.com/tools"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
-
-    <!--<android.support.v7.widget.Toolbar-->
-        <!--android:id="@+id/my_toolbar"-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="?attr/actionBarSize"-->
-        <!--style="@style/HeaderBar"-->
-        <!--android:elevation="4dp"/>-->
+    xmlns:tools="http://schemas.android.com/tools">
 
     <ScrollView
         android:layout_width="match_parent"
@@ -21,10 +13,13 @@
            android:layout_width="match_parent"
            android:layout_height="match_parent"
            android:orientation="vertical">
-           <android.support.v4.widget.ContentLoadingProgressBar
+           <ProgressBar
+               android:id="@+id/base_progress_bar_id"
                android:layout_width="wrap_content"
-               android:layout_height="wrap_content"
-               android:id="@+id/base_progress_bar_id"/>
+               android:layout_gravity="center"
+               android:foregroundGravity="center_horizontal"
+               android:layout_height="wrap_content" >
+           </ProgressBar>
            <TextView
                android:id="@+id/tv_start_date"
                android:layout_width="match_parent"
