@@ -34,7 +34,7 @@ class FavoriteFragment : BaseFragment<FavoriteContract.presenter>(), FavoriteCon
     override fun getPresenter(): FavoriteContract.presenter? = presenter
 
     override fun onInitView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View {
-        var view = LayoutInflater.from(context).inflate(R.layout.base_recycle_view, container, false)
+        val view = LayoutInflater.from(context).inflate(R.layout.base_recycle_view, container, false)
         contentUi = view.base_recycle_view_id
         swipeRefresh = view.base_swipe_refresh
         contentUi.layoutManager = LinearLayoutManager(ctx)
@@ -60,14 +60,14 @@ class FavoriteFragment : BaseFragment<FavoriteContract.presenter>(), FavoriteCon
         super.onAttach(context)
     }
 
-    override fun setViewModel(listFavoriteEvent: List<FavoriteEventEntity>) {
-        listOfMatch.clear()
-        listFavoriteEvent.forEach { i -> listOfMatch.add(i)}
+    override fun setViewModel(favorite: FavoriteEventEntity) {
+        if (!listOfMatch.contains(favorite)) listOfMatch.add(favorite)
         Log.d("list of favorite match ", listOfMatch.size.toString())
         favoriteAdapter.notifyDataSetChanged()
     }
 
     override fun notifyFavoriteChange() {
+        listOfMatch.clear()
         presenter.getListEventFavorite()
     }
 

@@ -5,7 +5,6 @@ import app.learn.kotlin.model.Constant
 import app.learn.kotlin.model.response.ListResponse
 import app.learn.kotlin.network.TheSportDBApiService
 import io.reactivex.android.schedulers.AndroidSchedulers
-import io.reactivex.schedulers.Schedulers
 import javax.inject.Inject
 
 class MatchPresenterImpl @Inject constructor (
@@ -43,7 +42,7 @@ class MatchPresenterImpl @Inject constructor (
                 .doOnSubscribe { view.showLoading() }
                 .doOnTerminate { view.hideLoading() }
                 .doOnError { view.showMessage(Constant.FAILED_GET_DATA) }
-                .subscribeOn(Schedulers.io())
+                .onErrorReturn { ListResponse() }
                 .subscribe {
                     view.setLeagues(it)
                 })

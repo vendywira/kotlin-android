@@ -11,7 +11,7 @@ class FavoriteContract {
     }
 
     interface view : BaseView {
-        fun setViewModel(listFavoriteEvent: List<FavoriteEventEntity>)
+        fun setViewModel(favorite: FavoriteEventEntity)
 
         fun notifyFavoriteChange()
     }

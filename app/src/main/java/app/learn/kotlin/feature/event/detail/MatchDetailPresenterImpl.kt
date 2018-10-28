@@ -15,13 +15,23 @@ class MatchDetailPresenterImpl @Inject constructor (
     : BasePresenterImpl(), MatchDetailPresenter {
 
     override fun insertMatchToFavorite(favoriteEventEntity: FavoriteEventEntity) {
-        favoriteRepository.insertEvent(favoriteEventEntity)
+        super.addDisposable(favoriteRepository.insertEvent(favoriteEventEntity)
+                .doOnSubscribe { view.showLoading() }
+                .doAfterTerminate { view.hideLoading() }
+                .observeOn(AndroidSchedulers.mainThread())
+                .doOnError { view.showMessage("Failed add to favorite") }
+                .doOnSuccess { view.showMessage("Added to favorite") }
+                .subscribe())
     }
 
     override fun deleteMatchFromFavorite(eventId: String?) {
-        if (eventId != null) {
-            favoriteRepository.deleteEvent(eventId)
-        }
+        super.addDisposable(favoriteRepository.deleteEvent(eventId.orEmpty())
+                .doOnSubscribe { view.showLoading() }
+                .doAfterTerminate { view.hideLoading() }
+                .observeOn(AndroidSchedulers.mainThread())
+                .doOnError { view.showMessage("Failed removed from favorite") }
+                .doOnSuccess { view.showMessage("Removed from favorite") }
+                .subscribe())
     }
 
     override fun isExistFavoriteEvent(eventId: String?): Boolean {
