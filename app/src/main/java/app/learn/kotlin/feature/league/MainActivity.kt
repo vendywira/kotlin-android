@@ -44,7 +44,7 @@ class MainActivity : BaseActivity<MainPresenter>(), MainView {
         progressBar = find(R.id.base_progress_bar_id)
         AndroidInjection.inject(this)
 
-        presenter?.getLaugueList()
+        presenter?.getLeagueList()
         adapter = RecyclerViewAdapter(this, clubList) {
             val toast = Toast.makeText(applicationContext, it.name, Toast.LENGTH_SHORT)
             toast.show()
