@@ -1,5 +1,6 @@
 package app.learn.kotlin.helper
 
+import android.annotation.SuppressLint
 import android.content.ContentValues
 import android.content.Context
 import android.os.Parcel
@@ -12,6 +13,7 @@ import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 import org.modelmapper.ModelMapper
 import java.text.SimpleDateFormat
+import java.util.*
 
 fun View.visible() {
     visibility = View.VISIBLE
@@ -53,14 +55,14 @@ val mapper: ModelMapper
 val objectMapper = ObjectMapper()
 
 fun convertObjectToPair(ob: Any): ContentValues {
-    var parcel: Parcel = Parcel.obtain()
+    val parcel: Parcel = Parcel.obtain()
     parcel.writeMap(objectMapper.convertValue(ob, Map::class.java))
     parcel.setDataPosition(0);
     return ContentValues.CREATOR.createFromParcel(parcel)
 }
 
 fun convertMapToContentValues(map: Map<*, *>): ContentValues {
-    var parcel: Parcel = Parcel.obtain()
+    val parcel: Parcel = Parcel.obtain()
     parcel.writeMap(map)
     parcel.setDataPosition(0);
     return ContentValues.CREATOR.createFromParcel(parcel)
@@ -69,11 +71,12 @@ fun convertMapToContentValues(map: Map<*, *>): ContentValues {
 val Context.database: DatabaseUtils
     get() = DatabaseUtils.getInstance(applicationContext)
 
+@SuppressLint("SimpleDateFormat")
 fun toSimpleString(strDate: String?): String? {
     return try {
-       SimpleDateFormat("dd/MM/yy").parse(strDate).let {
-            SimpleDateFormat("EEE, d MMM yyyy").format(it)
-        }
+        val localeId = Locale("in", "ID")
+        SimpleDateFormat("dd/MM/yy").parse(strDate)
+                .let(SimpleDateFormat("EEE, d MMM yyyy", localeId)::format)
     } catch (e: Exception) {
         strDate
     }

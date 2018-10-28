@@ -2,10 +2,10 @@ package app.learn.kotlin.feature.event.match
 
 import app.learn.kotlin.feature.base.BasePresenterImpl
 import app.learn.kotlin.model.Constant
-import app.learn.kotlin.model.response.Event
 import app.learn.kotlin.model.response.ListResponse
 import app.learn.kotlin.network.TheSportDBApiService
 import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.schedulers.Schedulers
 import javax.inject.Inject
 
 class MatchPresenterImpl @Inject constructor (
@@ -31,7 +31,7 @@ class MatchPresenterImpl @Inject constructor (
                 .doOnSubscribe { view.showLoading() }
                 .doOnTerminate { view.hideLoading() }
                 .doOnError { view.showMessage(Constant.FAILED_GET_DATA) }
-                .onErrorReturn { ListResponse<Event>() }
+                .onErrorReturn { ListResponse() }
                 .subscribe {
                     view.setViewModel(it)
                 })
@@ -43,6 +43,7 @@ class MatchPresenterImpl @Inject constructor (
                 .doOnSubscribe { view.showLoading() }
                 .doOnTerminate { view.hideLoading() }
                 .doOnError { view.showMessage(Constant.FAILED_GET_DATA) }
+                .subscribeOn(Schedulers.io())
                 .subscribe {
                     view.setLeagues(it)
                 })

@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import app.learn.kotlin.R
+import app.learn.kotlin.R.id.*
 import app.learn.kotlin.helper.toSimpleString
 import app.learn.kotlin.model.vo.MatchVO
 import org.jetbrains.anko.find
@@ -32,11 +33,11 @@ class MatchAdapter(private val listOfMatches: List<MatchVO>,
 
     class MatchHolder(view: View) : RecyclerView.ViewHolder(view) {
 
-        private var tvMatchDate: TextView = view.find(R.id.tv_match_date)
-        private var tvHomeTeamName: TextView = view.find(R.id.tv_home_team_name)
-        private var tvHomeTeamScore: TextView = view.find(R.id.tv_home_team_score)
-        private var tvAwayTeamName: TextView = view.find(R.id.tv_away_team_name)
-        private var tvAwayTeamScore: TextView = view.find(R.id.tv_away_team_score)
+        private var tvMatchDate: TextView = view.find(tv_match_date)
+        private var tvHomeTeamName: TextView = view.find(tv_home_team_name)
+        private var tvHomeTeamScore: TextView = view.find(tv_home_team_score)
+        private var tvAwayTeamName: TextView = view.find(tv_away_team_name)
+        private var tvAwayTeamScore: TextView = view.find(tv_away_team_score)
 
         fun bindItem(match: MatchVO) {
             tvMatchDate.text = toSimpleString(match.strDate)

@@ -2,9 +2,7 @@ package app.learn.kotlin.feature.event.detail
 
 import android.view.Menu
 import android.view.MenuItem
-import android.widget.ImageView
 import android.widget.ProgressBar
-import android.widget.TextView
 import app.learn.kotlin.R
 import app.learn.kotlin.feature.base.BaseActivity
 import app.learn.kotlin.helper.*
@@ -24,29 +22,6 @@ class MatchDetailActivity : BaseActivity<MatchDetailPresenter>(), MatchDetailVie
     internal lateinit var presenter: MatchDetailPresenter
 
     private lateinit var progressBar: ProgressBar
-    private lateinit var tvStartDate:TextView
-    private lateinit var tvHomeTeamName: TextView
-    private lateinit var tvHomeScore: TextView
-    private lateinit var tvHomeForward: TextView
-    private lateinit var tvHomeGoals: TextView
-    private lateinit var tvHomeGoalKeeper: TextView
-    private lateinit var tvHomeDefense: TextView
-    private lateinit var tvHomeShots: TextView
-    private lateinit var tvHomeMidfield: TextView
-    private lateinit var tvHomeTeamFormation: TextView
-    private lateinit var tvHomeSubstitutes: TextView
-    private lateinit var tvAwayTeamName: TextView
-    private lateinit var tvAwayScore: TextView
-    private lateinit var tvAwayForward: TextView
-    private lateinit var tvAwayGoals: TextView
-    private lateinit var tvAwayGoalKeeper: TextView
-    private lateinit var tvAwayDefense: TextView
-    private lateinit var tvAwayShots: TextView
-    private lateinit var tvAwayMidfield: TextView
-    private lateinit var tvAwayTeamFormation: TextView
-    private lateinit var tvAwaySubstitutes: TextView
-    private lateinit var ivHomeTeamIcon: ImageView
-    private lateinit var ivAwayTeamIcon: ImageView
     private lateinit var menu: Menu
 
     private var isFavorite: Boolean = false
@@ -67,37 +42,12 @@ class MatchDetailActivity : BaseActivity<MatchDetailPresenter>(), MatchDetailVie
     override fun getProgressBar(): ProgressBar? = progressBar
 
     override fun onInitView() {
+        AndroidInjection.inject(this)
         setContentView(R.layout.activity_match_detail)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         supportActionBar?.setDisplayShowHomeEnabled(true)
         supportActionBar?.setHomeButtonEnabled(true)
         eventId = intent.getStringExtra(Constant.MATCH_EVENT_ID)
-
-        tvStartDate = tv_start_date
-        tvHomeTeamName = tv_home_team_name
-        tvHomeScore = tv_home_team_score
-        tvHomeForward = tv_home_foward
-        tvHomeGoals = tv_home_goals
-        tvHomeGoalKeeper = tv_home_goal_keeper
-        tvHomeDefense = tv_home_defense
-        tvHomeShots = tv_home_shots
-        tvHomeMidfield = tv_home_midfield
-        tvHomeTeamFormation = tv_home_team_formation
-        tvHomeSubstitutes = tv_home_substitutes
-        tvAwayTeamName = tv_away_team_name
-        tvAwayScore = tv_away_team_score
-        tvAwayForward = tv_away_foward
-        tvAwayGoals = tv_away_goals
-        tvAwayGoalKeeper = tv_away_goal_keeper
-        tvAwayDefense = tv_away_defense
-        tvAwayShots = tv_away_shots
-        tvAwayMidfield = tv_away_midfield
-        tvAwayTeamFormation = tv_away_team_formation
-        tvAwaySubstitutes = tv_away_substitutes
-
-        ivHomeTeamIcon = iv_home_team_icon
-        ivAwayTeamIcon = iv_away_team_icon
-        AndroidInjection.inject(this)
         progressBar = base_progress_bar_id
         isFavorite = presenter.isExistFavoriteEvent(eventId)
         presenter.getDetailEvent()
@@ -119,7 +69,7 @@ class MatchDetailActivity : BaseActivity<MatchDetailPresenter>(), MatchDetailVie
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
-        var inflater = menuInflater
+        val inflater = menuInflater
         inflater.inflate(R.menu.toolbar, menu)
         this.menu = menu
         showFavoriteToggle()
@@ -138,7 +88,7 @@ class MatchDetailActivity : BaseActivity<MatchDetailPresenter>(), MatchDetailVie
             R.id.menu_unfavorite -> {
                 snackbar(findViewById(android.R.id.content), "Added to favorite")
                 isFavorite = true
-                var favorite = mapper.map(event, FavoriteEventEntity::class.java)
+                val favorite = mapper.map(event, FavoriteEventEntity::class.java)
                 presenter.insertMatchToFavorite(favorite)
                 showFavoriteToggle()
                 return true
@@ -155,39 +105,39 @@ class MatchDetailActivity : BaseActivity<MatchDetailPresenter>(), MatchDetailVie
     override fun setEventDetailModel(event: Event) {
         this.event = event
         event.let {
-            tvStartDate.text = toSimpleString(it.strDate)
+            tv_start_date.text = toSimpleString(it.strDate)
 
-            tvHomeTeamName.text = it.teamHomeName
-            tvHomeScore.text = it.teamHomeScore?.toString()
-            tvHomeForward.text = it.homeLineupForward
-            tvHomeGoals.text = it.homeGoalDetails
-            tvHomeGoalKeeper.text = it.homeLineupGoalkeeper
-            tvHomeDefense.text = it.homeLineupDefense
-            tvHomeShots.text = it.homeShots?.toString()
-            tvHomeMidfield.text = it.homeLineupMidfield
-            tvHomeTeamFormation.text = it.homeFormation
-            tvHomeSubstitutes.text = it.homeLineupSubstitutes
+            tv_home_team_name.text = it.teamHomeName
+            tv_home_team_score.text = it.teamHomeScore?.toString()
+            tv_home_foward.text = it.homeLineupForward
+            tv_home_goals.text = it.homeGoalDetails
+            tv_home_goal_keeper.text = it.homeLineupGoalkeeper
+            tv_home_defense.text = it.homeLineupDefense
+            tv_home_shots.text = it.homeShots?.toString()
+            tv_home_midfield.text = it.homeLineupMidfield
+            tv_home_team_formation.text = it.homeFormation
+            tv_home_substitutes.text = it.homeLineupSubstitutes
 
-            tvAwayTeamName.text = it.teamAwayName
-            tvAwayScore.text = it.teamAwayScore?.toString()
-            tvAwayForward.text = it.awayLineupForward
-            tvAwayGoals.text = it.awayGoalDetails
-            tvAwayGoalKeeper.text = it.awayLineupGoalkeeper
-            tvAwayDefense.text = it.awayLineupDefense
-            tvAwayShots.text = it.awayShots
-            tvAwayMidfield.text = it.awayLineupMidfield
-            tvAwayTeamFormation.text = it.awayFormation
-            tvAwaySubstitutes.text = it.awayLineupSubstitutes
+            tv_away_team_name.text = it.teamAwayName
+            tv_away_team_score.text = it.teamAwayScore?.toString()
+            tv_away_foward.text = it.awayLineupForward
+            tv_away_goals.text = it.awayGoalDetails
+            tv_away_goal_keeper.text = it.awayLineupGoalkeeper
+            tv_away_defense.text = it.awayLineupDefense
+            tv_away_shots.text = it.awayShots
+            tv_away_midfield.text = it.awayLineupMidfield
+            tv_away_team_formation.text = it.awayFormation
+            tv_away_substitutes.text = it.awayLineupSubstitutes
         }
     }
 
     override fun setTeamDetailModel(team: Team) {
         if (team.id.orEmpty() == event?.idHomeTeam) {
             teamHome = team
-            ivHomeTeamIcon.loadImageUrl(teamHome?.image.orEmpty())
+            iv_home_team_icon.loadImageUrl(teamHome?.image.orEmpty())
         } else {
             teamAway = team
-            ivAwayTeamIcon.loadImageUrl(teamAway?.image.orEmpty())
+            iv_away_team_icon.loadImageUrl(teamAway?.image.orEmpty())
         }
     }
 
