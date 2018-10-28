@@ -1,12 +1,14 @@
 package app.learn.kotlin.di.module.builder
 
-import app.learn.kotlin.mvp.league.MainActivity
-import app.learn.kotlin.mvp.league.MainModule
 import app.learn.kotlin.di.scope.ActivityScope
-import app.learn.kotlin.mvp.event.detail.MatchDetailActivity
-import app.learn.kotlin.mvp.event.detail.MatchDetailModule
-import app.learn.kotlin.mvp.event.match.MatchFragment
-import app.learn.kotlin.mvp.event.match.MatchModule
+import app.learn.kotlin.feature.event.detail.MatchDetailActivity
+import app.learn.kotlin.feature.event.detail.MatchDetailModule
+import app.learn.kotlin.feature.event.match.MatchFragment
+import app.learn.kotlin.feature.event.match.MatchModule
+import app.learn.kotlin.feature.favorite.FavoriteFragment
+import app.learn.kotlin.feature.favorite.FavoriteModule
+import app.learn.kotlin.feature.league.MainActivity
+import app.learn.kotlin.feature.league.MainModule
 import dagger.Module
 import dagger.android.ContributesAndroidInjector
 
@@ -14,7 +16,7 @@ import dagger.android.ContributesAndroidInjector
 abstract class ActivityBuilder {
 
     @ActivityScope
-    @ContributesAndroidInjector(modules = arrayOf(MainModule::class))
+    @ContributesAndroidInjector(modules = [MainModule::class])
     internal abstract fun provideMainActivity() : MainActivity
 
     @ActivityScope
@@ -23,5 +25,9 @@ abstract class ActivityBuilder {
 
     @ActivityScope
     @ContributesAndroidInjector(modules = [MatchDetailModule::class])
-    abstract fun provideMatchDetailFragment(): MatchDetailActivity
+    abstract fun provideMatchDetailActvity(): MatchDetailActivity
+
+    @ActivityScope
+    @ContributesAndroidInjector(modules = [FavoriteModule::class])
+    abstract fun provideFavoriteFragment(): FavoriteFragment
 }
