@@ -8,11 +8,11 @@ interface FavoriteMatchRepository {
 
     fun insertEvent(favoriteEventEntity: FavoriteEventEntity): Single<Boolean>
 
-    fun getEvent(eventId: String): FavoriteEventEntity
+    fun getEvent(eventId: String): Single<FavoriteEventEntity>
 
     fun getEventAll(): Observable<FavoriteEventEntity>
 
     fun deleteEvent(eventId: String): Single<Boolean>
 
-    fun isExistEvent(eventId: String): Boolean
+    fun isExistEvent(eventId: String): Single<Boolean>
 }

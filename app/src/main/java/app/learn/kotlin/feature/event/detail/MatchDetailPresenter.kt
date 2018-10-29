@@ -9,7 +9,7 @@ interface MatchDetailPresenter : BasePresenter {
 
     fun insertMatchToFavorite(favoriteEventEntity: FavoriteEventEntity)
 
-    fun isExistFavoriteEvent(eventId: String?): Boolean
+    fun isExistFavoriteEvent(eventId: String?)
 
     fun deleteMatchFromFavorite(eventId: String?)
 }

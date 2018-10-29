@@ -49,12 +49,11 @@ class MatchDetailActivity : BaseActivity<MatchDetailPresenter>(), MatchDetailVie
         supportActionBar?.setHomeButtonEnabled(true)
         eventId = intent.getStringExtra(Constant.MATCH_EVENT_ID)
         progressBar = base_progress_bar_id
-        isFavorite = presenter.isExistFavoriteEvent(eventId)
         presenter.getDetailEvent()
     }
 
-    override fun isExistFavoriteEvent() {
-        isFavorite = presenter.isExistFavoriteEvent(eventId)
+    override fun isExistFavoriteEvent(isFavorite: Boolean) {
+        this.isFavorite = isFavorite
         showFavoriteToggle()
     }
 
@@ -72,7 +71,7 @@ class MatchDetailActivity : BaseActivity<MatchDetailPresenter>(), MatchDetailVie
         val inflater = menuInflater
         inflater.inflate(R.menu.toolbar, menu)
         this.menu = menu
-        showFavoriteToggle()
+        presenter.isExistFavoriteEvent(eventId)
         return true
     }
 

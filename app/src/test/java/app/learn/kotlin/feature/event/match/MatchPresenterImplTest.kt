@@ -1,7 +1,5 @@
-package app.learn.kotlin.feature.event
+package app.learn.kotlin.feature.event.match
 
-import app.learn.kotlin.feature.event.match.MatchPresenterImpl
-import app.learn.kotlin.feature.event.match.MatchView
 import app.learn.kotlin.model.Constant
 import app.learn.kotlin.model.response.Event
 import app.learn.kotlin.model.response.League

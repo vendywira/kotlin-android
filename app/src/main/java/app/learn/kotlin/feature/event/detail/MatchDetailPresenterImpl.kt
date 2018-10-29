@@ -5,7 +5,6 @@ import app.learn.kotlin.model.entity.FavoriteEventEntity
 import app.learn.kotlin.network.TheSportDBApiService
 import app.learn.kotlin.repository.FavoriteMatchRepository
 import io.reactivex.android.schedulers.AndroidSchedulers
-import io.reactivex.schedulers.Schedulers
 import javax.inject.Inject
 
 class MatchDetailPresenterImpl @Inject constructor (
@@ -34,16 +33,19 @@ class MatchDetailPresenterImpl @Inject constructor (
                 .subscribe())
     }
 
-    override fun isExistFavoriteEvent(eventId: String?): Boolean {
-        if (eventId != null) {
-            return favoriteRepository.isExistEvent(eventId)
-        }
-        return false
+    override fun isExistFavoriteEvent(eventId: String?) {
+        super.addDisposable(favoriteRepository.isExistEvent(eventId.orEmpty())
+                .doOnSubscribe { view.showLoading() }
+                .doAfterTerminate { view.hideLoading() }
+                .observeOn(AndroidSchedulers.mainThread())
+                .doOnError { view.showMessage("failed to get data from db") }
+                .doOnSuccess { i -> view.isExistFavoriteEvent(i) }
+                .subscribe())
     }
 
     override fun getDetailEvent() {
         super.addDisposable(apiService.getEventByEventId(view.getEventId().orEmpty())
-                .doOnNext {
+                .doOnNext { it ->
                     it?.contents?.get(0)?.let {
                         getTeamDetail(it.idHomeTeam.orEmpty())
                         getTeamDetail(it.idAwayTeam.orEmpty())
@@ -52,8 +54,7 @@ class MatchDetailPresenterImpl @Inject constructor (
                 .doOnSubscribe { view.showLoading() }
                 .doOnTerminate { view.hideLoading() }
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribeOn(Schedulers.io())
-                .subscribe {
+                .subscribe { it ->
                     it?.contents?.get(0)?.let {
                         view.setEventDetailModel(it)
                     }
@@ -63,8 +64,7 @@ class MatchDetailPresenterImpl @Inject constructor (
     private fun getTeamDetail(teamId: String) {
         super.addDisposable(apiService.getTeamByTeamId(teamId)
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribeOn(Schedulers.io())
-                .subscribe {
+                .subscribe { it ->
                     it?.contents?.get(0)?.let {
                         view.setTeamDetailModel(it)
                     }

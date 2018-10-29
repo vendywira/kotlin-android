@@ -39,13 +39,19 @@ class FavoriteFragment : BaseFragment<FavoriteContract.presenter>(), FavoriteCon
         swipeRefresh = view.base_swipe_refresh
         contentUi.layoutManager = LinearLayoutManager(ctx)
         favoriteAdapter = FavoriteAdapter(listOfMatch
-        ) { position -> ctx.startActivity<MatchDetailActivity>(
-                Constant.MATCH_EVENT_ID to listOfMatch[position].eventId)}
+        ) { position ->
+            try {
+                ctx.startActivity<MatchDetailActivity>(
+                        Constant.MATCH_EVENT_ID to listOfMatch[position].eventId)
+            } catch (e: Exception) {
+                notifyFavoriteChange()
+            }
+           }
         contentUi.adapter = favoriteAdapter
-        presenter.getListEventFavorite()
+        notifyFavoriteChange()
 
         swipeRefresh.setOnRefreshListener {
-            presenter.getListEventFavorite()
+            notifyFavoriteChange()
         }
         return view
     }
@@ -61,7 +67,9 @@ class FavoriteFragment : BaseFragment<FavoriteContract.presenter>(), FavoriteCon
     }
 
     override fun setViewModel(favorite: FavoriteEventEntity) {
-        if (!listOfMatch.contains(favorite)) listOfMatch.add(favorite)
+        if (!listOfMatch.contains(favorite)) {
+            listOfMatch.add(favorite)
+        }
         Log.d("list of favorite match ", listOfMatch.size.toString())
         favoriteAdapter.notifyDataSetChanged()
     }
