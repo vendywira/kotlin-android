@@ -19,6 +19,7 @@ class FavoritePresenterImpl @Inject constructor(
                 .doOnTerminate { view.hideLoading() }
                 .doOnError { view.showMessage(Constant.FAILED_GET_DATA) }
                 .onErrorReturn { FavoriteEventEntity() }
+                .doOnComplete { view.notifyDataChange() }
                 .subscribe {
                     view.setViewModel(it)
                 })

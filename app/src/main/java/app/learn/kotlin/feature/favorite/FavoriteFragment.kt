@@ -5,7 +5,6 @@ import android.os.Bundle
 import android.support.v4.widget.SwipeRefreshLayout
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -44,21 +43,21 @@ class FavoriteFragment : BaseFragment<FavoriteContract.presenter>(), FavoriteCon
                 ctx.startActivity<MatchDetailActivity>(
                         Constant.MATCH_EVENT_ID to listOfMatch[position].eventId)
             } catch (e: Exception) {
-                notifyFavoriteChange()
+                favoriteChange()
             }
            }
         contentUi.adapter = favoriteAdapter
-        notifyFavoriteChange()
+        favoriteChange()
 
         swipeRefresh.setOnRefreshListener {
-            notifyFavoriteChange()
+            favoriteChange()
         }
         return view
     }
 
     override fun onResume() {
         super.onResume()
-        notifyFavoriteChange()
+        favoriteChange()
     }
 
     override fun onAttach(context: Context?) {
@@ -70,11 +69,13 @@ class FavoriteFragment : BaseFragment<FavoriteContract.presenter>(), FavoriteCon
         if (!listOfMatch.contains(favorite)) {
             listOfMatch.add(favorite)
         }
-        Log.d("list of favorite match ", listOfMatch.size.toString())
+    }
+
+    override fun notifyDataChange() {
         favoriteAdapter.notifyDataSetChanged()
     }
 
-    override fun notifyFavoriteChange() {
+    private fun favoriteChange() {
         listOfMatch.clear()
         presenter.getListEventFavorite()
     }

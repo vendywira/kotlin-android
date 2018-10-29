@@ -65,6 +65,7 @@ class FavoritePresenterImplTest {
         verify(favoriteRepository).getEventAll()
         verify(view).showLoading()
         verify(view).hideLoading()
+        verify(view).notifyDataChange()
         verify(view).setViewModel(favoriteEventEntity)
     }
 }

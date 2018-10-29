@@ -13,6 +13,6 @@ class FavoriteContract {
     interface view : BaseView {
         fun setViewModel(favorite: FavoriteEventEntity)
 
-        fun notifyFavoriteChange()
+        fun notifyDataChange()
     }
 }
