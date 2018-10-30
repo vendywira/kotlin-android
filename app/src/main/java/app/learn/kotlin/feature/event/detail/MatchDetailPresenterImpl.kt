@@ -13,13 +13,21 @@ class MatchDetailPresenterImpl @Inject constructor (
         private val favoriteRepository: FavoriteMatchRepository)
     : BasePresenterImpl(), MatchDetailPresenter {
 
+    companion object {
+        const val FAILED_ADD_TO_FAVORITE = "Failed add to favorite"
+        const val ADDED_TO_FAVORITE = "Added to favorite"
+        const val FAILED_TO_REMOVE_FROM_FAVORITE = "Failed to remove from favorite"
+        const val REMOVED_FROM_FAVORITE = "Removed from favorite"
+        const val FAILED_GET_DATA_FROM_DB = "Failed get data from db"
+    }
+
     override fun insertMatchToFavorite(favoriteEventEntity: FavoriteEventEntity) {
         super.addDisposable(favoriteRepository.insertEvent(favoriteEventEntity)
                 .doOnSubscribe { view.showLoading() }
                 .doAfterTerminate { view.hideLoading() }
                 .observeOn(AndroidSchedulers.mainThread())
-                .doOnError { view.showMessage("Failed add to favorite") }
-                .doOnSuccess { view.showMessage("Added to favorite") }
+                .doOnError { view.showMessage(FAILED_ADD_TO_FAVORITE) }
+                .doOnSuccess { view.showMessage(ADDED_TO_FAVORITE) }
                 .subscribe())
     }
 
@@ -28,8 +36,8 @@ class MatchDetailPresenterImpl @Inject constructor (
                 .doOnSubscribe { view.showLoading() }
                 .doAfterTerminate { view.hideLoading() }
                 .observeOn(AndroidSchedulers.mainThread())
-                .doOnError { view.showMessage("Failed removed from favorite") }
-                .doOnSuccess { view.showMessage("Removed from favorite") }
+                .doOnError { view.showMessage(FAILED_TO_REMOVE_FROM_FAVORITE) }
+                .doOnSuccess { view.showMessage(REMOVED_FROM_FAVORITE) }
                 .subscribe())
     }
 
@@ -38,7 +46,7 @@ class MatchDetailPresenterImpl @Inject constructor (
                 .doOnSubscribe { view.showLoading() }
                 .doAfterTerminate { view.hideLoading() }
                 .observeOn(AndroidSchedulers.mainThread())
-                .doOnError { view.showMessage("failed to get data from db") }
+                .doOnError { view.showMessage(FAILED_GET_DATA_FROM_DB) }
                 .doOnSuccess { i -> view.isExistFavoriteEvent(i) }
                 .subscribe())
     }
