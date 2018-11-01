@@ -30,10 +30,10 @@ class HomeActivityInstrumentedTest {
 
     @Rule
     @JvmField
-    var homeActivityRule = ActivityTestRule(HomeActivity::class.java)
+    internal var homeActivityRule = ActivityTestRule(HomeActivity::class.java)
 
     @Test
-    fun openDetailLastMatch() {
+    private fun openDetailLastMatch() {
         onView(withId(R.id.bottom_navigation)).check(matches(isDisplayed()))
         onView(withId(R.id.main_container)).check(matches(isDisplayed()))
         onView(withId(R.id.base_spinner_id)).check(matches(isDisplayed()))
@@ -49,7 +49,7 @@ class HomeActivityInstrumentedTest {
     }
 
     @Test
-    fun openDetailNextMatch() {
+    private fun openDetailNextMatch() {
         onView(withId(R.id.bottom_navigation)).check(matches(isDisplayed()))
         onView(withId(R.id.base_progress_bar_id).also { withTimeout(3000) }).check(matches(not(isDisplayed())))
         onView(withId(R.id.next_matchs)).check(matches(isCompletelyDisplayed())).perform(click())
@@ -69,7 +69,7 @@ class HomeActivityInstrumentedTest {
     }
 
     @Test
-    fun addLastMatchToFavoriteTest() {
+    private fun addLastMatchToFavoriteTest() {
         onView(withId(R.id.bottom_navigation)).check(matches(isDisplayed()))
         onView(withId(R.id.main_container)).check(matches(isDisplayed()))
         onView(withId(R.id.base_spinner_id)).check(matches(isDisplayed()))
@@ -85,7 +85,8 @@ class HomeActivityInstrumentedTest {
         try {
             // already to add favorite
             clickFavoriteIcon()
-        } catch (e: NoMatchingViewException) {}
+        } catch (e: NoMatchingViewException) {
+        }
 
         onView(withId(R.id.menu_favorite)).check(matches(isDisplayed()))
         pressBack()
@@ -93,7 +94,7 @@ class HomeActivityInstrumentedTest {
     }
 
     @Test
-    fun addNextMatchToFavoriteTest() {
+    private fun addNextMatchToFavoriteTest() {
         onView(withId(R.id.bottom_navigation)).check(matches(isDisplayed()))
         onView(withId(R.id.base_progress_bar_id).also { withTimeout(3000) })
                 .check(matches(not(isDisplayed())))
@@ -116,7 +117,8 @@ class HomeActivityInstrumentedTest {
         try {
             // already to add favorite
             clickFavoriteIcon()
-        } catch (e: NoMatchingViewException) {}
+        } catch (e: NoMatchingViewException) {
+        }
 
         onView(withId(R.id.menu_favorite)).check(matches(isDisplayed()))
         pressBack()
@@ -124,7 +126,7 @@ class HomeActivityInstrumentedTest {
     }
 
     @Test
-    fun unfavoriteTest() {
+    private fun unfavoriteTest() {
         onView(withId(R.id.bottom_navigation)).check(matches(isDisplayed()))
         onView(withId(R.id.base_progress_bar_id)
                 .also { withTimeout(3000) })

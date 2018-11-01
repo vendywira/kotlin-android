@@ -1,5 +1,7 @@
 package app.learn.kotlin.feature.event.detail
 
+import app.learn.kotlin.feature.event.detail.MatchDetailPresenterImpl.Companion.FAILED_GET_DATA_FROM_DB
+import app.learn.kotlin.feature.event.detail.MatchDetailPresenterImpl.Companion.FAILED_TO_REMOVE_FROM_FAVORITE
 import app.learn.kotlin.model.entity.FavoriteEventEntity
 import app.learn.kotlin.model.response.Event
 import app.learn.kotlin.model.response.ListResponse
@@ -113,7 +115,7 @@ class MatchDetailPresenterImplTest {
         verify(favoriteRepository).deleteEvent(EVENT_ID)
         verify(view).showLoading()
         verify(view).hideLoading()
-        verify(view).showMessage("Failed removed from favorite")
+        verify(view).showMessage(FAILED_TO_REMOVE_FROM_FAVORITE)
     }
 
     @Test
@@ -149,7 +151,7 @@ class MatchDetailPresenterImplTest {
         verify(favoriteRepository).isExistEvent(EVENT_ID)
         verify(view).showLoading()
         verify(view).hideLoading()
-        verify(view).showMessage("failed to get data from db")
+        verify(view).showMessage(FAILED_GET_DATA_FROM_DB)
     }
 
     @Test
