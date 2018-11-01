@@ -44,7 +44,7 @@ class MainActivity : BaseActivity<MainPresenter>(), MainView {
         progressBar = find(R.id.base_progress_bar_id)
         AndroidInjection.inject(this)
 
-        presenter?.getLeagueList()
+        presenter.getLeagueList()
         adapter = RecyclerViewAdapter(this, clubList) {
             val toast = Toast.makeText(applicationContext, it.name, Toast.LENGTH_SHORT)
             toast.show()
@@ -54,7 +54,7 @@ class MainActivity : BaseActivity<MainPresenter>(), MainView {
         listTeam.adapter = adapter
 
         swipeRefresh.onRefresh {
-            presenter?.getTeamList(leagueName)
+            presenter.getTeamList(leagueName)
         }
     }
 
@@ -85,7 +85,7 @@ class MainActivity : BaseActivity<MainPresenter>(), MainView {
         spinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
             override fun onItemSelected(parent: AdapterView<*>, view: View, position: Int, id: Long) {
                 leagueName = spinner.selectedItem.toString()
-                presenter?.getTeamList(leagueName)
+                presenter.getTeamList(leagueName)
             }
 
             override fun onNothingSelected(parent: AdapterView<*>) {}
@@ -93,10 +93,10 @@ class MainActivity : BaseActivity<MainPresenter>(), MainView {
     }
 
     override fun showLoading() {
-        progressBar?.visible()
+        progressBar.visible()
     }
 
     override fun hideLoading() {
-        progressBar?.invisible()
+        progressBar.invisible()
     }
 }

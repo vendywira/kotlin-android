@@ -30,10 +30,10 @@ class HomeActivityInstrumentedTest {
 
     @Rule
     @JvmField
-    internal var homeActivityRule = ActivityTestRule(HomeActivity::class.java)
+    var homeActivityRule = ActivityTestRule(HomeActivity::class.java)
 
     @Test
-    private fun openDetailLastMatch() {
+    fun openDetailLastMatch() {
         onView(withId(R.id.bottom_navigation)).check(matches(isDisplayed()))
         onView(withId(R.id.main_container)).check(matches(isDisplayed()))
         onView(withId(R.id.base_spinner_id)).check(matches(isDisplayed()))
@@ -43,13 +43,15 @@ class HomeActivityInstrumentedTest {
         onView(withId(R.id.base_recycle_view_id))
                 .perform(scrollToPosition<RecyclerViewAdapter.ViewHolder>(13), click())
         Thread.sleep(1000)
-        onView(withId(R.id.iv_home_team_icon.and(R.id.iv_away_team_icon))).check(matches(isDisplayed()))
+        onView(withId(R.id.iv_home_team_icon
+                .and(R.id.iv_away_team_icon)))
+                .check(matches(isDisplayed()))
         pressBack()
         onView(withId(R.id.base_recycle_view_id)).check(matches(isDisplayed()))
     }
 
     @Test
-    private fun openDetailNextMatch() {
+    fun openDetailNextMatch() {
         onView(withId(R.id.bottom_navigation)).check(matches(isDisplayed()))
         onView(withId(R.id.base_progress_bar_id).also { withTimeout(3000) }).check(matches(not(isDisplayed())))
         onView(withId(R.id.next_matchs)).check(matches(isCompletelyDisplayed())).perform(click())
@@ -69,7 +71,7 @@ class HomeActivityInstrumentedTest {
     }
 
     @Test
-    private fun addLastMatchToFavoriteTest() {
+    fun addLastMatchToFavoriteTest() {
         onView(withId(R.id.bottom_navigation)).check(matches(isDisplayed()))
         onView(withId(R.id.main_container)).check(matches(isDisplayed()))
         onView(withId(R.id.base_spinner_id)).check(matches(isDisplayed()))
@@ -94,7 +96,7 @@ class HomeActivityInstrumentedTest {
     }
 
     @Test
-    private fun addNextMatchToFavoriteTest() {
+    fun addNextMatchToFavoriteTest() {
         onView(withId(R.id.bottom_navigation)).check(matches(isDisplayed()))
         onView(withId(R.id.base_progress_bar_id).also { withTimeout(3000) })
                 .check(matches(not(isDisplayed())))
@@ -126,7 +128,7 @@ class HomeActivityInstrumentedTest {
     }
 
     @Test
-    private fun unfavoriteTest() {
+    fun unfavoriteTest() {
         onView(withId(R.id.bottom_navigation)).check(matches(isDisplayed()))
         onView(withId(R.id.base_progress_bar_id)
                 .also { withTimeout(3000) })
@@ -176,6 +178,6 @@ class HomeActivityInstrumentedTest {
     }
 
     private fun withTimeout(time: Long) {
-        Thread.sleep(3000)
+        Thread.sleep(time)
     }
 }
