@@ -25,7 +25,7 @@ class MatchPresenterImplTest {
     private lateinit var impl: MatchPresenterImpl
 
     @Spy
-    private lateinit var view: MatchView
+    private lateinit var view: MatchContract.View
 
     @Spy
     private lateinit var apiService: TheSportDBApiService

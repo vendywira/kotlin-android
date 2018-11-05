@@ -7,4 +7,5 @@ object Constant {
     const val MATCH_NEXT_MATCH = "MATCH_NEXT_MATCH"
     const val MATCH_EVENT_ID = "MATCH_EVENT_ID"
     const val TAG_MENU = "TAG_MENU"
+    const val QUERY_SEARCH = "QUERY_SEARCH"
 }

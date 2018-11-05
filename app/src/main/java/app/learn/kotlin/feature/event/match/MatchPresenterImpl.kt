@@ -8,9 +8,9 @@ import io.reactivex.android.schedulers.AndroidSchedulers
 import javax.inject.Inject
 
 class MatchPresenterImpl @Inject constructor (
-        private val view: MatchView,
+        private val view: MatchContract.View,
         private val apiService: TheSportDBApiService)
-    : BasePresenterImpl(), MatchPresenter {
+    : BasePresenterImpl(), MatchContract.Presenter {
 
     override fun getLastMatch() {
         super.addDisposable(apiService.getLastMatchByLeagueId(view.getSelectedLeagueId().orEmpty())

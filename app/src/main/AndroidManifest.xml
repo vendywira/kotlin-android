@@ -10,14 +10,15 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name="app.learn.kotlin.feature.HomeActivity">
+        <activity
+            android:name="app.learn.kotlin.feature.HomeActivity"
+            android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".feature.event.match.MatchActivity"/>
         <activity android:name=".feature.event.detail.MatchDetailActivity"/>
         <activity android:name=".feature.team.MainActivity"/>
     </application>

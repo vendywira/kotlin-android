@@ -8,10 +8,10 @@ import io.reactivex.android.schedulers.AndroidSchedulers
 import javax.inject.Inject
 
 class MatchDetailPresenterImpl @Inject constructor (
-        private val view: MatchDetailView,
+        private val view: MatchDetailContract.View,
         private val apiService: TheSportDBApiService,
         private val favoriteRepository: FavoriteMatchRepository)
-    : BasePresenterImpl(), MatchDetailPresenter {
+    : BasePresenterImpl(), MatchDetailContract.Presenter {
 
     companion object {
         const val FAILED_ADD_TO_FAVORITE = "Failed add to favorite"

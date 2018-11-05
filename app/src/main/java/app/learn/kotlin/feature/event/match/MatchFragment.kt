@@ -36,10 +36,10 @@ import org.jetbrains.anko.startActivity
 import org.jetbrains.anko.support.v4.ctx
 import javax.inject.Inject
 
-class MatchFragment : BaseFragment<MatchPresenter>(), MatchView {
+class MatchFragment : BaseFragment<MatchContract.Presenter>(), MatchContract.View {
 
     @Inject
-    internal lateinit var presenter: MatchPresenter
+    internal lateinit var presenter: MatchContract.Presenter
     private lateinit var contentUi: RecyclerView
     private lateinit var matchAdapter: MatchAdapter
     private lateinit var progressBar: ProgressBar
@@ -72,7 +72,7 @@ class MatchFragment : BaseFragment<MatchPresenter>(), MatchView {
         super.onAttach(context)
     }
 
-    override fun getPresenter(): MatchPresenter? = presenter
+    override fun getPresenter(): MatchContract.Presenter? = presenter
 
     override fun getProgressBar(): ProgressBar? = progressBar
 
@@ -118,7 +118,7 @@ class MatchFragment : BaseFragment<MatchPresenter>(), MatchView {
             eventResponses.addAll(it.contents.orEmpty())
             it.contents?.forEach {
                 listOfMatch.add(MatchVO(it.eventId, toSimpleString(it.strDate.orEmpty()), it.teamHomeName.orEmpty(),
-                        it.teamHomeScore ?: 0, it.teamAwayName.orEmpty(), it.teamAwayScore ?: 0))
+                        it.teamHomeScore, it.teamAwayName.orEmpty(), it.teamAwayScore))
             }
         }
         Log.d("list of match ", listOfMatch.size.toString())

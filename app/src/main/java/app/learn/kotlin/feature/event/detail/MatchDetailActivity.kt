@@ -1,5 +1,6 @@
 package app.learn.kotlin.feature.event.detail
 
+import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import android.widget.ProgressBar
@@ -16,10 +17,11 @@ import org.jetbrains.anko.design.snackbar
 import javax.inject.Inject
 
 
-class MatchDetailActivity : BaseActivity<MatchDetailPresenter>(), MatchDetailView {
+class MatchDetailActivity : BaseActivity<MatchDetailContract.Presenter>(),
+        MatchDetailContract.View {
 
     @Inject
-    internal lateinit var presenter: MatchDetailPresenter
+    internal lateinit var presenter: MatchDetailContract.Presenter
 
     private lateinit var progressBar: ProgressBar
     private lateinit var menu: Menu
@@ -37,16 +39,16 @@ class MatchDetailActivity : BaseActivity<MatchDetailPresenter>(), MatchDetailVie
 
     override fun getEventId(): String? = eventId
 
-    override fun getPresenter(): MatchDetailPresenter? = presenter
+    override fun getPresenter(): MatchDetailContract.Presenter? = presenter
 
     override fun getProgressBar(): ProgressBar? = progressBar
 
     override fun onInitView() {
         AndroidInjection.inject(this)
         setContentView(R.layout.activity_match_detail)
-        supportActionBar?.setDisplayHomeAsUpEnabled(true)
         supportActionBar?.setDisplayShowHomeEnabled(true)
         supportActionBar?.setHomeButtonEnabled(true)
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
         eventId = intent.getStringExtra(Constant.MATCH_EVENT_ID)
         progressBar = base_progress_bar_id
         presenter.getDetailEvent()
@@ -72,10 +74,11 @@ class MatchDetailActivity : BaseActivity<MatchDetailPresenter>(), MatchDetailVie
         inflater.inflate(R.menu.toolbar, menu)
         this.menu = menu
         presenter.isExistFavoriteEvent(eventId)
-        return true
+        return super.onCreateOptionsMenu(menu)
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        Log.d("test menu","hit menu "+item.itemId)
         when (item.itemId) {
             R.id.menu_favorite -> {
                 snackbar(findViewById(android.R.id.content), "Removed from favorite")
@@ -131,6 +134,7 @@ class MatchDetailActivity : BaseActivity<MatchDetailPresenter>(), MatchDetailVie
             tv_away_team_formation.text = it.awayFormation
             tv_away_substitutes.text = it.awayLineupSubstitutes
         }
+       supportActionBar?.title = "${event.teamHomeName} vs ${event.teamAwayName}"
     }
 
     override fun setTeamDetailModel(team: Team) {
