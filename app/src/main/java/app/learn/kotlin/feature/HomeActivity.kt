@@ -9,14 +9,13 @@ import app.learn.kotlin.R.layout.acivity_home
 import app.learn.kotlin.feature.event.match.MatchFragment
 import app.learn.kotlin.feature.favorite.FavoriteFragment
 import app.learn.kotlin.model.Constant
-import kotlinx.android.synthetic.main.acivity_home.*
+import kotlinx.android.synthetic.main.nav_bar_view.*
 
 class HomeActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(acivity_home)
-
         bottom_navigation.setOnNavigationItemSelectedListener { item ->
             when (item.itemId) {
                 prev_matchs -> {

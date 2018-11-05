@@ -1,4 +1,4 @@
-package app.learn.kotlin.feature.league
+package app.learn.kotlin.feature.team
 
 import android.view.View
 import android.widget.LinearLayout

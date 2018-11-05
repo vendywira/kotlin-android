@@ -5,7 +5,6 @@ import android.support.test.espresso.Espresso.pressBack
 import android.support.test.espresso.NoMatchingViewException
 import android.support.test.espresso.action.ViewActions.click
 import android.support.test.espresso.assertion.ViewAssertions.matches
-import android.support.test.espresso.contrib.RecyclerViewActions
 import android.support.test.espresso.contrib.RecyclerViewActions.actionOnItemAtPosition
 import android.support.test.espresso.contrib.RecyclerViewActions.scrollToPosition
 import android.support.test.espresso.matcher.ViewMatchers.*
@@ -15,9 +14,8 @@ import android.support.v7.widget.RecyclerView
 import app.learn.kotlin.feature.HomeActivity
 import app.learn.kotlin.feature.event.detail.MatchDetailPresenterImpl.Companion.ADDED_TO_FAVORITE
 import app.learn.kotlin.feature.event.detail.MatchDetailPresenterImpl.Companion.REMOVED_FROM_FAVORITE
-import app.learn.kotlin.feature.league.RecyclerViewAdapter
+import app.learn.kotlin.feature.team.RecyclerViewAdapter
 import org.hamcrest.CoreMatchers.not
-import org.jetbrains.anko.design.snackbar
 import org.junit.FixMethodOrder
 import org.junit.Rule
 import org.junit.Test

@@ -1,4 +1,4 @@
-package app.learn.kotlin.feature.league
+package app.learn.kotlin.feature.team
 
 import android.content.Context
 import android.support.v7.widget.RecyclerView

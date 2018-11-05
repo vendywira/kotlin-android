@@ -1,4 +1,4 @@
-package app.learn.kotlin.feature.league
+package app.learn.kotlin.feature.team
 
 import app.learn.kotlin.feature.base.BaseView
 import app.learn.kotlin.model.response.League

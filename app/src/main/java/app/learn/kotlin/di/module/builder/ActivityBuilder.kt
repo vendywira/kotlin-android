@@ -7,8 +7,8 @@ import app.learn.kotlin.feature.event.match.MatchFragment
 import app.learn.kotlin.feature.event.match.MatchModule
 import app.learn.kotlin.feature.favorite.FavoriteFragment
 import app.learn.kotlin.feature.favorite.FavoriteModule
-import app.learn.kotlin.feature.league.MainActivity
-import app.learn.kotlin.feature.league.MainModule
+import app.learn.kotlin.feature.team.MainActivity
+import app.learn.kotlin.feature.team.MainModule
 import dagger.Module
 import dagger.android.ContributesAndroidInjector
 

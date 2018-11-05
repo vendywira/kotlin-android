@@ -1,4 +1,4 @@
-package app.learn.kotlin.feature.league
+package app.learn.kotlin.feature.team
 
 import app.learn.kotlin.feature.base.BasePresenterImpl
 import app.learn.kotlin.model.Constant
