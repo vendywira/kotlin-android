@@ -24,7 +24,7 @@ class FavoritePresenterImplTest {
     private lateinit var impl: FavoritePresenterImpl
 
     @Spy
-    private lateinit var view: FavoriteContract.view
+    private lateinit var View: FavoriteContract.View
 
     @Spy
     private lateinit var favoriteRepository: FavoriteMatchRepository
@@ -53,7 +53,7 @@ class FavoritePresenterImplTest {
 
     @After
     fun tearDown() {
-        Mockito.verifyNoMoreInteractions(view, favoriteRepository)
+        Mockito.verifyNoMoreInteractions(View, favoriteRepository)
     }
 
     @Test
@@ -63,9 +63,9 @@ class FavoritePresenterImplTest {
         impl.getListEventFavorite()
 
         verify(favoriteRepository).getEventAll()
-        verify(view).showLoading()
-        verify(view).hideLoading()
-        verify(view).notifyDataChange()
-        verify(view).setViewModel(favoriteEventEntity)
+        verify(View).showLoading()
+        verify(View).hideLoading()
+        verify(View).notifyDataChange()
+        verify(View).setViewModel(favoriteEventEntity)
     }
 }

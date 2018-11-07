@@ -20,7 +20,9 @@
             </intent-filter>
         </activity>
         <activity android:name=".feature.event.detail.MatchDetailActivity"/>
-        <activity android:name=".feature.team.MainActivity"/>
+        <activity
+            android:theme="@style/AppTheme.NoActionBar"
+            android:name=".feature.search.SearchActivity"/>
     </application>
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />

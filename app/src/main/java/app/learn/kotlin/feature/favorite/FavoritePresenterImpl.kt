@@ -8,9 +8,9 @@ import io.reactivex.android.schedulers.AndroidSchedulers
 import javax.inject.Inject
 
 class FavoritePresenterImpl @Inject constructor(
-        private val view: FavoriteContract.view,
+        private val view: FavoriteContract.View,
         private val favoriteRepository: FavoriteMatchRepository)
-    : BasePresenterImpl(), FavoriteContract.presenter {
+    : BasePresenterImpl(), FavoriteContract.Presenter {
 
     override fun getListEventFavorite() {
         return super.addDisposable(favoriteRepository.getEventAll()

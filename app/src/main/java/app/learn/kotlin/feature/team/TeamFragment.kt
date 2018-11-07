@@ -1,64 +1,74 @@
 package app.learn.kotlin.feature.team
 
+import android.content.Context
+import android.os.Bundle
 import android.support.v4.widget.SwipeRefreshLayout
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
+import android.view.LayoutInflater
 import android.view.View
+import android.view.ViewGroup
 import android.widget.*
 import app.learn.kotlin.R
 import app.learn.kotlin.feature.base.BaseActivity
+import app.learn.kotlin.feature.base.BaseFragment
 import app.learn.kotlin.helper.invisible
 import app.learn.kotlin.helper.visible
 import app.learn.kotlin.model.response.League
 import app.learn.kotlin.model.response.ListResponse
 import app.learn.kotlin.model.response.Team
 import dagger.android.AndroidInjection
+import dagger.android.support.AndroidSupportInjection
+import kotlinx.android.synthetic.main.base_recycle_view.*
 import org.jetbrains.anko.ctx
 import org.jetbrains.anko.find
 import org.jetbrains.anko.setContentView
+import org.jetbrains.anko.support.v4.ctx
 import org.jetbrains.anko.support.v4.onRefresh
 import javax.inject.Inject
 import android.R as r
 
 
-class MainActivity : BaseActivity<MainPresenter>(), MainView {
+class TeamFragment : BaseFragment<TeamContract.Presenter>(), TeamContract.View {
 
     @Inject
-    internal lateinit var presenter : MainPresenter
+    internal lateinit var presenter : TeamContract.Presenter
 
     private lateinit var listTeam: RecyclerView
     private lateinit var progressBar: ProgressBar
     private lateinit var swipeRefresh: SwipeRefreshLayout
     private lateinit var spinner: Spinner
     private lateinit var leagueName: String
-    private lateinit var adapter: RecyclerViewAdapter
+    private lateinit var adapter: TeamAdapter
 
     private var leagues : MutableList<String?> = mutableListOf()
     private var clubList: MutableList<Team> = mutableListOf()
 
-    override fun onInitView() {
-        MainUi().setContentView(this)
-        spinner = find(R.id.base_spinner_id)
-        listTeam = find(R.id.club_list_id)
-        swipeRefresh = find(R.id.base_swipe_refresh)
-        progressBar = find(R.id.base_progress_bar_id)
-        AndroidInjection.inject(this)
+    override fun onInitView(inflater: LayoutInflater?, container: ViewGroup?,
+                            savedInstanceState: Bundle?): View {
+        val view = layoutInflater.inflate(R.layout.fragment_team, container, false);
+        spinner = view.find(R.id.base_spinner_id)
+        listTeam = view.find(R.id.base_recycle_view_id)
+        swipeRefresh = view.find(R.id.base_swipe_refresh)
+        progressBar = view.find(R.id.base_progress_bar_id)
 
         presenter.getLeagueList()
-        adapter = RecyclerViewAdapter(this, clubList) {
-            val toast = Toast.makeText(applicationContext, it.name, Toast.LENGTH_SHORT)
+        adapter = TeamAdapter(ctx, clubList) {
+            val toast = Toast.makeText(ctx, it.name, Toast.LENGTH_SHORT)
             toast.show()
         }
 
-        listTeam.layoutManager = LinearLayoutManager(this)
+        listTeam.layoutManager = LinearLayoutManager(ctx)
         listTeam.adapter = adapter
 
         swipeRefresh.onRefresh {
             presenter.getTeamList(leagueName)
         }
+
+        return view
     }
 
-    override fun getPresenter(): MainPresenter? = presenter
+    override fun getPresenter(): TeamContract.Presenter? = presenter
 
     override fun getProgressBar(): ProgressBar? = progressBar
 

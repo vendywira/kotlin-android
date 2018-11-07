@@ -10,6 +10,6 @@ data class ListResponse<out T : Parcelable> (
         val contents: List<T>? = null
 ) : Parcelable {
     companion object {
-        inline operator fun <reified T: Parcelable> invoke() = T::class.java.newInstance()
+        inline operator fun <reified T: Parcelable> invoke(): T = T::class.java.newInstance()
     }
 }

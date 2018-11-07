@@ -6,11 +6,11 @@ import app.learn.kotlin.model.entity.FavoriteEventEntity
 
 class FavoriteContract {
 
-    interface presenter : BasePresenter {
+    interface Presenter : BasePresenter {
         fun getListEventFavorite()
     }
 
-    interface view : BaseView {
+    interface View : BaseView {
         fun setViewModel(favorite: FavoriteEventEntity)
 
         fun notifyDataChange()

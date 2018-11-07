@@ -1,4 +1,4 @@
-package app.learn.kotlin.feature.team
+package app.learn.kotlin.feature.search
 
 import app.learn.kotlin.feature.base.BasePresenterImpl
 import app.learn.kotlin.model.Constant
@@ -7,32 +7,33 @@ import app.learn.kotlin.network.TheSportDBApiService
 import io.reactivex.android.schedulers.AndroidSchedulers
 import javax.inject.Inject
 
-class MainPresenterImpl @Inject constructor (
-        private val view: MainView,
+class SearchPresenterImpl @Inject constructor(
+        private val view: SearchContract.View,
         private val apiService: TheSportDBApiService)
-    : BasePresenterImpl(), MainPresenter {
+    : BasePresenterImpl(), SearchContract.Presenter {
 
-    override fun getLeagueList() {
-        super.addDisposable(apiService.getAllLeagues()
+    override fun searchTeams(query: String) {
+        super.addDisposable(apiService.searchTeams(query)
                 .observeOn(AndroidSchedulers.mainThread())
                 .doOnSubscribe { view.showLoading() }
                 .doOnTerminate { view.hideLoading() }
                 .doOnError { view.showMessage(Constant.FAILED_GET_DATA) }
                 .onErrorReturn { ListResponse() }
                 .subscribe {
-                    view.getListLaugue(it)
+                    view.addTeamsFound(it)
                 })
     }
 
-    override fun getTeamList(leagueName: String) {
-        super.addDisposable(apiService.getAllTeams(view.leagueName())
+    override fun searchEvent(query: String) {
+        super.addDisposable(apiService.searchEvents(query)
                 .observeOn(AndroidSchedulers.mainThread())
                 .doOnSubscribe { view.showLoading() }
                 .doOnTerminate { view.hideLoading() }
                 .doOnError { view.showMessage(Constant.FAILED_GET_DATA) }
                 .onErrorReturn { ListResponse() }
                 .subscribe {
-                    view.showTeamList(it)
+                    view.addEventsFound(it)
                 })
     }
+
 }

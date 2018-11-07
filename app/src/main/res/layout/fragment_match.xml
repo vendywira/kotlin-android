@@ -6,13 +6,11 @@
     app:layout_constraintEnd_toEndOf="parent"
     app:layout_constraintStart_toStartOf="parent">
 
-    <ProgressBar
-        android:id="@+id/base_progress_bar_id"
-        android:layout_width="wrap_content"
-        android:layout_gravity="center"
-        android:foregroundGravity="center_horizontal"
-        android:layout_height="wrap_content" >
-    </ProgressBar>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
     <Spinner
         android:id="@+id/base_spinner_id"
         android:layout_width="match_parent"
@@ -22,11 +20,20 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="43dp">
+        android:layout_marginTop="20dp">
         <include
             layout="@layout/base_recycle_view"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
     </LinearLayout>
+    </LinearLayout>
+
+    <ProgressBar
+        android:id="@+id/base_progress_bar_id"
+        android:layout_width="wrap_content"
+        android:layout_gravity="center"
+        android:foregroundGravity="center_horizontal"
+        android:layout_height="wrap_content" >
+    </ProgressBar>
 
 </FrameLayout>

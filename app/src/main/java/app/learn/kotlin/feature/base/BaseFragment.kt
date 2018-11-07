@@ -5,12 +5,13 @@ import android.support.v4.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import dagger.android.support.AndroidSupportInjection
 import org.jetbrains.anko.design.snackbar
 
 abstract class BaseFragment<out T : BasePresenter> : Fragment(), BaseView {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-
+        AndroidSupportInjection.inject(this)
         this.getPresenter()?.run {
             this.onAttach()
         }
@@ -26,5 +27,10 @@ abstract class BaseFragment<out T : BasePresenter> : Fragment(), BaseView {
         this.view?.rootView?.let {
             snackbar(it, message)
         }
+    }
+
+    override fun onDestroy() {
+        getPresenter()?.onDetach()
+        super.onDestroy()
     }
 }

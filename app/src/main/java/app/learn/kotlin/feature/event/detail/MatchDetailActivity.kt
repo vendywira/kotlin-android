@@ -5,6 +5,7 @@ import android.view.Menu
 import android.view.MenuItem
 import android.widget.ProgressBar
 import app.learn.kotlin.R
+import app.learn.kotlin.R.layout.activity_match_detail
 import app.learn.kotlin.feature.base.BaseActivity
 import app.learn.kotlin.helper.*
 import app.learn.kotlin.model.Constant
@@ -44,8 +45,7 @@ class MatchDetailActivity : BaseActivity<MatchDetailContract.Presenter>(),
     override fun getProgressBar(): ProgressBar? = progressBar
 
     override fun onInitView() {
-        AndroidInjection.inject(this)
-        setContentView(R.layout.activity_match_detail)
+        setContentView(activity_match_detail)
         supportActionBar?.setDisplayShowHomeEnabled(true)
         supportActionBar?.setHomeButtonEnabled(true)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)

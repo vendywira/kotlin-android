@@ -4,21 +4,26 @@ import android.os.Bundle
 import android.support.design.widget.TabLayout
 import android.support.v4.app.Fragment
 import android.support.v4.view.ViewPager
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.support.v7.widget.SearchView
+import android.view.*
 import app.learn.kotlin.R
 import app.learn.kotlin.model.Constant
 import app.learn.kotlin.model.Constant.MATCH_PREV_MATCH
 
 class MatchTabFragment : Fragment() {
 
+    private lateinit var searchView: SearchView
+    private lateinit var tabLayout:TabLayout
+    private lateinit var viewPager: ViewPager
+    private lateinit var viewPagerAdapter: MatchViewPagerAdapter
+
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
         val view = inflater.inflate(R.layout.fragment_tab_match, container, false)
-        val viewPager = view.findViewById<ViewPager>(R.id.viewpager)
-        val tabLayout = view.findViewById<TabLayout>(R.id.tab_match)
-        val viewPagerAdapter = childFragmentManager.let {
+        tabLayout = view.findViewById(R.id.tab_match)
+        viewPager = view.findViewById(R.id.viewpager)
+
+        viewPagerAdapter = childFragmentManager.let {
             MatchViewPagerAdapter(it)
         }
         viewPagerAdapter.let {
@@ -29,5 +34,31 @@ class MatchTabFragment : Fragment() {
             setHasOptionsMenu(true)
         }
         return view
+    }
+
+
+    private fun searchMatch(keyword: String) {
+
+        if (keyword.isNotBlank()) {
+            viewPager.removeAllViews()
+            tabLayout.removeAllViews()
+            viewPagerAdapter.let {
+                it.addFragment(getString(R.string.tab_title_next), MatchFragment.newInstance(Constant.MATCH_NEXT_MATCH))
+                viewPager.adapter = it
+                tabLayout.setupWithViewPager(viewPager)
+            }
+            viewPagerAdapter.notifyDataSetChanged()
+
+        } else {
+            viewPager.removeAllViews()
+            tabLayout.removeAllViews()
+            viewPagerAdapter.let {
+                it.addFragment(getString(R.string.tab_title_next), MatchFragment.newInstance(Constant.MATCH_NEXT_MATCH))
+                it.addFragment(getString(R.string.tab_title_prev), MatchFragment.newInstance(MATCH_PREV_MATCH))
+                viewPager.adapter = it
+                tabLayout.setupWithViewPager(viewPager)
+            }
+            viewPagerAdapter.notifyDataSetChanged()
+        }
     }
 }

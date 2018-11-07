@@ -7,8 +7,10 @@ import app.learn.kotlin.feature.event.match.MatchFragment
 import app.learn.kotlin.feature.event.match.MatchModule
 import app.learn.kotlin.feature.favorite.FavoriteFragment
 import app.learn.kotlin.feature.favorite.FavoriteModule
-import app.learn.kotlin.feature.team.MainActivity
-import app.learn.kotlin.feature.team.MainModule
+import app.learn.kotlin.feature.search.SearchActivity
+import app.learn.kotlin.feature.search.SearchModule
+import app.learn.kotlin.feature.team.TeamFragment
+import app.learn.kotlin.feature.team.TeamModule
 import dagger.Module
 import dagger.android.ContributesAndroidInjector
 
@@ -16,8 +18,8 @@ import dagger.android.ContributesAndroidInjector
 abstract class ActivityBuilder {
 
     @ActivityScope
-    @ContributesAndroidInjector(modules = [MainModule::class])
-    internal abstract fun provideMainActivity() : MainActivity
+    @ContributesAndroidInjector(modules = [TeamModule::class])
+    internal abstract fun provideMainActivity() : TeamFragment
 
     @ActivityScope
     @ContributesAndroidInjector(modules = [MatchModule::class])
@@ -30,4 +32,8 @@ abstract class ActivityBuilder {
     @ActivityScope
     @ContributesAndroidInjector(modules = [FavoriteModule::class])
     abstract fun provideFavoriteFragment(): FavoriteFragment
+
+    @ActivityScope
+    @ContributesAndroidInjector(modules = [SearchModule::class])
+    abstract fun provideSearchActivity(): SearchActivity
 }

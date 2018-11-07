@@ -2,6 +2,7 @@ package app.learn.kotlin.feature.base
 
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
+import dagger.android.AndroidInjection
 import org.jetbrains.anko.contentView
 import org.jetbrains.anko.design.snackbar
 
@@ -9,6 +10,7 @@ abstract class BaseActivity<out T : BasePresenter> : AppCompatActivity(), BaseVi
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        AndroidInjection.inject(this)
         onInitView()
 
         getPresenter()?.run { this.onAttach() }
@@ -22,5 +24,10 @@ abstract class BaseActivity<out T : BasePresenter> : AppCompatActivity(), BaseVi
         this.contentView?.rootView?.let {
             snackbar(it, message)
         }
+    }
+
+    override fun onDestroy() {
+        getPresenter()?.onDetach()
+        super.onDestroy()
     }
 }

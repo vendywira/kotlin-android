@@ -20,23 +20,23 @@ import org.jetbrains.anko.startActivity
 import org.jetbrains.anko.support.v4.ctx
 import javax.inject.Inject
 
-class FavoriteFragment : BaseFragment<FavoriteContract.presenter>(), FavoriteContract.view {
+class FavoriteFragment : BaseFragment<FavoriteContract.Presenter>(), FavoriteContract.View {
 
     @Inject
-    internal lateinit var presenter: FavoriteContract.presenter
+    internal lateinit var Presenter: FavoriteContract.Presenter
     private lateinit var progressBar: ProgressBar
-    private lateinit var contentUi: RecyclerView
+    private lateinit var recycleView: RecyclerView
     private lateinit var swipeRefresh: SwipeRefreshLayout
     private lateinit var favoriteAdapter: FavoriteAdapter
     private var listOfMatch = mutableListOf<FavoriteEventEntity>()
 
-    override fun getPresenter(): FavoriteContract.presenter? = presenter
+    override fun getPresenter(): FavoriteContract.Presenter? = Presenter
 
     override fun onInitView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View {
         val view = LayoutInflater.from(context).inflate(R.layout.base_recycle_view, container, false)
-        contentUi = view.base_recycle_view_id
+        recycleView = view.base_recycle_view_id
         swipeRefresh = view.base_swipe_refresh
-        contentUi.layoutManager = LinearLayoutManager(ctx)
+        recycleView.layoutManager = LinearLayoutManager(ctx)
         favoriteAdapter = FavoriteAdapter(listOfMatch
         ) { position ->
             try {
@@ -46,7 +46,7 @@ class FavoriteFragment : BaseFragment<FavoriteContract.presenter>(), FavoriteCon
                 favoriteChange()
             }
            }
-        contentUi.adapter = favoriteAdapter
+        recycleView.adapter = favoriteAdapter
         favoriteChange()
 
         swipeRefresh.setOnRefreshListener {
@@ -58,11 +58,6 @@ class FavoriteFragment : BaseFragment<FavoriteContract.presenter>(), FavoriteCon
     override fun onResume() {
         super.onResume()
         favoriteChange()
-    }
-
-    override fun onAttach(context: Context?) {
-        AndroidSupportInjection.inject(this)
-        super.onAttach(context)
     }
 
     override fun setViewModel(favorite: FavoriteEventEntity) {
@@ -77,7 +72,7 @@ class FavoriteFragment : BaseFragment<FavoriteContract.presenter>(), FavoriteCon
 
     private fun favoriteChange() {
         listOfMatch.clear()
-        presenter.getListEventFavorite()
+        Presenter.getListEventFavorite()
     }
 
     override fun getProgressBar(): ProgressBar? = progressBar

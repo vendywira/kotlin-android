@@ -9,9 +9,9 @@ abstract class FavoriteModule {
 
     @ActivityScope
     @Binds
-    abstract fun provideFavoriteView(favoriteFragment: FavoriteFragment): FavoriteContract.view
+    abstract fun provideFavoriteView(favoriteFragment: FavoriteFragment): FavoriteContract.View
 
     @ActivityScope
     @Binds
-    abstract fun provideFavoritePresenter(favoritePresenterImpl: FavoritePresenterImpl): FavoriteContract.presenter
+    abstract fun provideFavoritePresenter(favoritePresenterImpl: FavoritePresenterImpl): FavoriteContract.Presenter
 }
