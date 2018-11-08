@@ -12,6 +12,7 @@ import android.widget.*
 import app.learn.kotlin.R
 import app.learn.kotlin.feature.base.BaseActivity
 import app.learn.kotlin.feature.base.BaseFragment
+import app.learn.kotlin.helper.gone
 import app.learn.kotlin.helper.invisible
 import app.learn.kotlin.helper.visible
 import app.learn.kotlin.model.response.League
@@ -19,7 +20,7 @@ import app.learn.kotlin.model.response.ListResponse
 import app.learn.kotlin.model.response.Team
 import dagger.android.AndroidInjection
 import dagger.android.support.AndroidSupportInjection
-import kotlinx.android.synthetic.main.base_recycle_view.*
+import kotlinx.android.synthetic.main.recycle_swipe_refresh.*
 import org.jetbrains.anko.ctx
 import org.jetbrains.anko.find
 import org.jetbrains.anko.setContentView
@@ -74,6 +75,8 @@ class TeamFragment : BaseFragment<TeamContract.Presenter>(), TeamContract.View {
 
     override fun leagueName(): String = leagueName
 
+    fun hideSpinner() = spinner.gone()
+
     override fun showTeamList(teamResponse: ListResponse<Team>?) {
         swipeRefresh.isRefreshing = false
         clubList.clear()
@@ -103,10 +106,12 @@ class TeamFragment : BaseFragment<TeamContract.Presenter>(), TeamContract.View {
     }
 
     override fun showLoading() {
+        swipeRefresh.isRefreshing = false
         progressBar.visible()
     }
 
     override fun hideLoading() {
+        swipeRefresh.isRefreshing = false
         progressBar.invisible()
     }
 }

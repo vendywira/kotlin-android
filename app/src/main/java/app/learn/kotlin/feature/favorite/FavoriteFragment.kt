@@ -1,6 +1,5 @@
 package app.learn.kotlin.feature.favorite
 
-import android.content.Context
 import android.os.Bundle
 import android.support.v4.widget.SwipeRefreshLayout
 import android.support.v7.widget.LinearLayoutManager
@@ -14,8 +13,8 @@ import app.learn.kotlin.feature.base.BaseFragment
 import app.learn.kotlin.feature.event.detail.MatchDetailActivity
 import app.learn.kotlin.model.Constant
 import app.learn.kotlin.model.entity.FavoriteEventEntity
-import dagger.android.support.AndroidSupportInjection
 import kotlinx.android.synthetic.main.base_recycle_view.view.*
+import kotlinx.android.synthetic.main.recycle_swipe_refresh.view.*
 import org.jetbrains.anko.startActivity
 import org.jetbrains.anko.support.v4.ctx
 import javax.inject.Inject
@@ -23,17 +22,28 @@ import javax.inject.Inject
 class FavoriteFragment : BaseFragment<FavoriteContract.Presenter>(), FavoriteContract.View {
 
     @Inject
-    internal lateinit var Presenter: FavoriteContract.Presenter
+    internal lateinit var presenter: FavoriteContract.Presenter
     private lateinit var progressBar: ProgressBar
     private lateinit var recycleView: RecyclerView
     private lateinit var swipeRefresh: SwipeRefreshLayout
     private lateinit var favoriteAdapter: FavoriteAdapter
     private var listOfMatch = mutableListOf<FavoriteEventEntity>()
+    private var tagMenu: String? = null
 
-    override fun getPresenter(): FavoriteContract.Presenter? = Presenter
+    companion object {
+        fun newInstance(tag: String): FavoriteFragment {
+            val fragment = FavoriteFragment()
+            val bundle = Bundle()
+            bundle.putString(Constant.TAG_MENU, tag)
+            fragment.arguments = bundle
+            return fragment
+        }
+    }
+
+    override fun getPresenter(): FavoriteContract.Presenter? = presenter
 
     override fun onInitView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View {
-        val view = LayoutInflater.from(context).inflate(R.layout.base_recycle_view, container, false)
+        val view = LayoutInflater.from(context).inflate(R.layout.recycle_swipe_refresh, container, false)
         recycleView = view.base_recycle_view_id
         swipeRefresh = view.base_swipe_refresh
         recycleView.layoutManager = LinearLayoutManager(ctx)
@@ -52,7 +62,20 @@ class FavoriteFragment : BaseFragment<FavoriteContract.Presenter>(), FavoriteCon
         swipeRefresh.setOnRefreshListener {
             favoriteChange()
         }
+
+        tagMenu = arguments?.getString(Constant.TAG_MENU) ?: Constant.FAVORITE_MATCHES
         return view
+    }
+
+    private fun getMatch() {
+        when (tagMenu) {
+            Constant.FAVORITE_MATCHES -> {
+                presenter.getListEventFavorite()
+            }
+            Constant.FAVORITE_TEAMS -> {
+                presenter.getListEventFavorite()
+            }
+        }
     }
 
     override fun onResume() {
@@ -72,7 +95,7 @@ class FavoriteFragment : BaseFragment<FavoriteContract.Presenter>(), FavoriteCon
 
     private fun favoriteChange() {
         listOfMatch.clear()
-        Presenter.getListEventFavorite()
+        presenter.getListEventFavorite()
     }
 
     override fun getProgressBar(): ProgressBar? = progressBar

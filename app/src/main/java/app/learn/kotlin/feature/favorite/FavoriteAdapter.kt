@@ -4,8 +4,10 @@ import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.TextView
 import app.learn.kotlin.R
+import app.learn.kotlin.helper.gone
 import app.learn.kotlin.helper.toSimpleString
 import app.learn.kotlin.model.entity.FavoriteEventEntity
 import org.jetbrains.anko.find
@@ -30,11 +32,12 @@ private val onClick: (position: Int) -> Unit)
 
     class MatchHolder(view: View) : RecyclerView.ViewHolder(view) {
 
-        private var tvMatchDate: TextView = view.find(R.id.tv_match_date)
-        private var tvHomeTeamName: TextView = view.find(R.id.tv_home_team_name)
-        private var tvHomeTeamScore: TextView = view.find(R.id.tv_home_team_score)
-        private var tvAwayTeamName: TextView = view.find(R.id.tv_away_team_name)
-        private var tvAwayTeamScore: TextView = view.find(R.id.tv_away_team_score)
+        private val tvMatchDate: TextView = view.find(R.id.tv_match_date)
+        private val tvHomeTeamName: TextView = view.find(R.id.tv_home_team_name)
+        private val tvHomeTeamScore: TextView = view.find(R.id.tv_home_team_score)
+        private val tvAwayTeamName: TextView = view.find(R.id.tv_away_team_name)
+        private val tvAwayTeamScore: TextView = view.find(R.id.tv_away_team_score)
+        private val btnReminder: ImageView = view.find(R.id.btn_reminder)
 
         fun bindItem(favorite: FavoriteEventEntity) {
             tvMatchDate.text = toSimpleString(favorite.strDate)
@@ -42,6 +45,7 @@ private val onClick: (position: Int) -> Unit)
             tvHomeTeamScore.text = favorite.homeTeamScore?.toString()
             tvAwayTeamName.text = favorite.awayTeamName
             tvAwayTeamScore.text = favorite.awayTeamScore?.toString()
+            btnReminder.gone()
         }
     }
 }

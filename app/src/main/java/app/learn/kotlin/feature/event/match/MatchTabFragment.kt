@@ -20,7 +20,7 @@ class MatchTabFragment : Fragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
         val view = inflater.inflate(R.layout.fragment_tab_match, container, false)
-        tabLayout = view.findViewById(R.id.tab_match)
+        tabLayout = view.findViewById(R.id.tabs)
         viewPager = view.findViewById(R.id.viewpager)
 
         viewPagerAdapter = childFragmentManager.let {

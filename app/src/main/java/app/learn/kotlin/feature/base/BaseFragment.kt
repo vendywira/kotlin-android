@@ -5,6 +5,8 @@ import android.support.v4.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import app.learn.kotlin.helper.invisible
+import app.learn.kotlin.helper.visible
 import dagger.android.support.AndroidSupportInjection
 import org.jetbrains.anko.design.snackbar
 
@@ -32,5 +34,13 @@ abstract class BaseFragment<out T : BasePresenter> : Fragment(), BaseView {
     override fun onDestroy() {
         getPresenter()?.onDetach()
         super.onDestroy()
+    }
+
+    override fun showLoading() {
+        getProgressBar()?.visible()
+    }
+
+    override fun hideLoading() {
+        getProgressBar()?.invisible()
     }
 }

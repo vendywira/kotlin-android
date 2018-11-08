@@ -4,6 +4,8 @@
     <string name="vs">vs</string>
     <string name="tab_title_prev">Last</string>
     <string name="tab_title_next">Next</string>
+    <string name="tab_title_matches">Matches</string>
+    <string name="tab_title_teams">Teams</string>
     <string name="label_lineups">Lineups</string>
     <string name="label_goal_keeper">Goal Keeper</string>
     <string name="label_defense">Defense</string>
@@ -12,7 +14,7 @@
     <string name="label_substitutes">Subtitutes</string>
     <string name="ic_favorites">Favorites</string>
     <string name="ic_team">Teams</string>
-    <string name="ic_match">Matchs</string>
+    <string name="ic_match">Matches</string>
     <string name="next_match">Next Match</string>
     <string name="prev_match">Previous Mattch</string>
     <string name="label_goals">Goals</string>

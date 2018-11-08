@@ -11,6 +11,14 @@ abstract class SearchModule {
     @Binds
     abstract fun provideSearchView(searchActivity: SearchActivity): SearchContract.View
 
+//    @ActivityScope
+//    @Binds
+//    abstract fun provideSearchEvent(searchEventFragment: SearchEventFragment): SearchEventContract
+//
+//    @ActivityScope
+//    @Binds
+//    abstract fun provideSearchTeam(searchTeamFragment: SearchTeamFragment): SearchTeamContract
+
     @ActivityScope
     @Binds
     abstract fun provideSearchPresenter(searchPresenterImpl: SearchPresenterImpl): SearchContract.Presenter

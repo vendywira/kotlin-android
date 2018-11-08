@@ -29,10 +29,12 @@ fun View.gone() {
 
 fun MenuItem.visible() {
     isVisible = true
+    enable()
 }
 
 fun MenuItem.invisible() {
     isVisible = false
+    disable()
 }
 
 fun MenuItem.enable() {
@@ -79,5 +81,14 @@ fun toSimpleString(strDate: String?): String? {
                 .let(SimpleDateFormat("EEE, d MMM yyyy", localeId)::format)
     } catch (e: Exception) {
         strDate
+    }
+}
+
+fun String?.toDate(): Date {
+    return try {
+        val simpleDateFormat = SimpleDateFormat("dd/MM/yy")
+        simpleDateFormat.parse(this)
+    } catch (e: Exception) {
+        Date()
     }
 }

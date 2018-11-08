@@ -13,6 +13,7 @@ import app.learn.kotlin.R.layout.acivity_home
 import app.learn.kotlin.feature.event.match.MatchTabFragment
 import app.learn.kotlin.feature.favorite.FavoriteContract
 import app.learn.kotlin.feature.favorite.FavoriteFragment
+import app.learn.kotlin.feature.favorite.FavoriteTabFragment
 import app.learn.kotlin.feature.search.SearchActivity
 import app.learn.kotlin.feature.team.TeamFragment
 import app.learn.kotlin.helper.invisible
@@ -40,7 +41,7 @@ class HomeActivity : AppCompatActivity() {
         bottom_navigation.setOnNavigationItemSelectedListener { item ->
             when (item.itemId) {
                 menu_team_id -> {
-                        menu?.getItem(MENU_SEARCH)?.visible()
+                    menu?.getItem(MENU_SEARCH)?.visible()
                     showFragment(savedInstanceState, TeamFragment())
                     fragmentName = Constant.FRAGMENT_TEAM
                 }
@@ -51,13 +52,15 @@ class HomeActivity : AppCompatActivity() {
                 }
                 menu_favorite_id -> {
                     menu?.getItem(MENU_SEARCH)?.invisible()
-                    showFragment(savedInstanceState, FavoriteFragment())
+                    showFragment(savedInstanceState, FavoriteTabFragment())
                     fragmentName = Constant.FRAGMENT_FAVORITE
                 }
             }
+            if (item.itemId == R.id.menu_favorite_id)
+                menu?.removeItem(R.menu.menu_search_btn)
             true
         }
-        bottom_navigation.selectedItemId = R.id.menu_match_id
+        bottom_navigation.selectedItemId = R.id.menu_team_id
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {

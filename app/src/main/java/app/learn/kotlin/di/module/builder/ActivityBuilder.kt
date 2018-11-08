@@ -8,7 +8,11 @@ import app.learn.kotlin.feature.event.match.MatchModule
 import app.learn.kotlin.feature.favorite.FavoriteFragment
 import app.learn.kotlin.feature.favorite.FavoriteModule
 import app.learn.kotlin.feature.search.SearchActivity
+import app.learn.kotlin.feature.search.event.SearchEventFragment
+import app.learn.kotlin.feature.search.event.SearchEventModule
 import app.learn.kotlin.feature.search.SearchModule
+import app.learn.kotlin.feature.search.team.SearchTeamFragment
+import app.learn.kotlin.feature.search.team.SearchTeamModule
 import app.learn.kotlin.feature.team.TeamFragment
 import app.learn.kotlin.feature.team.TeamModule
 import dagger.Module
@@ -36,4 +40,13 @@ abstract class ActivityBuilder {
     @ActivityScope
     @ContributesAndroidInjector(modules = [SearchModule::class])
     abstract fun provideSearchActivity(): SearchActivity
+
+    @ActivityScope
+    @ContributesAndroidInjector(modules = [SearchEventModule::class])
+    abstract fun provideSearchEvent(): SearchEventFragment
+
+    @ActivityScope
+    @ContributesAndroidInjector(modules = [SearchTeamModule::class])
+    abstract fun provideSearchTeam(): SearchTeamFragment
+
 }
