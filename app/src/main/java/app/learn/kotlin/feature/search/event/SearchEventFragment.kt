@@ -1,5 +1,6 @@
 package app.learn.kotlin.feature.search.event
 
+import android.content.Context
 import android.os.Bundle
 import android.support.v4.widget.SwipeRefreshLayout
 import android.support.v7.widget.LinearLayoutManager
@@ -20,6 +21,7 @@ import app.learn.kotlin.model.Constant
 import app.learn.kotlin.model.response.Event
 import app.learn.kotlin.model.response.ListResponse
 import app.learn.kotlin.model.vo.MatchVO
+import dagger.android.support.AndroidSupportInjection
 import kotlinx.android.synthetic.main.abc_search_view.*
 import kotlinx.android.synthetic.main.base_recycle_view.view.*
 import kotlinx.android.synthetic.main.recycle_swipe_refresh.view.*
@@ -40,6 +42,11 @@ class SearchEventFragment : BaseFragment<SearchEventContract.Presenter>(), Searc
     private lateinit var swipeRefresh: SwipeRefreshLayout
     private var listOfMatch = mutableListOf<MatchVO>()
     private var eventResponses = mutableListOf<Event>()
+
+    override fun onAttach(context: Context?) {
+        super.onAttach(context)
+        AndroidSupportInjection.inject(this)
+    }
 
     override fun onInitView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View {
         val view = LayoutInflater.from(context).inflate(R.layout.fragment_search_match, container, false)

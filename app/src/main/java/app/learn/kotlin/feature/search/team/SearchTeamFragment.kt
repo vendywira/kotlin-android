@@ -1,5 +1,6 @@
 package app.learn.kotlin.feature.search.team
 
+import android.content.Context
 import android.os.Bundle
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
@@ -10,17 +11,13 @@ import android.widget.ProgressBar
 import android.widget.Toast
 import app.learn.kotlin.R
 import app.learn.kotlin.feature.base.BaseFragment
-import app.learn.kotlin.feature.search.SearchContract
-import app.learn.kotlin.feature.team.TeamAdapter
-import app.learn.kotlin.helper.gone
+import app.learn.kotlin.feature.team.list.ListTeamAdapter
 import app.learn.kotlin.helper.invisible
 import app.learn.kotlin.model.response.ListResponse
 import app.learn.kotlin.model.response.Team
+import dagger.android.support.AndroidSupportInjection
 import kotlinx.android.synthetic.main.base_recycle_view.view.*
-import kotlinx.android.synthetic.main.recycle_swipe_refresh.*
-import kotlinx.android.synthetic.main.recycle_swipe_refresh.view.*
 import kotlinx.android.synthetic.main.fragment_match.view.*
-import kotlinx.android.synthetic.main.fragment_team.*
 import org.jetbrains.anko.support.v4.ctx
 import javax.inject.Inject
 
@@ -31,11 +28,16 @@ class SearchTeamFragment : BaseFragment<SearchTeamContract.Presenter>(), SearchT
 
     private lateinit var recycleView: RecyclerView
     private lateinit var progressBar: ProgressBar
-    private lateinit var adapter: TeamAdapter
+    private lateinit var adapterList: ListTeamAdapter
 
     private var clubList: MutableList<Team> = mutableListOf()
 
     override fun getPresenter(): SearchTeamContract.Presenter? = presenter
+
+    override fun onAttach(context: Context?) {
+        super.onAttach(context)
+        AndroidSupportInjection.inject(this)
+    }
 
     override fun onInitView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View {
         val view = layoutInflater.inflate(R.layout.fragment_search_team, container, false);
@@ -43,13 +45,13 @@ class SearchTeamFragment : BaseFragment<SearchTeamContract.Presenter>(), SearchT
         progressBar.invisible()
         recycleView = view.base_recycle_view_id
 
-        adapter = TeamAdapter(ctx, clubList) {
+        adapterList = ListTeamAdapter(ctx, clubList) {
             val toast = Toast.makeText(ctx, it.name, Toast.LENGTH_SHORT)
             toast.show()
         }
 
         recycleView.layoutManager = LinearLayoutManager(ctx)
-        recycleView.adapter = adapter
+        recycleView.adapter = adapterList
 
         return view
     }
@@ -65,7 +67,7 @@ class SearchTeamFragment : BaseFragment<SearchTeamContract.Presenter>(), SearchT
         data.contents?.let {
             clubList.addAll(it)
         }
-        adapter.notifyDataSetChanged()
+        adapterList.notifyDataSetChanged()
     }
 
 }

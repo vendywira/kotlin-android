@@ -8,8 +8,13 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import app.learn.kotlin.R
+import app.learn.kotlin.feature.HomeActivity
 import app.learn.kotlin.feature.event.match.MatchViewPagerAdapter
+import app.learn.kotlin.feature.favorite.event.FavoriteEventFragment
+import app.learn.kotlin.feature.favorite.event.FavoriteTeamFragment
+import app.learn.kotlin.helper.invisible
 import app.learn.kotlin.model.Constant
+import org.jetbrains.anko.support.v4.ctx
 
 class FavoriteTabFragment : Fragment() {
 
@@ -27,8 +32,8 @@ class FavoriteTabFragment : Fragment() {
             MatchViewPagerAdapter(it)
         }
         viewPagerAdapter.let {
-            it.addFragment(getString(R.string.tab_title_matches), FavoriteFragment.newInstance(Constant.FAVORITE_MATCHES))
-            it.addFragment(getString(R.string.tab_title_teams), FavoriteFragment.newInstance(Constant.FAVORITE_TEAMS))
+            it.addFragment(getString(R.string.tab_title_matches), FavoriteEventFragment())
+            it.addFragment(getString(R.string.tab_title_teams), FavoriteTeamFragment())
             viewPager.adapter = it
             tabLayout.setupWithViewPager(viewPager)
             setHasOptionsMenu(true)

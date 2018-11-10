@@ -1,5 +1,7 @@
 package app.learn.kotlin.feature.favorite
 
+import app.learn.kotlin.feature.favorite.event.FavoriteEventContract
+import app.learn.kotlin.feature.favorite.event.FavoriteEventPresenterImpl
 import app.learn.kotlin.model.entity.FavoriteEventEntity
 import app.learn.kotlin.repository.FavoriteMatchRepository
 import io.reactivex.Observable
@@ -18,13 +20,13 @@ import org.mockito.Spy
 import org.mockito.junit.MockitoJUnitRunner
 
 @RunWith(MockitoJUnitRunner::class)
-class FavoritePresenterImplTest {
+class FavoriteEventPresenterImplTest {
 
     @InjectMocks
-    private lateinit var impl: FavoritePresenterImpl
+    private lateinit var impl: FavoriteEventPresenterImpl
 
     @Spy
-    private lateinit var View: FavoriteContract.View
+    private lateinit var view: FavoriteEventContract.View
 
     @Spy
     private lateinit var favoriteRepository: FavoriteMatchRepository
@@ -53,19 +55,19 @@ class FavoritePresenterImplTest {
 
     @After
     fun tearDown() {
-        Mockito.verifyNoMoreInteractions(View, favoriteRepository)
+        Mockito.verifyNoMoreInteractions(view, favoriteRepository)
     }
 
     @Test
     fun getListEventFavoriteTest_valid_success() {
-        `when`(favoriteRepository.getEventAll()).thenReturn(responseAllEvent)
+        `when`(favoriteRepository.findAll()).thenReturn(responseAllEvent)
 
-        impl.getListEventFavorite()
+        impl.getListFavorite()
 
-        verify(favoriteRepository).getEventAll()
-        verify(View).showLoading()
-        verify(View).hideLoading()
-        verify(View).notifyDataChange()
-        verify(View).setViewModel(favoriteEventEntity)
+        verify(favoriteRepository).findAll()
+        verify(view).showLoading()
+        verify(view).hideLoading()
+        verify(view).notifyDataChange()
+        verify(view).setViewModel(favoriteEventEntity)
     }
 }

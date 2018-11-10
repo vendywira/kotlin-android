@@ -1,24 +1,26 @@
-package app.learn.kotlin.feature.favorite
+package app.learn.kotlin.feature.favorite.event
 
 import app.learn.kotlin.feature.base.BasePresenterImpl
 import app.learn.kotlin.model.Constant
 import app.learn.kotlin.model.entity.FavoriteEventEntity
+import app.learn.kotlin.model.entity.FavoriteTeamEntity
 import app.learn.kotlin.repository.FavoriteMatchRepository
+import app.learn.kotlin.repository.FavoriteTeamRepository
 import io.reactivex.android.schedulers.AndroidSchedulers
 import javax.inject.Inject
 
-class FavoritePresenterImpl @Inject constructor(
-        private val view: FavoriteContract.View,
-        private val favoriteRepository: FavoriteMatchRepository)
-    : BasePresenterImpl(), FavoriteContract.Presenter {
+class FavoriteTeamPresenterImpl @Inject constructor(
+        private val view: FavoriteTeamContract.View,
+        private val favoriteRepository: FavoriteTeamRepository
+): BasePresenterImpl(), FavoriteTeamContract.Presenter {
 
-    override fun getListEventFavorite() {
-        return super.addDisposable(favoriteRepository.getEventAll()
+    override fun getListFavorite() {
+        return super.addDisposable(favoriteRepository.findAll()
                 .observeOn(AndroidSchedulers.mainThread())
                 .doOnSubscribe { view.showLoading() }
                 .doOnTerminate { view.hideLoading() }
                 .doOnError { view.showMessage(Constant.FAILED_GET_DATA) }
-                .onErrorReturn { FavoriteEventEntity() }
+                .onErrorReturn { FavoriteTeamEntity() }
                 .doOnComplete { view.notifyDataChange() }
                 .subscribe {
                     view.setViewModel(it)

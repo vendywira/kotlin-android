@@ -1,13 +1,15 @@
 package app.learn.kotlin.model.entity
 
 data class FavoriteTeamEntity (
-    val id: Int,
-    val teamId: String,
-    val teamName: String,
-    val teamLogoUrl: String,
-    val teamBanner: String,
-    val teamDescription: String
+    val id: Int?,
+    val teamId: String?,
+    val teamName: String?,
+    val teamLogoUrl: String?,
+    val teamBanner: String?,
+    val teamDescription: String?
 ) {
+
+    constructor() : this(null, null, null, null, null, null)
     companion object {
         const val TABLE_NAME = "favorite_team"
         const val ID = "id"

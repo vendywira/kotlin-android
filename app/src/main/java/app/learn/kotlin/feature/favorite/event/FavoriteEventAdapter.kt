@@ -1,4 +1,4 @@
-package app.learn.kotlin.feature.favorite
+package app.learn.kotlin.feature.favorite.event
 
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
@@ -12,9 +12,9 @@ import app.learn.kotlin.helper.toSimpleString
 import app.learn.kotlin.model.entity.FavoriteEventEntity
 import org.jetbrains.anko.find
 
-class FavoriteAdapter (private val listOfMatches: List<FavoriteEventEntity>,
-private val onClick: (position: Int) -> Unit)
-: RecyclerView.Adapter<FavoriteAdapter.MatchHolder>() {
+class FavoriteEventAdapter (private val listOfMatches: List<FavoriteEventEntity>,
+                            private val onClick: (position: Int) -> Unit)
+: RecyclerView.Adapter<FavoriteEventAdapter.MatchHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MatchHolder {
         return MatchHolder(LayoutInflater.from(parent.context)

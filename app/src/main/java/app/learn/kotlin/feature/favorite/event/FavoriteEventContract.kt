@@ -1,17 +1,18 @@
-package app.learn.kotlin.feature.favorite
+package app.learn.kotlin.feature.favorite.event
 
 import app.learn.kotlin.feature.base.BasePresenter
 import app.learn.kotlin.feature.base.BaseView
 import app.learn.kotlin.model.entity.FavoriteEventEntity
+import app.learn.kotlin.model.entity.FavoriteTeamEntity
 
-class FavoriteContract {
+class FavoriteEventContract {
 
     interface Presenter : BasePresenter {
-        fun getListEventFavorite()
+        fun getListFavorite()
     }
 
     interface View : BaseView {
-        fun setViewModel(favorite: FavoriteEventEntity)
+        fun setViewModel(data: FavoriteEventEntity)
 
         fun notifyDataChange()
     }

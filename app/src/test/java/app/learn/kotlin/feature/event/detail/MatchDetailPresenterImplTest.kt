@@ -70,11 +70,11 @@ class MatchDetailPresenterImplTest {
 
     @Test
     fun insertMatchToFavoriteTest_valid_true() {
-        Mockito.`when`(favoriteRepository.insertEvent(favoriteEventEntity)).thenReturn(Single.just(true))
+        Mockito.`when`(favoriteRepository.insert(favoriteEventEntity)).thenReturn(Single.just(true))
 
         impl.insertMatchToFavorite(favoriteEventEntity)
 
-        Mockito.verify(favoriteRepository).insertEvent(favoriteEventEntity)
+        Mockito.verify(favoriteRepository).insert(favoriteEventEntity)
         Mockito.verify(view).showLoading()
         Mockito.verify(view).hideLoading()
         Mockito.verify(view).showMessage("Added to favorite")
@@ -82,12 +82,12 @@ class MatchDetailPresenterImplTest {
 
     @Test
     fun insertMatchToFavoriteTest_valid_exception() {
-        Mockito.`when`(favoriteRepository.insertEvent(favoriteEventEntity))
+        Mockito.`when`(favoriteRepository.insert(favoriteEventEntity))
                 .thenReturn(Single.error(Exception()))
 
         impl.insertMatchToFavorite(favoriteEventEntity)
 
-        Mockito.verify(favoriteRepository).insertEvent(favoriteEventEntity)
+        Mockito.verify(favoriteRepository).insert(favoriteEventEntity)
         Mockito.verify(view).showLoading()
         Mockito.verify(view).hideLoading()
         Mockito.verify(view).showMessage("Failed add to favorite")
@@ -95,11 +95,11 @@ class MatchDetailPresenterImplTest {
 
     @Test
     fun deleteMatchFromFavoriteTest_valid_success() {
-        `when`(favoriteRepository.deleteEvent(EVENT_ID)).thenReturn(Single.just(true))
+        `when`(favoriteRepository.delete(EVENT_ID)).thenReturn(Single.just(true))
 
         impl.deleteMatchFromFavorite(EVENT_ID)
 
-        verify(favoriteRepository).deleteEvent(EVENT_ID)
+        verify(favoriteRepository).delete(EVENT_ID)
         verify(view).showLoading()
         verify(view).hideLoading()
         verify(view).showMessage("Removed from favorite")
@@ -107,12 +107,12 @@ class MatchDetailPresenterImplTest {
 
     @Test
     fun deleteMatchFromFavoriteTest_valid_failed() {
-        `when`(favoriteRepository.deleteEvent(EVENT_ID))
+        `when`(favoriteRepository.delete(EVENT_ID))
                 .thenReturn(Single.error(Exception()))
 
         impl.deleteMatchFromFavorite(EVENT_ID)
 
-        verify(favoriteRepository).deleteEvent(EVENT_ID)
+        verify(favoriteRepository).delete(EVENT_ID)
         verify(view).showLoading()
         verify(view).hideLoading()
         verify(view).showMessage(FAILED_TO_REMOVE_FROM_FAVORITE)
@@ -120,11 +120,11 @@ class MatchDetailPresenterImplTest {
 
     @Test
     fun isExistFavoriteEventTest_valid_true() {
-        `when`(favoriteRepository.isExistEvent(EVENT_ID)).thenReturn(Single.just(true))
+        `when`(favoriteRepository.isExist(EVENT_ID)).thenReturn(Single.just(true))
 
         impl.isExistFavoriteEvent(EVENT_ID)
 
-        verify(favoriteRepository).isExistEvent(EVENT_ID)
+        verify(favoriteRepository).isExist(EVENT_ID)
         verify(view).showLoading()
         verify(view).hideLoading()
         verify(view).isExistFavoriteEvent(true)
@@ -132,11 +132,11 @@ class MatchDetailPresenterImplTest {
 
     @Test
     fun isExistFavoriteEventTest_valid_false() {
-        `when`(favoriteRepository.isExistEvent(EVENT_ID)).thenReturn(Single.just(false))
+        `when`(favoriteRepository.isExist(EVENT_ID)).thenReturn(Single.just(false))
 
         impl.isExistFavoriteEvent(EVENT_ID)
 
-        verify(favoriteRepository).isExistEvent(EVENT_ID)
+        verify(favoriteRepository).isExist(EVENT_ID)
         verify(view).showLoading()
         verify(view).hideLoading()
         verify(view).isExistFavoriteEvent(false)
@@ -144,11 +144,11 @@ class MatchDetailPresenterImplTest {
 
     @Test
     fun isExistFavoriteEventTest_valid_exception() {
-        `when`(favoriteRepository.isExistEvent(EVENT_ID)).thenReturn(Single.error(Exception()))
+        `when`(favoriteRepository.isExist(EVENT_ID)).thenReturn(Single.error(Exception()))
 
         impl.isExistFavoriteEvent(EVENT_ID)
 
-        verify(favoriteRepository).isExistEvent(EVENT_ID)
+        verify(favoriteRepository).isExist(EVENT_ID)
         verify(view).showLoading()
         verify(view).hideLoading()
         verify(view).showMessage(FAILED_GET_DATA_FROM_DB)

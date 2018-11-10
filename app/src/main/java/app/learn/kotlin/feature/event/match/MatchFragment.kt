@@ -31,6 +31,7 @@ import app.learn.kotlin.model.response.Event
 import app.learn.kotlin.model.response.League
 import app.learn.kotlin.model.response.ListResponse
 import app.learn.kotlin.model.vo.MatchVO
+import dagger.android.support.AndroidSupportInjection
 import kotlinx.android.synthetic.main.base_recycle_view.view.*
 import kotlinx.android.synthetic.main.recycle_swipe_refresh.view.*
 import kotlinx.android.synthetic.main.fragment_match.view.*
@@ -65,6 +66,7 @@ open class MatchFragment : BaseFragment<MatchContract.Presenter>(), MatchContrac
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        AndroidSupportInjection.inject(this)
         super.onCreate(savedInstanceState)
         tagMenu = arguments?.getString(TAG_MENU) ?: MATCH_PREV_MATCH
     }

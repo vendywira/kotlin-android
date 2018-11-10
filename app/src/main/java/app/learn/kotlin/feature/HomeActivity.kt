@@ -2,35 +2,30 @@ package app.learn.kotlin.feature
 
 import android.os.Bundle
 import android.support.v4.app.Fragment
-import android.support.v4.content.ContextCompat.startActivity
 import android.support.v7.app.AppCompatActivity
 import android.view.Menu
-import android.view.MenuInflater
 import android.view.MenuItem
 import app.learn.kotlin.R
 import app.learn.kotlin.R.id.*
 import app.learn.kotlin.R.layout.acivity_home
 import app.learn.kotlin.feature.event.match.MatchTabFragment
-import app.learn.kotlin.feature.favorite.FavoriteContract
-import app.learn.kotlin.feature.favorite.FavoriteFragment
 import app.learn.kotlin.feature.favorite.FavoriteTabFragment
 import app.learn.kotlin.feature.search.SearchActivity
-import app.learn.kotlin.feature.team.TeamFragment
+import app.learn.kotlin.feature.team.list.ListTeamFragment
 import app.learn.kotlin.helper.invisible
 import app.learn.kotlin.helper.visible
 import app.learn.kotlin.model.Constant
 import kotlinx.android.synthetic.main.acivity_home.*
 import kotlinx.android.synthetic.main.nav_bar_view.*
 import org.jetbrains.anko.startActivity
-import kotlin.concurrent.thread
 
 class HomeActivity : AppCompatActivity() {
 
-    private var menu: Menu? = null
     private lateinit var fragmentName: String
 
     companion object {
-        private const val MENU_SEARCH = 0
+        internal const val MENU_SEARCH = 0
+        internal var menu: Menu? = null
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -42,7 +37,7 @@ class HomeActivity : AppCompatActivity() {
             when (item.itemId) {
                 menu_team_id -> {
                     menu?.getItem(MENU_SEARCH)?.visible()
-                    showFragment(savedInstanceState, TeamFragment())
+                    showFragment(savedInstanceState, ListTeamFragment())
                     fragmentName = Constant.FRAGMENT_TEAM
                 }
                 menu_match_id -> {
@@ -56,8 +51,6 @@ class HomeActivity : AppCompatActivity() {
                     fragmentName = Constant.FRAGMENT_FAVORITE
                 }
             }
-            if (item.itemId == R.id.menu_favorite_id)
-                menu?.removeItem(R.menu.menu_search_btn)
             true
         }
         bottom_navigation.selectedItemId = R.id.menu_team_id
@@ -66,7 +59,7 @@ class HomeActivity : AppCompatActivity() {
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
         val inflater = menuInflater
         inflater.inflate(R.menu.menu_search_btn, menu)
-        this.menu = menu
+        HomeActivity.menu = menu
         return super.onCreateOptionsMenu(menu)
     }
 

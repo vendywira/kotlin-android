@@ -2,17 +2,14 @@ package app.learn.kotlin.feature.search
 
 import android.os.Bundle
 import android.support.v4.app.Fragment
-import android.util.Log
 import android.widget.ProgressBar
 import android.widget.SearchView
 import app.learn.kotlin.R
 import app.learn.kotlin.feature.base.BaseActivity
-import app.learn.kotlin.feature.event.match.MatchFragment
 import app.learn.kotlin.feature.search.event.SearchEventContract
 import app.learn.kotlin.feature.search.event.SearchEventFragment
 import app.learn.kotlin.feature.search.team.SearchTeamContract
 import app.learn.kotlin.feature.search.team.SearchTeamFragment
-import app.learn.kotlin.feature.team.TeamFragment
 import app.learn.kotlin.model.Constant
 import app.learn.kotlin.model.Constant.FRAGMENT_EVENT
 import app.learn.kotlin.model.Constant.FRAGMENT_TEAM
@@ -20,7 +17,6 @@ import app.learn.kotlin.model.response.Event
 import app.learn.kotlin.model.response.ListResponse
 import app.learn.kotlin.model.response.Team
 import kotlinx.android.synthetic.main.fragment_search.*
-import java.util.*
 import javax.inject.Inject
 
 class SearchActivity : BaseActivity<SearchContract.Presenter> (), SearchContract.View {

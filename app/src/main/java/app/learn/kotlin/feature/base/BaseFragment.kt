@@ -1,5 +1,6 @@
 package app.learn.kotlin.feature.base
 
+import android.content.Context
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.view.LayoutInflater
@@ -13,7 +14,6 @@ import org.jetbrains.anko.design.snackbar
 abstract class BaseFragment<out T : BasePresenter> : Fragment(), BaseView {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        AndroidSupportInjection.inject(this)
         this.getPresenter()?.run {
             this.onAttach()
         }
@@ -34,6 +34,11 @@ abstract class BaseFragment<out T : BasePresenter> : Fragment(), BaseView {
     override fun onDestroy() {
         getPresenter()?.onDetach()
         super.onDestroy()
+    }
+
+    override fun onAttach(context: Context?) {
+        super.onAttach(context)
+        AndroidSupportInjection.inject(this)
     }
 
     override fun showLoading() {

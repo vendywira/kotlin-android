@@ -14,7 +14,7 @@ import android.support.v7.widget.RecyclerView
 import app.learn.kotlin.feature.HomeActivity
 import app.learn.kotlin.feature.event.detail.MatchDetailPresenterImpl.Companion.ADDED_TO_FAVORITE
 import app.learn.kotlin.feature.event.detail.MatchDetailPresenterImpl.Companion.REMOVED_FROM_FAVORITE
-import app.learn.kotlin.feature.team.TeamAdapter
+import app.learn.kotlin.feature.team.list.ListTeamAdapter
 import org.hamcrest.CoreMatchers.not
 import org.junit.FixMethodOrder
 import org.junit.Rule
@@ -39,7 +39,7 @@ class HomeActivityInstrumentedTest {
         onView(withId(R.id.base_spinner_id)).perform(click())
         onView(withText("Italian Serie A")).perform(click())
         onView(withId(R.id.base_recycle_view_id))
-                .perform(scrollToPosition<TeamAdapter.TeamHolder>(13), click())
+                .perform(scrollToPosition<ListTeamAdapter.TeamHolder>(13), click())
         Thread.sleep(1000)
         onView(withId(R.id.iv_home_team_icon
                 .and(R.id.iv_away_team_icon)))
@@ -60,7 +60,7 @@ class HomeActivityInstrumentedTest {
         onView(withId(R.id.base_spinner_id)).perform(click())
         onView(withText("Italian Serie A")).perform(click())
         onView(withId(R.id.base_recycle_view_id))
-                .perform(scrollToPosition<TeamAdapter.TeamHolder>(13), click())
+                .perform(scrollToPosition<ListTeamAdapter.TeamHolder>(13), click())
         Thread.sleep(1000)
         onView(withId(R.id.iv_home_team_icon)).check(matches(isDisplayed()))
         onView(withId(R.id.iv_away_team_icon)).check(matches(isDisplayed()))
@@ -77,7 +77,7 @@ class HomeActivityInstrumentedTest {
         onView(withId(R.id.base_spinner_id)).perform(click())
         onView(withText("Italian Serie A")).perform(click())
         onView(withId(R.id.base_recycle_view_id))
-                .perform(scrollToPosition<TeamAdapter.TeamHolder>(13), click())
+                .perform(scrollToPosition<ListTeamAdapter.TeamHolder>(13), click())
         Thread.sleep(1000)
         onView(withId(R.id.iv_home_team_icon
                 .and(R.id.iv_away_team_icon)))
@@ -109,7 +109,7 @@ class HomeActivityInstrumentedTest {
         onView(withId(R.id.base_spinner_id)).perform(click())
         onView(withText("English League Championship")).perform(click())
         onView(withId(R.id.base_recycle_view_id))
-                .perform(scrollToPosition<TeamAdapter.TeamHolder>(5), click())
+                .perform(scrollToPosition<ListTeamAdapter.TeamHolder>(5), click())
         Thread.sleep(1000)
         onView(withId(R.id.iv_home_team_icon
                 .and(R.id.iv_away_team_icon)))

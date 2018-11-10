@@ -6,21 +6,27 @@ import app.learn.kotlin.helper.DatabaseUtils
 import app.learn.kotlin.helper.convertMapToContentValues
 import app.learn.kotlin.helper.objectMapper
 import app.learn.kotlin.model.entity.FavoriteEventEntity
+import app.learn.kotlin.model.entity.FavoriteTeamEntity
 import io.reactivex.Observable
 import io.reactivex.Single
-import org.jetbrains.anko.db.*
+import org.jetbrains.anko.db.classParser
+import org.jetbrains.anko.db.delete
+import org.jetbrains.anko.db.parseList
+import org.jetbrains.anko.db.parseSingle
+import org.jetbrains.anko.db.select
 import javax.inject.Inject
 
-class FavoriteMatchRepositoryImpl @Inject constructor(private val db: DatabaseUtils)
-    : FavoriteMatchRepository {
 
-    override fun insert(favoriteEventEntity: FavoriteEventEntity): Single<Boolean> {
+class FavoriteTeamRepositoryImpl @Inject constructor(private val db: DatabaseUtils)
+    : FavoriteTeamRepository {
+
+    override fun insert(favoriteTeamEntity: FavoriteTeamEntity): Single<Boolean> {
         return Single.create {
             try {
                 db.use {
                     insert(FavoriteEventEntity.TABLE_NAME, null,
                             convertMapToContentValues(objectMapper
-                                    .convertValue(favoriteEventEntity, Map::class.java)))
+                                    .convertValue(FavoriteTeamEntity, Map::class.java)))
                 }
                 it.onSuccess(true)
             } catch (e: Exception) {
@@ -30,13 +36,13 @@ class FavoriteMatchRepositoryImpl @Inject constructor(private val db: DatabaseUt
         }
     }
 
-    override fun find(eventId: String): Single<FavoriteEventEntity> {
+    override fun find(teamId: String): Single<FavoriteTeamEntity> {
         return Single.create {
             try {
                 it.onSuccess(db.use {
-                    select(FavoriteEventEntity.TABLE_NAME)
-                            .whereArgs("${FavoriteEventEntity.EVENT_ID} = {id}", "id" to eventId)
-                            .exec { parseSingle(classParser<FavoriteEventEntity>()) }
+                    select(FavoriteTeamEntity.TABLE_NAME)
+                            .whereArgs("${FavoriteTeamEntity.TEAM_ID} = {id}", "id" to teamId)
+                            .exec { parseSingle(classParser<FavoriteTeamEntity>()) }
                 })
             } catch (e: Exception) {
                 Log.e("Error", e.stackTrace.toString())
@@ -45,12 +51,12 @@ class FavoriteMatchRepositoryImpl @Inject constructor(private val db: DatabaseUt
         }
     }
 
-    override fun findAll(): Observable<FavoriteEventEntity> {
-        return Observable.create<FavoriteEventEntity> {
+    override fun findAll(): Observable<FavoriteTeamEntity> {
+        return Observable.create<FavoriteTeamEntity> {
             try {
                 val result = db.use {
                     select(FavoriteEventEntity.TABLE_NAME)
-                            .exec { parseList(classParser<FavoriteEventEntity>()) }
+                            .exec { parseList(classParser<FavoriteTeamEntity>()) }
                 }
                 for (r in result) it.onNext(r)
                 it.onComplete()
@@ -61,13 +67,13 @@ class FavoriteMatchRepositoryImpl @Inject constructor(private val db: DatabaseUt
         }
     }
 
-    override fun delete(eventId: String): Single<Boolean> {
+    override fun delete(teamId: String): Single<Boolean> {
         return Single.create { emitter ->
             try {
                 db.use {
-                    delete(FavoriteEventEntity.TABLE_NAME,
-                            "${FavoriteEventEntity.EVENT_ID} = {id}",
-                            "id" to eventId)
+                    delete(FavoriteTeamEntity.TABLE_NAME,
+                            "${FavoriteTeamEntity.TEAM_ID} = {id}",
+                            "id" to teamId)
                 }
 
                 emitter.onSuccess(true)
@@ -79,13 +85,13 @@ class FavoriteMatchRepositoryImpl @Inject constructor(private val db: DatabaseUt
 
     }
 
-    override fun isExist(eventId: String): Single<Boolean> {
+    override fun isExist(teamId: String): Single<Boolean> {
         return Single.create {
             try {
                 val result = db.use {
                     select(FavoriteEventEntity.TABLE_NAME)
-                            .whereArgs("${FavoriteEventEntity.EVENT_ID} = {id}", "id" to eventId)
-                            .exec { parseList(classParser<FavoriteEventEntity>()) }
+                            .whereArgs("${FavoriteTeamEntity.TEAM_ID} = {id}", "id" to teamId)
+                            .exec { parseList(classParser<FavoriteTeamEntity>()) }
                 }
 
                 if(result.isNotEmpty()) {

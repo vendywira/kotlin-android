@@ -1,6 +1,5 @@
-package app.learn.kotlin.feature.team
+package app.learn.kotlin.feature.team.list
 
-import android.content.Context
 import android.os.Bundle
 import android.support.v4.widget.SwipeRefreshLayout
 import android.support.v7.widget.LinearLayoutManager
@@ -10,7 +9,6 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.*
 import app.learn.kotlin.R
-import app.learn.kotlin.feature.base.BaseActivity
 import app.learn.kotlin.feature.base.BaseFragment
 import app.learn.kotlin.helper.gone
 import app.learn.kotlin.helper.invisible
@@ -18,29 +16,24 @@ import app.learn.kotlin.helper.visible
 import app.learn.kotlin.model.response.League
 import app.learn.kotlin.model.response.ListResponse
 import app.learn.kotlin.model.response.Team
-import dagger.android.AndroidInjection
-import dagger.android.support.AndroidSupportInjection
-import kotlinx.android.synthetic.main.recycle_swipe_refresh.*
-import org.jetbrains.anko.ctx
 import org.jetbrains.anko.find
-import org.jetbrains.anko.setContentView
 import org.jetbrains.anko.support.v4.ctx
 import org.jetbrains.anko.support.v4.onRefresh
 import javax.inject.Inject
 import android.R as r
 
 
-class TeamFragment : BaseFragment<TeamContract.Presenter>(), TeamContract.View {
+class ListTeamFragment : BaseFragment<ListTeamContract.Presenter>(), ListTeamContract.View {
 
     @Inject
-    internal lateinit var presenter : TeamContract.Presenter
+    internal lateinit var presenter : ListTeamContract.Presenter
 
     private lateinit var listTeam: RecyclerView
     private lateinit var progressBar: ProgressBar
     private lateinit var swipeRefresh: SwipeRefreshLayout
     private lateinit var spinner: Spinner
     private lateinit var leagueName: String
-    private lateinit var adapter: TeamAdapter
+    private lateinit var adapterList: ListTeamAdapter
 
     private var leagues : MutableList<String?> = mutableListOf()
     private var clubList: MutableList<Team> = mutableListOf()
@@ -54,13 +47,13 @@ class TeamFragment : BaseFragment<TeamContract.Presenter>(), TeamContract.View {
         progressBar = view.find(R.id.base_progress_bar_id)
 
         presenter.getLeagueList()
-        adapter = TeamAdapter(ctx, clubList) {
+        adapterList = ListTeamAdapter(ctx, clubList) {
             val toast = Toast.makeText(ctx, it.name, Toast.LENGTH_SHORT)
             toast.show()
         }
 
         listTeam.layoutManager = LinearLayoutManager(ctx)
-        listTeam.adapter = adapter
+        listTeam.adapter = adapterList
 
         swipeRefresh.onRefresh {
             presenter.getTeamList(leagueName)
@@ -69,7 +62,7 @@ class TeamFragment : BaseFragment<TeamContract.Presenter>(), TeamContract.View {
         return view
     }
 
-    override fun getPresenter(): TeamContract.Presenter? = presenter
+    override fun getPresenter(): ListTeamContract.Presenter? = presenter
 
     override fun getProgressBar(): ProgressBar? = progressBar
 
@@ -83,7 +76,7 @@ class TeamFragment : BaseFragment<TeamContract.Presenter>(), TeamContract.View {
         teamResponse?.contents?.let {
             clubList.addAll(it)
         }
-        adapter.notifyDataSetChanged()
+        adapterList.notifyDataSetChanged()
     }
 
     override fun getListLaugue(leagueResponse: ListResponse<League>?) {

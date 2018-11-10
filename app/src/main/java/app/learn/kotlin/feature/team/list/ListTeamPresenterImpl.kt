@@ -1,4 +1,4 @@
-package app.learn.kotlin.feature.team
+package app.learn.kotlin.feature.team.list
 
 import app.learn.kotlin.feature.base.BasePresenterImpl
 import app.learn.kotlin.model.Constant
@@ -7,10 +7,10 @@ import app.learn.kotlin.network.TheSportDBApiService
 import io.reactivex.android.schedulers.AndroidSchedulers
 import javax.inject.Inject
 
-class TeamPresenterImpl @Inject constructor (
-        private val view: TeamContract.View,
+class ListTeamPresenterImpl @Inject constructor (
+        private val view: ListTeamContract.View,
         private val apiService: TheSportDBApiService)
-    : BasePresenterImpl(), TeamContract.Presenter {
+    : BasePresenterImpl(), ListTeamContract.Presenter {
 
     override fun getLeagueList() {
         super.addDisposable(apiService.getAllLeagues()

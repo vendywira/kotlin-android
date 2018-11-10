@@ -1,4 +1,4 @@
-package app.learn.kotlin.feature.team
+package app.learn.kotlin.feature.team.list
 
 import app.learn.kotlin.feature.base.BasePresenter
 import app.learn.kotlin.feature.base.BaseView
@@ -6,7 +6,7 @@ import app.learn.kotlin.model.response.League
 import app.learn.kotlin.model.response.ListResponse
 import app.learn.kotlin.model.response.Team
 
-class TeamContract {
+class ListTeamContract {
 
     interface Presenter : BasePresenter {
 

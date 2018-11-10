@@ -22,7 +22,7 @@ class MatchDetailPresenterImpl @Inject constructor (
     }
 
     override fun insertMatchToFavorite(favoriteEventEntity: FavoriteEventEntity) {
-        super.addDisposable(favoriteRepository.insertEvent(favoriteEventEntity)
+        super.addDisposable(favoriteRepository.insert(favoriteEventEntity)
                 .doOnSubscribe { view.showLoading() }
                 .doAfterTerminate { view.hideLoading() }
                 .observeOn(AndroidSchedulers.mainThread())
@@ -32,7 +32,7 @@ class MatchDetailPresenterImpl @Inject constructor (
     }
 
     override fun deleteMatchFromFavorite(eventId: String?) {
-        super.addDisposable(favoriteRepository.deleteEvent(eventId.orEmpty())
+        super.addDisposable(favoriteRepository.delete(eventId.orEmpty())
                 .doOnSubscribe { view.showLoading() }
                 .doAfterTerminate { view.hideLoading() }
                 .observeOn(AndroidSchedulers.mainThread())
@@ -42,7 +42,7 @@ class MatchDetailPresenterImpl @Inject constructor (
     }
 
     override fun isExistFavoriteEvent(eventId: String?) {
-        super.addDisposable(favoriteRepository.isExistEvent(eventId.orEmpty())
+        super.addDisposable(favoriteRepository.isExist(eventId.orEmpty())
                 .doOnSubscribe { view.showLoading() }
                 .doAfterTerminate { view.hideLoading() }
                 .observeOn(AndroidSchedulers.mainThread())
