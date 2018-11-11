@@ -4,39 +4,44 @@ import android.os.Bundle
 import android.support.v4.widget.SwipeRefreshLayout
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.*
+import android.widget.AdapterView
+import android.widget.ArrayAdapter
+import android.widget.ProgressBar
+import android.widget.Spinner
 import app.learn.kotlin.R
 import app.learn.kotlin.feature.base.BaseFragment
-import app.learn.kotlin.helper.gone
-import app.learn.kotlin.helper.invisible
-import app.learn.kotlin.helper.visible
+import app.learn.kotlin.feature.team.detail.TeamDetailActivity
+import app.learn.kotlin.helper.mapper
+import app.learn.kotlin.model.Constant
 import app.learn.kotlin.model.response.League
 import app.learn.kotlin.model.response.ListResponse
 import app.learn.kotlin.model.response.Team
+import app.learn.kotlin.model.vo.TeamVo
 import org.jetbrains.anko.find
+import org.jetbrains.anko.startActivity
 import org.jetbrains.anko.support.v4.ctx
 import org.jetbrains.anko.support.v4.onRefresh
+import org.jetbrains.anko.support.v4.toast
 import javax.inject.Inject
-import android.R as r
 
-
-class ListTeamFragment : BaseFragment<ListTeamContract.Presenter>(), ListTeamContract.View {
+class TeamListFragment : BaseFragment<TeamListContract.Presenter>(), TeamListContract.View {
 
     @Inject
-    internal lateinit var presenter : ListTeamContract.Presenter
+    internal lateinit var presenter : TeamListContract.Presenter
 
     private lateinit var listTeam: RecyclerView
     private lateinit var progressBar: ProgressBar
     private lateinit var swipeRefresh: SwipeRefreshLayout
     private lateinit var spinner: Spinner
     private lateinit var leagueName: String
-    private lateinit var adapterList: ListTeamAdapter
+    private lateinit var adapterList: TeamListAdapter
 
     private var leagues : MutableList<String?> = mutableListOf()
-    private var clubList: MutableList<Team> = mutableListOf()
+    private var listResponseTeam: MutableList<TeamVo> = mutableListOf()
 
     override fun onInitView(inflater: LayoutInflater?, container: ViewGroup?,
                             savedInstanceState: Bundle?): View {
@@ -47,9 +52,9 @@ class ListTeamFragment : BaseFragment<ListTeamContract.Presenter>(), ListTeamCon
         progressBar = view.find(R.id.base_progress_bar_id)
 
         presenter.getLeagueList()
-        adapterList = ListTeamAdapter(ctx, clubList) {
-            val toast = Toast.makeText(ctx, it.name, Toast.LENGTH_SHORT)
-            toast.show()
+        adapterList = TeamListAdapter(ctx, listResponseTeam) {
+            ctx.startActivity<TeamDetailActivity>(
+                Constant.TEAM_INTENT to listResponseTeam[it])
         }
 
         listTeam.layoutManager = LinearLayoutManager(ctx)
@@ -62,19 +67,19 @@ class ListTeamFragment : BaseFragment<ListTeamContract.Presenter>(), ListTeamCon
         return view
     }
 
-    override fun getPresenter(): ListTeamContract.Presenter? = presenter
+    override fun getPresenter(): TeamListContract.Presenter? = presenter
 
     override fun getProgressBar(): ProgressBar? = progressBar
 
     override fun leagueName(): String = leagueName
 
-    fun hideSpinner() = spinner.gone()
-
     override fun showTeamList(teamResponse: ListResponse<Team>?) {
         swipeRefresh.isRefreshing = false
-        clubList.clear()
-        teamResponse?.contents?.let {
-            clubList.addAll(it)
+        listResponseTeam.clear()
+        teamResponse?.contents?.let { teams ->
+            val teamVoList = mutableListOf<TeamVo>()
+            teams.forEach { teamVoList.add(mapper.map(it, TeamVo::class.java)) }
+            listResponseTeam.addAll(teamVoList)
         }
         adapterList.notifyDataSetChanged()
     }
@@ -100,11 +105,11 @@ class ListTeamFragment : BaseFragment<ListTeamContract.Presenter>(), ListTeamCon
 
     override fun showLoading() {
         swipeRefresh.isRefreshing = false
-        progressBar.visible()
+        super.showLoading()
     }
 
     override fun hideLoading() {
         swipeRefresh.isRefreshing = false
-        progressBar.invisible()
+        super.hideLoading()
     }
 }

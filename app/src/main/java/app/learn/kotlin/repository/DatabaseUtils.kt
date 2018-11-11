@@ -1,4 +1,4 @@
-package app.learn.kotlin.helper
+package app.learn.kotlin.repository
 
 import android.content.Context
 import android.database.sqlite.SQLiteDatabase
@@ -22,8 +22,7 @@ class DatabaseUtils(ctx: Context) : ManagedSQLiteOpenHelper(ctx, Constant.DB_NAM
     }
 
     override fun onCreate(db: SQLiteDatabase) {
-        db.createTable(
-                FavoriteEventEntity.TABLE_NAME, true,
+        db.createTable(FavoriteEventEntity.TABLE_NAME, true,
                 FavoriteEventEntity.ID to INTEGER + PRIMARY_KEY + AUTOINCREMENT,
                 FavoriteEventEntity.EVENT_ID to TEXT + UNIQUE,
                 FavoriteEventEntity.TEAM_HOME_NAME to TEXT,

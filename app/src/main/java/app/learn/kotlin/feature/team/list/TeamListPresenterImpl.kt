@@ -7,10 +7,10 @@ import app.learn.kotlin.network.TheSportDBApiService
 import io.reactivex.android.schedulers.AndroidSchedulers
 import javax.inject.Inject
 
-class ListTeamPresenterImpl @Inject constructor (
-        private val view: ListTeamContract.View,
+class TeamListPresenterImpl @Inject constructor (
+        private val view: TeamListContract.View,
         private val apiService: TheSportDBApiService)
-    : BasePresenterImpl(), ListTeamContract.Presenter {
+    : BasePresenterImpl(), TeamListContract.Presenter {
 
     override fun getLeagueList() {
         super.addDisposable(apiService.getAllLeagues()

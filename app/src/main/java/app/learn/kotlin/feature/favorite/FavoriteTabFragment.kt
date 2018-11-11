@@ -8,13 +8,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import app.learn.kotlin.R
-import app.learn.kotlin.feature.HomeActivity
 import app.learn.kotlin.feature.event.match.MatchViewPagerAdapter
 import app.learn.kotlin.feature.favorite.event.FavoriteEventFragment
 import app.learn.kotlin.feature.favorite.event.FavoriteTeamFragment
-import app.learn.kotlin.helper.invisible
-import app.learn.kotlin.model.Constant
-import org.jetbrains.anko.support.v4.ctx
 
 class FavoriteTabFragment : Fragment() {
 
@@ -24,7 +20,7 @@ class FavoriteTabFragment : Fragment() {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
-        val view = inflater.inflate(R.layout.fragment_tab_match, container, false)
+        val view = inflater.inflate(R.layout.fragment_tabs, container, false)
         tabLayout = view.findViewById(R.id.tabs)
         viewPager = view.findViewById(R.id.viewpager)
 

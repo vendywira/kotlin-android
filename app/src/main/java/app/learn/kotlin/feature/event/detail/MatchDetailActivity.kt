@@ -12,7 +12,6 @@ import app.learn.kotlin.model.Constant
 import app.learn.kotlin.model.entity.FavoriteEventEntity
 import app.learn.kotlin.model.response.Event
 import app.learn.kotlin.model.response.Team
-import dagger.android.AndroidInjection
 import kotlinx.android.synthetic.main.activity_match_detail.*
 import org.jetbrains.anko.design.snackbar
 import javax.inject.Inject
@@ -138,12 +137,12 @@ class MatchDetailActivity : BaseActivity<MatchDetailContract.Presenter>(),
     }
 
     override fun setTeamDetailModel(team: Team) {
-        if (team.id.orEmpty() == event?.idHomeTeam) {
+        if (team.teamId.orEmpty() == event?.idHomeTeam) {
             teamHome = team
-            iv_home_team_icon.loadImageUrl(teamHome?.image.orEmpty())
+            iv_home_team_icon.loadImageUrl(teamHome?.teamLogoUrl.orEmpty())
         } else {
             teamAway = team
-            iv_away_team_icon.loadImageUrl(teamAway?.image.orEmpty())
+            iv_away_team_icon.loadImageUrl(teamAway?.teamLogoUrl.orEmpty())
         }
     }
 

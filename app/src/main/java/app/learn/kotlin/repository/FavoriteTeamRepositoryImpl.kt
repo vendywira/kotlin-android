@@ -2,7 +2,6 @@ package app.learn.kotlin.repository
 
 import android.database.sqlite.SQLiteException
 import android.util.Log
-import app.learn.kotlin.helper.DatabaseUtils
 import app.learn.kotlin.helper.convertMapToContentValues
 import app.learn.kotlin.helper.objectMapper
 import app.learn.kotlin.model.entity.FavoriteEventEntity
@@ -24,9 +23,9 @@ class FavoriteTeamRepositoryImpl @Inject constructor(private val db: DatabaseUti
         return Single.create {
             try {
                 db.use {
-                    insert(FavoriteEventEntity.TABLE_NAME, null,
+                    insert(FavoriteTeamEntity.TABLE_NAME, null,
                             convertMapToContentValues(objectMapper
-                                    .convertValue(FavoriteTeamEntity, Map::class.java)))
+                                    .convertValue(favoriteTeamEntity, Map::class.java)))
                 }
                 it.onSuccess(true)
             } catch (e: Exception) {
@@ -41,7 +40,7 @@ class FavoriteTeamRepositoryImpl @Inject constructor(private val db: DatabaseUti
             try {
                 it.onSuccess(db.use {
                     select(FavoriteTeamEntity.TABLE_NAME)
-                            .whereArgs("${FavoriteTeamEntity.TEAM_ID} = {id}", "id" to teamId)
+                            .whereArgs("${FavoriteTeamEntity.TEAM_ID} = {teamId}", "teamId" to teamId)
                             .exec { parseSingle(classParser<FavoriteTeamEntity>()) }
                 })
             } catch (e: Exception) {
@@ -55,7 +54,7 @@ class FavoriteTeamRepositoryImpl @Inject constructor(private val db: DatabaseUti
         return Observable.create<FavoriteTeamEntity> {
             try {
                 val result = db.use {
-                    select(FavoriteEventEntity.TABLE_NAME)
+                    select(FavoriteTeamEntity.TABLE_NAME)
                             .exec { parseList(classParser<FavoriteTeamEntity>()) }
                 }
                 for (r in result) it.onNext(r)
@@ -72,13 +71,14 @@ class FavoriteTeamRepositoryImpl @Inject constructor(private val db: DatabaseUti
             try {
                 db.use {
                     delete(FavoriteTeamEntity.TABLE_NAME,
-                            "${FavoriteTeamEntity.TEAM_ID} = {id}",
-                            "id" to teamId)
+                            "${FavoriteTeamEntity.TEAM_ID} = {teamId}",
+                            "teamId" to teamId)
                 }
 
                 emitter.onSuccess(true)
             } catch (e: SQLiteException) {
                 Log.e("Error", e.stackTrace.toString())
+                emitter.onSuccess(false)
                 emitter.onError(e)
             }
         }
@@ -89,8 +89,8 @@ class FavoriteTeamRepositoryImpl @Inject constructor(private val db: DatabaseUti
         return Single.create {
             try {
                 val result = db.use {
-                    select(FavoriteEventEntity.TABLE_NAME)
-                            .whereArgs("${FavoriteTeamEntity.TEAM_ID} = {id}", "id" to teamId)
+                    select(FavoriteTeamEntity.TABLE_NAME)
+                            .whereArgs("${FavoriteTeamEntity.TEAM_ID} = {teamId}", "teamId" to teamId)
                             .exec { parseList(classParser<FavoriteTeamEntity>()) }
                 }
 
@@ -101,6 +101,7 @@ class FavoriteTeamRepositoryImpl @Inject constructor(private val db: DatabaseUti
                 }
             } catch (e: Exception) {
                 Log.e("Error", e.stackTrace.toString())
+                it.onSuccess(false)
                 it.onError(e)
             }
         }

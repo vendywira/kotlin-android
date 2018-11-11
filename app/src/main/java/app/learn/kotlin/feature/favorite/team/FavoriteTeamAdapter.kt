@@ -8,9 +8,8 @@ import android.widget.ImageView
 import android.widget.TextView
 import app.learn.kotlin.R
 import app.learn.kotlin.R.id.img_team_logo
+import app.learn.kotlin.helper.loadImageUrl
 import app.learn.kotlin.model.entity.FavoriteTeamEntity
-import com.bumptech.glide.Glide
-import com.bumptech.glide.request.RequestOptions
 import org.jetbrains.anko.find
 
 class FavoriteTeamAdapter (private val listOfTeams: List<FavoriteTeamEntity>,
@@ -37,10 +36,7 @@ class FavoriteTeamAdapter (private val listOfTeams: List<FavoriteTeamEntity>,
         private val tvTeamName: TextView = view.find(R.id.tv_team_name)
 
         fun bindItem(favorite: FavoriteTeamEntity) {
-            Glide.with(itemView.context)
-                    .load(favorite.teamLogoUrl)
-                    .apply(RequestOptions().placeholder(R.drawable.ic_hourglass))
-                    .into(imgTeamLogo)
+            imgTeamLogo.loadImageUrl(favorite.teamLogoUrl.orEmpty())
             tvTeamName.text = favorite.teamName
         }
     }

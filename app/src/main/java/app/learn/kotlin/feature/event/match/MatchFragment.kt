@@ -20,8 +20,8 @@ import app.learn.kotlin.R.layout.fragment_match
 import app.learn.kotlin.feature.base.BaseFragment
 import app.learn.kotlin.feature.event.detail.MatchDetailActivity
 import app.learn.kotlin.helper.invisible
+import app.learn.kotlin.helper.mapper
 import app.learn.kotlin.helper.toDate
-import app.learn.kotlin.helper.toSimpleString
 import app.learn.kotlin.helper.visible
 import app.learn.kotlin.model.Constant
 import app.learn.kotlin.model.Constant.MATCH_NEXT_MATCH
@@ -30,8 +30,7 @@ import app.learn.kotlin.model.Constant.TAG_MENU
 import app.learn.kotlin.model.response.Event
 import app.learn.kotlin.model.response.League
 import app.learn.kotlin.model.response.ListResponse
-import app.learn.kotlin.model.vo.MatchVO
-import dagger.android.support.AndroidSupportInjection
+import app.learn.kotlin.model.vo.MatchVo
 import kotlinx.android.synthetic.main.base_recycle_view.view.*
 import kotlinx.android.synthetic.main.recycle_swipe_refresh.view.*
 import kotlinx.android.synthetic.main.fragment_match.view.*
@@ -50,7 +49,7 @@ open class MatchFragment : BaseFragment<MatchContract.Presenter>(), MatchContrac
     private lateinit var spinner: Spinner
     private var leagueId: String? = null
     private var tagMenu: String? = null
-    private var listOfMatch = mutableListOf<MatchVO>()
+    private var listOfMatch = mutableListOf<MatchVo>()
     private var leagues: MutableList<String> = mutableListOf()
     private var eventResponses = mutableListOf<Event>()
     private var leaguesResponses: MutableList<League> = mutableListOf()
@@ -66,7 +65,6 @@ open class MatchFragment : BaseFragment<MatchContract.Presenter>(), MatchContrac
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        AndroidSupportInjection.inject(this)
         super.onCreate(savedInstanceState)
         tagMenu = arguments?.getString(TAG_MENU) ?: MATCH_PREV_MATCH
     }
@@ -128,14 +126,9 @@ open class MatchFragment : BaseFragment<MatchContract.Presenter>(), MatchContrac
         eventResponse?.let { it ->
             eventResponses.addAll(it.contents.orEmpty())
             it.contents?.forEach {
-                listOfMatch.add(MatchVO(
-                        it.eventId,
-                        toSimpleString(it.strDate.orEmpty()),
-                        it.teamHomeName.orEmpty(),
-                        it.teamHomeScore,
-                        it.teamAwayName.orEmpty(),
-                        it.teamAwayScore,
-                        tagMenu == MATCH_NEXT_MATCH))
+                val match = mapper.map(it, MatchVo::class.java)
+                match.showReminder = (tagMenu == MATCH_NEXT_MATCH)
+                listOfMatch.add(match)
             }
         }
         Log.d("list of match ", listOfMatch.size.toString())

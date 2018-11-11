@@ -11,7 +11,7 @@ import app.learn.kotlin.R.layout.acivity_home
 import app.learn.kotlin.feature.event.match.MatchTabFragment
 import app.learn.kotlin.feature.favorite.FavoriteTabFragment
 import app.learn.kotlin.feature.search.SearchActivity
-import app.learn.kotlin.feature.team.list.ListTeamFragment
+import app.learn.kotlin.feature.team.list.TeamListFragment
 import app.learn.kotlin.helper.invisible
 import app.learn.kotlin.helper.visible
 import app.learn.kotlin.model.Constant
@@ -37,7 +37,7 @@ class HomeActivity : AppCompatActivity() {
             when (item.itemId) {
                 menu_team_id -> {
                     menu?.getItem(MENU_SEARCH)?.visible()
-                    showFragment(savedInstanceState, ListTeamFragment())
+                    showFragment(savedInstanceState, TeamListFragment())
                     fragmentName = Constant.FRAGMENT_TEAM
                 }
                 menu_match_id -> {
@@ -48,7 +48,6 @@ class HomeActivity : AppCompatActivity() {
                 menu_favorite_id -> {
                     menu?.getItem(MENU_SEARCH)?.invisible()
                     showFragment(savedInstanceState, FavoriteTabFragment())
-                    fragmentName = Constant.FRAGMENT_FAVORITE
                 }
             }
             true

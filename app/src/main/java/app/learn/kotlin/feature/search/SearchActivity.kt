@@ -72,12 +72,8 @@ class SearchActivity : BaseActivity<SearchContract.Presenter> (), SearchContract
 
     private fun search(query: String) {
         when (flag) {
-            FRAGMENT_EVENT -> {
-                searchEvent.search(query)
-            }
-            FRAGMENT_TEAM -> {
-                searchTeam.search(query)
-            }
+            FRAGMENT_EVENT -> searchEvent.search(query)
+            FRAGMENT_TEAM -> searchTeam.search(query)
         }
     }
 
@@ -98,17 +94,7 @@ class SearchActivity : BaseActivity<SearchContract.Presenter> (), SearchContract
         }
     }
 
-
     override fun getPresenter(): SearchContract.Presenter? = presenter
 
     override fun getProgressBar(): ProgressBar?  = progressBar
-
-    override fun showLoading() {
-
-    }
-
-    override fun hideLoading() {
-
-    }
-
 }

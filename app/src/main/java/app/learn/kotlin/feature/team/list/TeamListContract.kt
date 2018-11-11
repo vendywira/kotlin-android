@@ -6,7 +6,7 @@ import app.learn.kotlin.model.response.League
 import app.learn.kotlin.model.response.ListResponse
 import app.learn.kotlin.model.response.Team
 
-class ListTeamContract {
+class TeamListContract {
 
     interface Presenter : BasePresenter {
 

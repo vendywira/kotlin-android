@@ -59,8 +59,8 @@ class MatchDetailPresenterImplTest {
         event = Event(eventId = EVENT_ID, idHomeTeam = ID_HOME_TEAM, idAwayTeam = ID_AWAY_TEAM)
         listEventResponse = ListResponse(mutableListOf(event))
         responseEvents = Observable.just(listEventResponse)
-        teamHome = Team(id = ID_HOME_TEAM)
-        teamAway = Team(id = ID_AWAY_TEAM)
+        teamHome = Team(teamId = ID_HOME_TEAM)
+        teamAway = Team(teamId = ID_AWAY_TEAM)
     }
 
     @After

@@ -2,7 +2,6 @@ package app.learn.kotlin.repository
 
 import android.database.sqlite.SQLiteException
 import android.util.Log
-import app.learn.kotlin.helper.DatabaseUtils
 import app.learn.kotlin.helper.convertMapToContentValues
 import app.learn.kotlin.helper.objectMapper
 import app.learn.kotlin.model.entity.FavoriteEventEntity
@@ -35,7 +34,7 @@ class FavoriteMatchRepositoryImpl @Inject constructor(private val db: DatabaseUt
             try {
                 it.onSuccess(db.use {
                     select(FavoriteEventEntity.TABLE_NAME)
-                            .whereArgs("${FavoriteEventEntity.EVENT_ID} = {id}", "id" to eventId)
+                            .whereArgs("${FavoriteEventEntity.EVENT_ID} = {eventId}", "eventId" to eventId)
                             .exec { parseSingle(classParser<FavoriteEventEntity>()) }
                 })
             } catch (e: Exception) {
@@ -66,8 +65,8 @@ class FavoriteMatchRepositoryImpl @Inject constructor(private val db: DatabaseUt
             try {
                 db.use {
                     delete(FavoriteEventEntity.TABLE_NAME,
-                            "${FavoriteEventEntity.EVENT_ID} = {id}",
-                            "id" to eventId)
+                            "${FavoriteEventEntity.EVENT_ID} = {eventId}",
+                            "eventId" to eventId)
                 }
 
                 emitter.onSuccess(true)
@@ -84,7 +83,7 @@ class FavoriteMatchRepositoryImpl @Inject constructor(private val db: DatabaseUt
             try {
                 val result = db.use {
                     select(FavoriteEventEntity.TABLE_NAME)
-                            .whereArgs("${FavoriteEventEntity.EVENT_ID} = {id}", "id" to eventId)
+                            .whereArgs("${FavoriteEventEntity.EVENT_ID} = {eventId}", "eventId" to eventId)
                             .exec { parseList(classParser<FavoriteEventEntity>()) }
                 }
 
