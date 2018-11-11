@@ -3,7 +3,7 @@
     package="app.learn.kotlin">
 
     <application
-        android:name=".AppController"
+        android:name=".di.AppController"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
@@ -23,7 +23,8 @@
         <activity
             android:theme="@style/AppTheme.NoActionBar"
             android:name=".feature.search.SearchActivity"/>
-        <activity android:name=".feature.team.detail.TeamDetailActivity" />
+        <activity android:name=".feature.team.detail.TeamDetailActivity"
+            android:theme="@style/AppTheme.NoActionBar"/>
     </application>
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />

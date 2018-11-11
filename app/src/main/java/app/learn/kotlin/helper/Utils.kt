@@ -121,9 +121,10 @@ fun timeFormating(time: String): String? {
     }
 }
 
+@SuppressLint("SimpleDateFormat")
 fun String?.toDate(): Date {
     return try {
-        val simpleDateFormat = SimpleDateFormat("dd/MM/yy")
+        val simpleDateFormat = SimpleDateFormat("dd/MM/yy.hh:mm:ssXXX")
         simpleDateFormat.parse(this)
     } catch (e: Exception) {
         Date()

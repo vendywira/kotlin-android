@@ -1,7 +1,7 @@
 package app.learn.kotlin.di.component
 
 import android.app.Application
-import app.learn.kotlin.AppController
+import app.learn.kotlin.di.AppController
 import app.learn.kotlin.di.module.AppModule
 import app.learn.kotlin.di.module.builder.ActivityBuilder
 import app.learn.kotlin.di.scope.ApplicationScope

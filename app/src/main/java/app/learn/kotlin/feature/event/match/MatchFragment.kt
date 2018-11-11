@@ -111,7 +111,7 @@ open class MatchFragment : BaseFragment<MatchContract.Presenter>(), MatchContrac
         intent.data = CalendarContract.Events.CONTENT_URI
         intent.putExtra(CalendarContract.Events.TITLE, event.event)
         intent.putExtra(CalendarContract.EXTRA_EVENT_BEGIN_TIME,
-                event.event.toDate().time)
+                ("${event.strDate}.${event.time}").toDate().time)
         intent.putExtra(CalendarContract.Events.ALL_DAY, false)
         intent.putExtra(CalendarContract.Events.DESCRIPTION, event.filename)
         startActivity(intent)

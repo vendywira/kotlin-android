@@ -49,6 +49,7 @@ class TeamDetailActivity : BaseActivity<TeamDetailContract.Presenter>(),
 
     override fun onInitView() {
         setContentView(activity_team_detail)
+        setSupportActionBar(toolbar)
         supportActionBar?.setDisplayShowHomeEnabled(true)
         supportActionBar?.setHomeButtonEnabled(true)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
@@ -117,13 +118,5 @@ class TeamDetailActivity : BaseActivity<TeamDetailContract.Presenter>(),
 
     override fun setViewModel(team: Team) {
 
-    }
-
-    override fun showLoading() {
-        progressBar.visible()
-    }
-
-    override fun hideLoading() {
-        progressBar.invisible()
     }
 }
