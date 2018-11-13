@@ -1,5 +1,8 @@
 package app.learn.kotlin.feature.team.detail
 
+import android.os.Bundle
+import android.support.design.widget.TabLayout
+import android.support.v4.view.ViewPager
 import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
@@ -8,20 +11,26 @@ import app.learn.kotlin.R
 import app.learn.kotlin.R.layout.activity_team_detail
 import app.learn.kotlin.feature.base.BaseActivity
 import app.learn.kotlin.feature.event.detail.TeamDetailContract
+import app.learn.kotlin.feature.base.BasePagerAdapter
+import app.learn.kotlin.feature.team.player.list.PlayerListFragment
 import app.learn.kotlin.helper.invisible
 import app.learn.kotlin.helper.loadImageUrl
 import app.learn.kotlin.helper.mapper
 import app.learn.kotlin.helper.visible
 import app.learn.kotlin.model.Constant
-import app.learn.kotlin.model.entity.FavoriteEventEntity
 import app.learn.kotlin.model.entity.FavoriteTeamEntity
-import app.learn.kotlin.model.response.Event
 import app.learn.kotlin.model.response.Team
 import app.learn.kotlin.model.vo.TeamVo
 import kotlinx.android.synthetic.main.activity_team_detail.*
 import kotlinx.android.synthetic.main.progress_bar.*
 import org.jetbrains.anko.design.snackbar
 import javax.inject.Inject
+import android.support.design.widget.AppBarLayout
+import android.support.design.widget.CollapsingToolbarLayout
+
+
+
+
 
 
 class TeamDetailActivity : BaseActivity<TeamDetailContract.Presenter>(),
@@ -33,6 +42,9 @@ class TeamDetailActivity : BaseActivity<TeamDetailContract.Presenter>(),
     private lateinit var progressBar: ProgressBar
     private lateinit var team: TeamVo
     private lateinit var menu: Menu
+    private lateinit var tabLayout: TabLayout
+    private lateinit var viewPager: ViewPager
+    private lateinit var basePagerAdapter: BasePagerAdapter
 
     private var isFavorite: Boolean = false
 
@@ -49,18 +61,47 @@ class TeamDetailActivity : BaseActivity<TeamDetailContract.Presenter>(),
 
     override fun onInitView() {
         setContentView(activity_team_detail)
+        progressBar = base_progress_bar_id
+        team = intent.getParcelableExtra(Constant.TEAM_INTENT)
+        app_bar_team_detail.addOnOffsetChangedListener(titleShownOnCollapse(collapsing_toolbar))
+
         setSupportActionBar(toolbar)
         supportActionBar?.setDisplayShowHomeEnabled(true)
         supportActionBar?.setHomeButtonEnabled(true)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
-        progressBar = base_progress_bar_id
-        team = intent.getParcelableExtra(Constant.TEAM_INTENT)
-        Log.d("team detail", team.toString())
-        loadBanner(team.teamBanner.orEmpty())
+        supportActionBar?.setDisplayShowTitleEnabled(false)
+
+        loadBanner(team)
+        setTabLayout()
     }
 
-    private fun loadBanner(banner: String){
-        img_team_banner.loadImageUrl(banner)
+    private fun titleShownOnCollapse(collapsingToolbarLayout: CollapsingToolbarLayout):
+            AppBarLayout.OnOffsetChangedListener {
+
+        return object : AppBarLayout.OnOffsetChangedListener {
+            var isShow = true
+            var scrollRange = -1
+
+            override fun onOffsetChanged(appBarLayout: AppBarLayout, verticalOffset: Int) {
+                if (scrollRange == -1) {
+                    scrollRange = appBarLayout.totalScrollRange
+                }
+                if (scrollRange + verticalOffset == 0) {
+                    collapsingToolbarLayout.title = team.teamName
+                    isShow = true
+                } else if (isShow) {
+                    collapsingToolbarLayout.title = " "
+                    isShow = false
+                }
+            }
+        }
+    }
+
+    private fun loadBanner(team: TeamVo){
+        img_logo.loadImageUrl(team.teamLogoUrl.orEmpty())
+        tv_team_name.text = team.teamName
+        tv_team_formed_year.text = team.teamFormedYear
+        tv_team_stadium.text = team.teamStadiumName
     }
 
     override fun isExistFavoriteTeam(isFavorite: Boolean) {
@@ -110,6 +151,23 @@ class TeamDetailActivity : BaseActivity<TeamDetailContract.Presenter>(),
         }
 
         return super.onOptionsItemSelected(item)
+    }
+
+    private fun setTabLayout() {
+        tabLayout = findViewById(R.id.tabs)
+        viewPager = findViewById(R.id.viewpagerTeam)
+        val teamOverviewFragment = TeamDetailOverviewFragment()
+        val content = Bundle()
+        content.putString(Constant.CONTENT_TEAM_OVERVIEW, team.teamDescription.orEmpty())
+        teamOverviewFragment.arguments = content
+
+        basePagerAdapter = BasePagerAdapter(supportFragmentManager)
+        basePagerAdapter.let {
+            it.addFragment(getString(R.string.tab_title_overview), teamOverviewFragment)
+            it.addFragment(getString(R.string.tab_title_player), PlayerListFragment())
+            viewPager.adapter = it
+            tabLayout.setupWithViewPager(viewPager)
+        }
     }
 
     override fun showMessage(message: String) {

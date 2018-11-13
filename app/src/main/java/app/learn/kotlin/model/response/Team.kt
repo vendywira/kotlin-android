@@ -18,6 +18,12 @@ data class Team (
         @SerializedName("strTeamFanart1")
         var teamBanner: String? = null,
 
+        @SerializedName("strStadium")
+        var teamStadiumName: String? = null,
+
+        @SerializedName("intFormedYear")
+        var teamFormedYear: String? = null,
+
         @SerializedName("strDescriptionEN")
-        val teamDescription: String?
+        val teamDescription: String? = null
 ) : Parcelable

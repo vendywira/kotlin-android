@@ -1,6 +1,7 @@
 package app.learn.kotlin.model.vo
 
 import android.os.Parcelable
+import com.google.gson.annotations.SerializedName
 import kotlinx.android.parcel.Parcelize
 
 @Parcelize
@@ -9,7 +10,9 @@ data class TeamVo (
         var teamName: String? = null,
         var teamLogoUrl: String? = null,
         var teamBanner: String? = null,
-        val teamDescription: String?
+        var teamStadiumName: String? = null,
+        var teamFormedYear: String? = null,
+        var teamDescription: String? = null
 ) : Parcelable {
-    constructor() : this(null, null, null, null, null)
+    constructor() : this(null, null, null, null, null, null, null)
 }

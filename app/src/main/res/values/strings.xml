@@ -6,6 +6,8 @@
     <string name="tab_title_next">Next</string>
     <string name="tab_title_matches">Matches</string>
     <string name="tab_title_teams">Teams</string>
+    <string name="tab_title_overview">Overview</string>
+    <string name="tab_title_player">Players</string>
     <string name="label_lineups">Lineups</string>
     <string name="label_goal_keeper">Goal Keeper</string>
     <string name="label_defense">Defense</string>

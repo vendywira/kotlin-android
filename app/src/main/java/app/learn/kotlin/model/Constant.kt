@@ -11,4 +11,5 @@ object Constant {
     const val FRAGMENT_SEARCH = "FRAGMENT_SEARCH"
     const val FRAGMENT_TEAM = "FRAGMENT_TEAM"
     const val FRAGMENT_EVENT = "FRAGMENT_EVENT"
+    const val CONTENT_TEAM_OVERVIEW = "CONTENT_TEAM_OVERVIEW"
 }

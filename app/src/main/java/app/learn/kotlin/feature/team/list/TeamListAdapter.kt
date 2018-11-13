@@ -9,7 +9,6 @@ import android.widget.ImageView
 import android.widget.TextView
 import app.learn.kotlin.R
 import app.learn.kotlin.helper.loadImageUrl
-import app.learn.kotlin.model.response.Team
 import app.learn.kotlin.model.vo.TeamVo
 
 class TeamListAdapter(
@@ -34,7 +33,7 @@ class TeamListAdapter(
     class TeamHolder(view: View) : RecyclerView.ViewHolder(view) {
 
         val name = itemView.findViewById<TextView>(R.id.tv_team_name)
-        val image = itemView.findViewById<ImageView>(R.id.img_team_logo)
+        val image = itemView.findViewById<ImageView>(R.id.img_logo)
 
         fun bindItem(items : TeamVo) {
             name.text = items.teamName
