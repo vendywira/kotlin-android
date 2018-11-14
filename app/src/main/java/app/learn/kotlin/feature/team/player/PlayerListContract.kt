@@ -1,4 +1,4 @@
-package app.learn.kotlin.feature.team.player.list
+package app.learn.kotlin.feature.team.player
 
 import app.learn.kotlin.feature.base.BasePresenter
 import app.learn.kotlin.feature.base.BaseView

@@ -19,8 +19,8 @@ import app.learn.kotlin.feature.search.team.SearchTeamModule
 import app.learn.kotlin.feature.team.detail.TeamDetailActivity
 import app.learn.kotlin.feature.team.list.TeamListFragment
 import app.learn.kotlin.feature.team.list.TeamListModule
-import app.learn.kotlin.feature.team.player.list.PlayerListFragment
-import app.learn.kotlin.feature.team.player.list.PlayerListModule
+import app.learn.kotlin.feature.team.player.PlayerListFragment
+import app.learn.kotlin.feature.team.player.PlayerListModule
 import dagger.Module
 import dagger.android.ContributesAndroidInjector
 

@@ -22,7 +22,5 @@ class TeamDetailContract {
         fun isExistFavoriteTeam(isFavorite: Boolean)
 
         fun getTeamId(): String?
-
-        fun setViewModel(team: Team)
     }
 }

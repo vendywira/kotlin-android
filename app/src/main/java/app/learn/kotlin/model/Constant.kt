@@ -12,4 +12,6 @@ object Constant {
     const val FRAGMENT_TEAM = "FRAGMENT_TEAM"
     const val FRAGMENT_EVENT = "FRAGMENT_EVENT"
     const val CONTENT_TEAM_OVERVIEW = "CONTENT_TEAM_OVERVIEW"
+    const val TEAM_ID = "TEAM_ID"
+    const val PLAYER_INTENT = "PLAYER_INTENT"
 }

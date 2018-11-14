@@ -31,7 +31,7 @@ data class Player (
         var intSoccerXMLTeamID: String?,
 
         @SerializedName("strBanner")
-        var strBanner: String?,
+        var banner: String?,
 
         @SerializedName("strBirthLocation")
         var strBirthLocation: String?,
@@ -40,7 +40,7 @@ data class Player (
         var strCollege: String?,
 
         @SerializedName("strCutout")
-        var strCutout: String?,
+        var playerImageUrl: String?,
 
         @SerializedName("strDescriptionCN")
         var strDescriptionCN: String?,
@@ -49,7 +49,7 @@ data class Player (
         var strDescriptionDE: String?,
 
         @SerializedName("strDescriptionEN")
-        var strDescriptionEN: String?,
+        var description: String?,
 
         @SerializedName("strDescriptionES")
         var strDescriptionES: String?,
@@ -91,7 +91,7 @@ data class Player (
         var strFacebook: String?,
 
         @SerializedName("strFanart1")
-        var strFanart1: String?,
+        var banner1: String?,
 
         @SerializedName("strFanart2")
         var strFanart2: String?,
@@ -106,7 +106,7 @@ data class Player (
         var strGender: String?,
 
         @SerializedName("strHeight")
-        var strHeight: String?,
+        var height: String?,
 
         @SerializedName("strInstagram")
         var strInstagram: String?,
@@ -118,10 +118,10 @@ data class Player (
         var strNationality: String?,
 
         @SerializedName("strPlayer")
-        var strPlayer: String?,
+        var name: String?,
 
         @SerializedName("strPosition")
-        var strPosition: String?,
+        var position: String?,
 
         @SerializedName("strSigning")
         var strSigning: String?,
@@ -133,7 +133,7 @@ data class Player (
         var strTeam: String?,
 
         @SerializedName("strThumb")
-        var strThumb: String?,
+        var thumbImageUrl: String?,
 
         @SerializedName("strTwitter")
         var strTwitter: String?,
@@ -145,7 +145,7 @@ data class Player (
         var strWebsite: String?,
 
         @SerializedName("strWeight")
-        var strWeight: String?,
+        var weight: String?,
 
         @SerializedName("strYoutube")
         var strYoutube: String?

@@ -12,14 +12,13 @@ import app.learn.kotlin.R.layout.activity_team_detail
 import app.learn.kotlin.feature.base.BaseActivity
 import app.learn.kotlin.feature.event.detail.TeamDetailContract
 import app.learn.kotlin.feature.base.BasePagerAdapter
-import app.learn.kotlin.feature.team.player.list.PlayerListFragment
+import app.learn.kotlin.feature.team.player.PlayerListFragment
 import app.learn.kotlin.helper.invisible
 import app.learn.kotlin.helper.loadImageUrl
 import app.learn.kotlin.helper.mapper
 import app.learn.kotlin.helper.visible
 import app.learn.kotlin.model.Constant
 import app.learn.kotlin.model.entity.FavoriteTeamEntity
-import app.learn.kotlin.model.response.Team
 import app.learn.kotlin.model.vo.TeamVo
 import kotlinx.android.synthetic.main.activity_team_detail.*
 import kotlinx.android.synthetic.main.progress_bar.*
@@ -161,10 +160,15 @@ class TeamDetailActivity : BaseActivity<TeamDetailContract.Presenter>(),
         content.putString(Constant.CONTENT_TEAM_OVERVIEW, team.teamDescription.orEmpty())
         teamOverviewFragment.arguments = content
 
+        val playerListFragment = PlayerListFragment()
+        val players = Bundle()
+        players.putString(Constant.TEAM_ID, team.teamId)
+        playerListFragment.arguments = players
+
         basePagerAdapter = BasePagerAdapter(supportFragmentManager)
         basePagerAdapter.let {
             it.addFragment(getString(R.string.tab_title_overview), teamOverviewFragment)
-            it.addFragment(getString(R.string.tab_title_player), PlayerListFragment())
+            it.addFragment(getString(R.string.tab_title_player), playerListFragment)
             viewPager.adapter = it
             tabLayout.setupWithViewPager(viewPager)
         }
@@ -174,7 +178,4 @@ class TeamDetailActivity : BaseActivity<TeamDetailContract.Presenter>(),
         snackbar(findViewById(android.R.id.content), message)
     }
 
-    override fun setViewModel(team: Team) {
-
-    }
 }

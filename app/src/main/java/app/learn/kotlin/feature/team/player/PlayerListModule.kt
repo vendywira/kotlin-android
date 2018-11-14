@@ -1,9 +1,6 @@
-package app.learn.kotlin.feature.team.player.list
+package app.learn.kotlin.feature.team.player
 
 import app.learn.kotlin.di.scope.ActivityScope
-import app.learn.kotlin.feature.team.list.TeamListContract
-import app.learn.kotlin.feature.team.list.TeamListFragment
-import app.learn.kotlin.feature.team.list.TeamListPresenterImpl
 import dagger.Binds
 import dagger.Module
 
