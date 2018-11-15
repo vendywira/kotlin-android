@@ -18,8 +18,8 @@ class RepositoryModule {
 
     @ApplicationScope
     @Provides
-    internal fun provideFavoriteEventRepository(databaseUtils: DatabaseUtils): FavoriteMatchRepository {
-        return FavoriteMatchRepositoryImpl(databaseUtils)
+    internal fun provideFavoriteEventRepository(databaseUtils: DatabaseUtils): FavouriteMatchRepository {
+        return FavouriteMatchRepositoryImpl(databaseUtils)
     }
 
     @ApplicationScope

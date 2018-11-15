@@ -4,7 +4,7 @@ import app.learn.kotlin.model.entity.EventEntity
 import io.reactivex.Observable
 import io.reactivex.Single
 
-interface FavoriteMatchRepository {
+interface FavouriteMatchRepository {
 
     fun insert(eventEntity: EventEntity): Single<Boolean>
 

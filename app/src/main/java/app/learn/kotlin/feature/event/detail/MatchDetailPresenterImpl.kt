@@ -3,14 +3,14 @@ package app.learn.kotlin.feature.event.detail
 import app.learn.kotlin.feature.base.BasePresenterImpl
 import app.learn.kotlin.model.entity.EventEntity
 import app.learn.kotlin.network.TheSportDBApiService
-import app.learn.kotlin.repository.FavoriteMatchRepository
+import app.learn.kotlin.repository.FavouriteMatchRepository
 import io.reactivex.android.schedulers.AndroidSchedulers
 import javax.inject.Inject
 
 class MatchDetailPresenterImpl @Inject constructor (
         private val view: MatchDetailContract.View,
         private val apiService: TheSportDBApiService,
-        private val favoriteRepository: FavoriteMatchRepository)
+        private val favouriteRepository: FavouriteMatchRepository)
     : BasePresenterImpl(), MatchDetailContract.Presenter {
 
     companion object {
@@ -22,7 +22,7 @@ class MatchDetailPresenterImpl @Inject constructor (
     }
 
     override fun insertMatchToFavorite(eventEntity: EventEntity) {
-        super.addDisposable(favoriteRepository.insert(eventEntity)
+        super.addDisposable(favouriteRepository.insert(eventEntity)
                 .doOnSubscribe { view.showLoading() }
                 .doAfterTerminate { view.hideLoading() }
                 .observeOn(AndroidSchedulers.mainThread())
@@ -32,7 +32,7 @@ class MatchDetailPresenterImpl @Inject constructor (
     }
 
     override fun deleteMatchFromFavorite(eventId: String?) {
-        super.addDisposable(favoriteRepository.delete(eventId.orEmpty())
+        super.addDisposable(favouriteRepository.delete(eventId.orEmpty())
                 .doOnSubscribe { view.showLoading() }
                 .doAfterTerminate { view.hideLoading() }
                 .observeOn(AndroidSchedulers.mainThread())
@@ -42,7 +42,7 @@ class MatchDetailPresenterImpl @Inject constructor (
     }
 
     override fun isExistFavoriteEvent(eventId: String?) {
-        super.addDisposable(favoriteRepository.isExist(eventId.orEmpty())
+        super.addDisposable(favouriteRepository.isExist(eventId.orEmpty())
                 .doOnSubscribe { view.showLoading() }
                 .doAfterTerminate { view.hideLoading() }
                 .observeOn(AndroidSchedulers.mainThread())

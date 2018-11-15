@@ -3,7 +3,7 @@ package app.learn.kotlin.feature.favorite
 import app.learn.kotlin.feature.favourite.event.FavouriteEventContract
 import app.learn.kotlin.feature.favourite.event.FavouriteEventPresenterImpl
 import app.learn.kotlin.model.entity.EventEntity
-import app.learn.kotlin.repository.FavoriteMatchRepository
+import app.learn.kotlin.repository.FavouriteMatchRepository
 import io.reactivex.Observable
 import io.reactivex.android.plugins.RxAndroidPlugins
 import io.reactivex.schedulers.Schedulers
@@ -29,7 +29,7 @@ class FavouriteEventPresenterImplTest {
     private lateinit var view: FavouriteEventContract.View
 
     @Spy
-    private lateinit var favoriteRepository: FavoriteMatchRepository
+    private lateinit var favouriteRepository: FavouriteMatchRepository
 
     private val EVENT_ID = "eventId"
     private val HOME_TEAM_NAME = "homeTeamName"
@@ -57,16 +57,16 @@ class FavouriteEventPresenterImplTest {
 
     @After
     fun tearDown() {
-        Mockito.verifyNoMoreInteractions(view, favoriteRepository)
+        Mockito.verifyNoMoreInteractions(view, favouriteRepository)
     }
 
     @Test
     fun getListEventFavoriteTest_valid_success() {
-        `when`(favoriteRepository.findAll()).thenReturn(responseAllEvent)
+        `when`(favouriteRepository.findAll()).thenReturn(responseAllEvent)
 
         impl.getListFavorite()
 
-        verify(favoriteRepository).findAll()
+        verify(favouriteRepository).findAll()
         verify(view).showLoading()
         verify(view).hideLoading()
         verify(view).notifyDataChange()

@@ -10,8 +10,8 @@ import io.reactivex.Single
 import org.jetbrains.anko.db.*
 import javax.inject.Inject
 
-class FavoriteMatchRepositoryImpl @Inject constructor(private val db: DatabaseUtils)
-    : FavoriteMatchRepository {
+class FavouriteMatchRepositoryImpl @Inject constructor(private val db: DatabaseUtils)
+    : FavouriteMatchRepository {
 
     override fun insert(eventEntity: EventEntity): Single<Boolean> {
         return Single.create {
