@@ -13,19 +13,25 @@
            android:layout_width="match_parent"
            android:layout_height="match_parent"
            android:orientation="vertical">
-           <ProgressBar
-               android:id="@+id/base_progress_bar_id"
-               android:layout_width="wrap_content"
-               android:layout_gravity="center"
-               android:foregroundGravity="center_horizontal"
-               android:layout_height="wrap_content" >
-           </ProgressBar>
            <TextView
                android:id="@+id/tv_start_date"
                android:layout_width="match_parent"
                android:layout_height="wrap_content"
-               android:layout_margin="8dp"
-               android:gravity="center_horizontal"/>
+               android:layout_marginLeft="8dp"
+               android:layout_marginRight="8dp"
+               android:layout_marginTop="8dp"
+               android:layout_marginBottom="4dp"
+               android:gravity="center_horizontal"
+               tools:text="Min, 22 November 2018"/>
+           <TextView
+               android:id="@+id/tv_start_time"
+               android:layout_width="match_parent"
+               android:layout_height="wrap_content"
+               android:layout_marginLeft="8dp"
+               android:layout_marginRight="8dp"
+               android:layout_marginBottom="10dp"
+               android:gravity="center_horizontal"
+               tools:text="22:00"/>
            <LinearLayout
                android:layout_width="match_parent"
                android:layout_height="wrap_content"
@@ -332,4 +338,11 @@
            </LinearLayout>
        </LinearLayout>
     </ScrollView>
+    <ProgressBar
+        android:id="@+id/base_progress_bar_id"
+        android:layout_width="wrap_content"
+        android:layout_gravity="center"
+        android:foregroundGravity="center_horizontal"
+        android:layout_height="wrap_content" >
+    </ProgressBar>
 </FrameLayout>

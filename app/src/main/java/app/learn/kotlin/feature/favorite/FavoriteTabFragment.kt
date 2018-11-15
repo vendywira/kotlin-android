@@ -10,7 +10,7 @@ import android.view.ViewGroup
 import app.learn.kotlin.R
 import app.learn.kotlin.feature.base.BasePagerAdapter
 import app.learn.kotlin.feature.favorite.event.FavoriteEventFragment
-import app.learn.kotlin.feature.favorite.event.FavoriteTeamFragment
+import app.learn.kotlin.feature.favorite.team.FavoriteTeamFragment
 
 class FavoriteTabFragment : Fragment() {
 

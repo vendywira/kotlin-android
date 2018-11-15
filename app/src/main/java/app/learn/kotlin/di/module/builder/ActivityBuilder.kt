@@ -8,7 +8,7 @@ import app.learn.kotlin.feature.event.match.MatchFragment
 import app.learn.kotlin.feature.event.match.MatchModule
 import app.learn.kotlin.feature.favorite.event.FavoriteEventFragment
 import app.learn.kotlin.feature.favorite.event.FavoriteEventModule
-import app.learn.kotlin.feature.favorite.event.FavoriteTeamFragment
+import app.learn.kotlin.feature.favorite.team.FavoriteTeamFragment
 import app.learn.kotlin.feature.favorite.team.FavoriteTeamModule
 import app.learn.kotlin.feature.search.SearchActivity
 import app.learn.kotlin.feature.search.event.SearchEventFragment

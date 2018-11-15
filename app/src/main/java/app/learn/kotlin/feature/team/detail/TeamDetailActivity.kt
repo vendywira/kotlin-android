@@ -97,7 +97,7 @@ class TeamDetailActivity : BaseActivity<TeamDetailContract.Presenter>(),
     }
 
     private fun loadBanner(team: TeamVo){
-        img_logo.loadImageUrl(team.teamLogoUrl.orEmpty())
+        img_logo_team.loadImageUrl(team.teamLogoUrl.orEmpty())
         tv_team_name.text = team.teamName
         tv_team_formed_year.text = team.teamFormedYear
         tv_team_stadium.text = team.teamStadiumName

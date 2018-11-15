@@ -6,10 +6,12 @@ data class FavoriteTeamEntity (
     var teamName: String?,
     var teamLogoUrl: String?,
     var teamBanner: String?,
+    var teamStadiumName: String?,
+    var teamFormedYear: String?,
     var teamDescription: String?
 ) {
 
-    constructor() : this(null, null, null, null, null, null)
+    constructor() : this(null, null, null, null, null, null, null, null)
     companion object {
         const val TABLE_NAME = "favorite_team"
         const val ID = "id"
@@ -18,5 +20,7 @@ data class FavoriteTeamEntity (
         const val TEAM_LOGO_URL = "teamLogoUrl"
         const val TEAM_DESCRIPTION = "teamDescription"
         const val TEAM_BANNER = "teamBanner"
+        const val TEAM_STADIUM_NAME = "teamStadiumName"
+        const val TEAM_FORMED_YEAR = "teamFormedYear"
     }
 }

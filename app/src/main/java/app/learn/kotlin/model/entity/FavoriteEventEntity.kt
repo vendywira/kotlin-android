@@ -7,9 +7,10 @@ data class FavoriteEventEntity (
         var homeTeamScore: Int?,
         var awayTeamName: String?,
         var awayTeamScore: Int?,
-        var strDate: String?
+        var strDate: String?,
+        var time: String?
 ) {
-    constructor() : this(null, null, null, null, null, null, null)
+    constructor() : this(null,null, null, null, null, null, null, null)
 
     companion object {
             const val TABLE_NAME = "favorite_event"
@@ -20,5 +21,6 @@ data class FavoriteEventEntity (
             const val TEAM_HOME_SCORE = "homeTeamScore"
             const val TEAM_AWAY_SCORE = "awayTeamScore"
             const val START_DATE = "strDate"
+            const val TIME = "time"
     }
 }

@@ -17,6 +17,7 @@ import android.widget.ArrayAdapter
 import android.widget.ProgressBar
 import android.widget.Spinner
 import app.learn.kotlin.R.layout.fragment_match
+import app.learn.kotlin.feature.adapter.EventAdapter
 import app.learn.kotlin.feature.base.BaseFragment
 import app.learn.kotlin.feature.event.detail.MatchDetailActivity
 import app.learn.kotlin.helper.invisible
@@ -30,9 +31,7 @@ import app.learn.kotlin.model.Constant.TAG_MENU
 import app.learn.kotlin.model.response.Event
 import app.learn.kotlin.model.response.League
 import app.learn.kotlin.model.response.ListResponse
-import app.learn.kotlin.model.vo.MatchVo
-import kotlinx.android.synthetic.main.base_recycle_view.view.*
-import kotlinx.android.synthetic.main.recycle_swipe_refresh.view.*
+import app.learn.kotlin.model.vo.EventVo
 import kotlinx.android.synthetic.main.fragment_match.view.*
 import org.jetbrains.anko.startActivity
 import org.jetbrains.anko.support.v4.ctx
@@ -43,13 +42,13 @@ open class MatchFragment : BaseFragment<MatchContract.Presenter>(), MatchContrac
     @Inject
     internal open lateinit var presenter: MatchContract.Presenter
     private lateinit var contentUi: RecyclerView
-    private lateinit var matchAdapter: MatchAdapter
+    private lateinit var eventAdapter: EventAdapter
     private lateinit var progressBar: ProgressBar
     private lateinit var swipeRefresh: SwipeRefreshLayout
     private lateinit var spinner: Spinner
     private var leagueId: String? = null
     private var tagMenu: String? = null
-    private var listOfMatch = mutableListOf<MatchVo>()
+    private var listOfMatch = mutableListOf<EventVo>()
     private var leagues: MutableList<String> = mutableListOf()
     private var eventResponses = mutableListOf<Event>()
     private var leaguesResponses: MutableList<League> = mutableListOf()
@@ -77,18 +76,19 @@ open class MatchFragment : BaseFragment<MatchContract.Presenter>(), MatchContrac
     override fun onInitView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View {
         val view = LayoutInflater.from(context).inflate(fragment_match, container, false)
         progressBar = view.base_progress_bar_id
-        contentUi = view.base_recycle_view_id
+        contentUi = view.rv_match
         swipeRefresh = view.base_swipe_refresh
-        spinner = view.base_spinner_id
+        spinner = view.event_spinner_id
 
         presenter.getAllLeague()
         Log.d("list of match ", listOfMatch.size.toString())
         contentUi.layoutManager = LinearLayoutManager(ctx)
-        matchAdapter = MatchAdapter(listOfMatch,
-                { position -> ctx.startActivity<MatchDetailActivity>(
-                        Constant.MATCH_EVENT_ID to listOfMatch[position].eventId)
+        eventAdapter = EventAdapter(listOfMatch,
+                { position ->
+                    ctx.startActivity<MatchDetailActivity>(
+                            Constant.MATCH_EVENT_ID to listOfMatch[position].eventId)
                 }, { addEventToCalender(eventResponses[it]) })
-        contentUi.adapter = matchAdapter
+        contentUi.adapter = eventAdapter
         swipeRefresh.setOnRefreshListener {
             getMatch()
         }
@@ -126,13 +126,13 @@ open class MatchFragment : BaseFragment<MatchContract.Presenter>(), MatchContrac
         eventResponse?.let { it ->
             eventResponses.addAll(it.contents.orEmpty())
             it.contents?.forEach {
-                val match = mapper.map(it, MatchVo::class.java)
+                val match = mapper.map(it, EventVo::class.java)
                 match.showReminder = (tagMenu == MATCH_NEXT_MATCH)
                 listOfMatch.add(match)
             }
         }
         Log.d("list of match ", listOfMatch.size.toString())
-        matchAdapter.notifyDataSetChanged()
+        eventAdapter.notifyDataSetChanged()
     }
 
     override fun setLeagues(leagueResponse: ListResponse<League>?) {

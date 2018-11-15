@@ -31,12 +31,14 @@ class FavoriteEventPresenterImplTest {
     @Spy
     private lateinit var favoriteRepository: FavoriteMatchRepository
 
-    var EVENT_ID = "eventId"
-    var HOME_TEAM_NAME = "homeTeamName"
-    var HOME_TEAM_SCORE = 3
-    var AWAY_TEAM_NAME = "awayTeamName"
-    var AWAY_TEAM_SCORE = 2
-    var STR_DATE = "strDate"
+    private val EVENT_ID = "eventId"
+    private val HOME_TEAM_NAME = "homeTeamName"
+    private val HOME_TEAM_SCORE = 3
+    private val AWAY_TEAM_NAME = "awayTeamName"
+    private val AWAY_TEAM_SCORE = 2
+    private val STR_DATE = "strDate"
+    private val TIME = "time"
+
     private lateinit var favoriteEventEntity: FavoriteEventEntity
     private lateinit var responseAllEvent: Observable<FavoriteEventEntity>
 
@@ -48,7 +50,7 @@ class FavoriteEventPresenterImplTest {
         favoriteEventEntity = FavoriteEventEntity(id = null,
                 eventId = EVENT_ID, homeTeamName = HOME_TEAM_NAME,
                 awayTeamName = AWAY_TEAM_NAME, homeTeamScore = HOME_TEAM_SCORE,
-                awayTeamScore = AWAY_TEAM_SCORE, strDate = STR_DATE)
+                awayTeamScore = AWAY_TEAM_SCORE, strDate = STR_DATE, time = TIME)
 
         responseAllEvent = Observable.just(favoriteEventEntity)
     }

@@ -4,6 +4,9 @@ import android.os.Bundle
 import android.support.design.widget.AppBarLayout
 import android.support.design.widget.CollapsingToolbarLayout
 import android.support.v7.app.AppCompatActivity
+import android.view.MenuItem
+import app.learn.kotlin.R
+import app.learn.kotlin.R.id.view_pager_player
 import app.learn.kotlin.R.layout.activity_player_detail
 import app.learn.kotlin.feature.base.BasePagerAdapter
 import app.learn.kotlin.helper.loadImageUrl
@@ -32,6 +35,11 @@ class PlayerDetailActivity : AppCompatActivity() {
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         supportActionBar?.setDisplayShowTitleEnabled(false)
 
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        onBackPressed()
+        return super.onOptionsItemSelected(item)
     }
 
     private fun titleShownOnCollapse(collapsingToolbarLayout: CollapsingToolbarLayout):

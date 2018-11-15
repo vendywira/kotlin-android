@@ -5,9 +5,9 @@ import kotlinx.android.parcel.Parcelize
 import java.util.*
 
 @Parcelize
-data class MatchVo (
+data class EventVo (
         var eventId: String? = "",
-        var dateEvent: Date? = null,
+        var dateEvent: String? = null,
         var time: String?,
         var teamHomeName: String? = "",
         var teamHomeScore: Int?,

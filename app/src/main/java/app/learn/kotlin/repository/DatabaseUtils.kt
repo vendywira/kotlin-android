@@ -29,7 +29,8 @@ class DatabaseUtils(ctx: Context) : ManagedSQLiteOpenHelper(ctx, Constant.DB_NAM
                 FavoriteEventEntity.TEAM_HOME_SCORE to INTEGER,
                 FavoriteEventEntity.TEAM_AWAY_NAME to TEXT,
                 FavoriteEventEntity.TEAM_AWAY_SCORE to INTEGER,
-                FavoriteEventEntity.START_DATE to TEXT)
+                FavoriteEventEntity.START_DATE to TEXT,
+                FavoriteEventEntity.TIME to TEXT)
 
         db.createTable(FavoriteTeamEntity.TABLE_NAME, true,
                 FavoriteTeamEntity.ID to INTEGER + PRIMARY_KEY + AUTOINCREMENT,
@@ -37,6 +38,8 @@ class DatabaseUtils(ctx: Context) : ManagedSQLiteOpenHelper(ctx, Constant.DB_NAM
                 FavoriteTeamEntity.TEAM_NAME to TEXT,
                 FavoriteTeamEntity.TEAM_LOGO_URL to TEXT,
                 FavoriteTeamEntity.TEAM_BANNER to TEXT,
+                FavoriteTeamEntity.TEAM_STADIUM_NAME to TEXT,
+                FavoriteTeamEntity.TEAM_FORMED_YEAR to TEXT,
                 FavoriteTeamEntity.TEAM_DESCRIPTION to TEXT)
     }
 

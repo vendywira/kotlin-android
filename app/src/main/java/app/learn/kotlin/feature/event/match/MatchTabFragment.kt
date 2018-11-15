@@ -27,7 +27,7 @@ class MatchTabFragment : Fragment() {
         }
         viewPagerAdapter.let {
             it.addFragment(getString(R.string.tab_title_next), MatchFragment.newInstance(Constant.MATCH_NEXT_MATCH))
-            it.addFragment(getString(R.string.tab_title_prev), MatchFragment.newInstance(MATCH_PREV_MATCH))
+            it.addFragment(getString(R.string.tab_title_prev), MatchFragment.newInstance(Constant.MATCH_PREV_MATCH))
             viewPager.adapter = it
             tabLayout.setupWithViewPager(viewPager)
             setHasOptionsMenu(true)

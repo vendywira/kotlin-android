@@ -2,7 +2,6 @@ package app.learn.kotlin.feature.favorite.team
 
 import app.learn.kotlin.di.scope.ActivityScope
 import app.learn.kotlin.feature.favorite.event.FavoriteTeamContract
-import app.learn.kotlin.feature.favorite.event.FavoriteTeamFragment
 import dagger.Binds
 import dagger.Module
 

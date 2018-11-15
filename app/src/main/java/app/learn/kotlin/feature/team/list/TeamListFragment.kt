@@ -4,7 +4,6 @@ import android.os.Bundle
 import android.support.v4.widget.SwipeRefreshLayout
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -13,6 +12,7 @@ import android.widget.ArrayAdapter
 import android.widget.ProgressBar
 import android.widget.Spinner
 import app.learn.kotlin.R
+import app.learn.kotlin.feature.adapter.TeamAdapter
 import app.learn.kotlin.feature.base.BaseFragment
 import app.learn.kotlin.feature.team.detail.TeamDetailActivity
 import app.learn.kotlin.helper.mapper
@@ -25,7 +25,6 @@ import org.jetbrains.anko.find
 import org.jetbrains.anko.startActivity
 import org.jetbrains.anko.support.v4.ctx
 import org.jetbrains.anko.support.v4.onRefresh
-import org.jetbrains.anko.support.v4.toast
 import javax.inject.Inject
 
 class TeamListFragment : BaseFragment<TeamListContract.Presenter>(), TeamListContract.View {
@@ -38,7 +37,7 @@ class TeamListFragment : BaseFragment<TeamListContract.Presenter>(), TeamListCon
     private lateinit var swipeRefresh: SwipeRefreshLayout
     private lateinit var spinner: Spinner
     private lateinit var leagueName: String
-    private lateinit var adapterList: TeamListAdapter
+    private lateinit var adapter: TeamAdapter
 
     private var leagues : MutableList<String?> = mutableListOf()
     private var listResponseTeam: MutableList<TeamVo> = mutableListOf()
@@ -46,19 +45,19 @@ class TeamListFragment : BaseFragment<TeamListContract.Presenter>(), TeamListCon
     override fun onInitView(inflater: LayoutInflater?, container: ViewGroup?,
                             savedInstanceState: Bundle?): View {
         val view = layoutInflater.inflate(R.layout.fragment_team, container, false);
-        spinner = view.find(R.id.base_spinner_id)
+        spinner = view.find(R.id.team_spinner_id)
         listTeam = view.find(R.id.base_recycle_view_id)
         swipeRefresh = view.find(R.id.base_swipe_refresh)
         progressBar = view.find(R.id.base_progress_bar_id)
 
         presenter.getLeagueList()
-        adapterList = TeamListAdapter(ctx, listResponseTeam) {
+        adapter = TeamAdapter(ctx, listResponseTeam) {
             ctx.startActivity<TeamDetailActivity>(
-                Constant.TEAM_INTENT to listResponseTeam[it])
+                    Constant.TEAM_INTENT to listResponseTeam[it])
         }
 
         listTeam.layoutManager = LinearLayoutManager(ctx)
-        listTeam.adapter = adapterList
+        listTeam.adapter = adapter
 
         swipeRefresh.onRefresh {
             presenter.getTeamList(leagueName)
@@ -81,7 +80,7 @@ class TeamListFragment : BaseFragment<TeamListContract.Presenter>(), TeamListCon
             teams.forEach { teamVoList.add(mapper.map(it, TeamVo::class.java)) }
             listResponseTeam.addAll(teamVoList)
         }
-        adapterList.notifyDataSetChanged()
+        adapter.notifyDataSetChanged()
     }
 
     override fun getListLaugue(leagueResponse: ListResponse<League>?) {

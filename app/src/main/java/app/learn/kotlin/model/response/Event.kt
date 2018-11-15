@@ -56,7 +56,7 @@ data class Event(
         var teamHomeScore: Int? = 0,
 
         @field:SerializedName("dateEvent")
-        var dateEvent: Date? = null,
+        var dateEvent: String? = null,
 
         @field:SerializedName("strCountry")
         var country: String? = null,

@@ -109,8 +109,8 @@ class MatchDetailActivity : BaseActivity<MatchDetailContract.Presenter>(),
     override fun setEventDetailModel(event: Event) {
         this.event = event
         event.let {
-            tv_start_date.text = toSimpleString(it.strDate)
-
+            tv_start_date.text = dateFormating(it.strDate)
+            tv_start_time.text = timeFormating(it.time.orEmpty())
             tv_home_team_name.text = it.teamHomeName
             tv_home_team_score.text = it.teamHomeScore?.toString()
             tv_home_foward.text = it.homeLineupForward

@@ -1,4 +1,4 @@
-package app.learn.kotlin.feature.team.player
+package app.learn.kotlin.feature.adapter
 
 import android.content.Context
 import android.support.v7.widget.RecyclerView
@@ -11,10 +11,10 @@ import app.learn.kotlin.model.vo.PlayerVo
 import com.bumptech.glide.request.RequestOptions
 import kotlinx.android.synthetic.main.item_list_player.view.*
 
-class PlayerListAdapter (private val context: Context,
-                         private val items: List<PlayerVo>,
-                         private val listener: (position: Int) -> Unit)
-    : RecyclerView.Adapter<PlayerListAdapter.PlayerHolder>() {
+class PlayerAdapter (private val context: Context,
+                     private val items: List<PlayerVo>,
+                     private val listener: (position: Int) -> Unit)
+    : RecyclerView.Adapter<PlayerAdapter.PlayerHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) =
             PlayerHolder(LayoutInflater.from(context).inflate(R.layout.item_list_player, parent, false))

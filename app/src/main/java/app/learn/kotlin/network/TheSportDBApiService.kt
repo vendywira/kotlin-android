@@ -38,7 +38,4 @@ interface TheSportDBApiService {
 
     @GET("api/v1/json/1/lookup_all_players.php")
     fun getAllPlayers(@Query("id") id:String?) : Observable<ListResponse<Player>>
-
-    @GET("api/v1/json/1/lookupplayer.php")
-    fun getPlayerDetail(@Query("id") id:String?) : Observable<ListResponse<Player>>
 }

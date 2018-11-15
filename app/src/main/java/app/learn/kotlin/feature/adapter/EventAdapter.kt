@@ -1,4 +1,4 @@
-package app.learn.kotlin.feature.event.match
+package app.learn.kotlin.feature.adapter
 
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
@@ -18,23 +18,23 @@ import app.learn.kotlin.helper.dateFormating
 import app.learn.kotlin.helper.gone
 import app.learn.kotlin.helper.timeFormating
 import app.learn.kotlin.helper.visible
-import app.learn.kotlin.model.vo.MatchVo
+import app.learn.kotlin.model.vo.EventVo
 import org.jetbrains.anko.find
 
 
-class MatchAdapter(private val listOfMatches: List<MatchVo>,
+class EventAdapter(private val listOfMatches: List<EventVo>,
                    private val onClick: (position: Int) -> Unit,
                    private val onReminderClick: (position: Int) -> Unit)
-    : RecyclerView.Adapter<MatchAdapter.MatchHolder>() {
+    : RecyclerView.Adapter<EventAdapter.Holder>() {
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MatchHolder {
-        return MatchHolder(LayoutInflater.from(parent.context)
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): Holder {
+        return Holder(LayoutInflater.from(parent.context)
                 .inflate(R.layout.item_list_match, parent, false))
     }
 
     override fun getItemCount(): Int = listOfMatches.size
 
-    override fun onBindViewHolder(holder: MatchHolder, position: Int) {
+    override fun onBindViewHolder(holder: Holder, position: Int) {
         holder.bindItem(listOfMatches[position])
         holder.itemView.setOnClickListener {
             onClick(position)
@@ -46,7 +46,7 @@ class MatchAdapter(private val listOfMatches: List<MatchVo>,
     }
 
 
-    class MatchHolder(view: View) : RecyclerView.ViewHolder(view) {
+    class Holder(view: View) : RecyclerView.ViewHolder(view) {
 
         private val tvMatchDate: TextView = view.find(tv_match_date)
         private val tvTime: TextView = view.find(tv_time)
@@ -56,10 +56,10 @@ class MatchAdapter(private val listOfMatches: List<MatchVo>,
         private val tvAwayTeamScore: TextView = view.find(tv_away_team_score)
         internal val btnReminder: ImageView = view.find(btn_reminder)
 
-        fun bindItem(match: MatchVo) {
+        fun bindItem(match: EventVo) {
             tvMatchDate.text = dateFormating(match.dateEvent)
             tvTime.text = timeFormating(match.time.orEmpty())
-            tvHomeTeamName.text = match.teamAwayName
+            tvHomeTeamName.text = match.teamHomeName
             tvHomeTeamScore.text = match.teamHomeScore?.toString()
             tvAwayTeamName.text = match.teamAwayName
             tvAwayTeamScore.text = match.teamAwayScore?.toString()

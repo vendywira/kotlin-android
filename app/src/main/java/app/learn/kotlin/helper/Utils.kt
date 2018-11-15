@@ -91,7 +91,7 @@ val Context.database: DatabaseUtils
     get() = DatabaseUtils.getInstance(applicationContext)
 
 @SuppressLint("SimpleDateFormat")
-fun toSimpleString(strDate: String?): String? {
+fun dateFormating(strDate: String?): String? {
     return try {
         val localeId = Locale("in", "ID")
         SimpleDateFormat("dd/MM/yy").parse(strDate)

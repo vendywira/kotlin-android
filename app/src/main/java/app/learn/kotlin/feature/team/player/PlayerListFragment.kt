@@ -10,6 +10,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ProgressBar
 import app.learn.kotlin.R
+import app.learn.kotlin.feature.adapter.PlayerAdapter
 import app.learn.kotlin.feature.base.BaseFragment
 import app.learn.kotlin.helper.mapper
 import app.learn.kotlin.model.Constant
@@ -29,7 +30,7 @@ class PlayerListFragment : BaseFragment<PlayerListContract.Presenter>(), PlayerL
     private lateinit var progressBar: ProgressBar
     private lateinit var recyclerView: RecyclerView
     private lateinit var swipeRefresh: SwipeRefreshLayout
-    private lateinit var adapterList: PlayerListAdapter
+    private lateinit var adapter: PlayerAdapter
     private var listResponsePlayer: MutableList<PlayerVo> = mutableListOf()
 
 
@@ -44,14 +45,14 @@ class PlayerListFragment : BaseFragment<PlayerListContract.Presenter>(), PlayerL
         val teamId = arguments?.getString(Constant.TEAM_ID).toString()
 
         presenter.getListTeamPlayer(teamId)
-        adapterList = PlayerListAdapter(ctx, listResponsePlayer) {
+        adapter = PlayerAdapter(ctx, listResponsePlayer) {
             Log.d("player", listResponsePlayer[it].toString())
             ctx.startActivity<PlayerDetailActivity>(
                     Constant.PLAYER_INTENT to listResponsePlayer[it])
         }
 
         recyclerView.layoutManager = GridLayoutManager(context, 3)
-        recyclerView.adapter = adapterList
+        recyclerView.adapter = adapter
 
         swipeRefresh.onRefresh {
             presenter.getListTeamPlayer(teamId)
@@ -74,7 +75,7 @@ class PlayerListFragment : BaseFragment<PlayerListContract.Presenter>(), PlayerL
                 playersVo.add(playerVo) }
             listResponsePlayer.addAll(playersVo)
         }
-        adapterList.notifyDataSetChanged()
+        adapter.notifyDataSetChanged()
     }
 
     override fun showLoading() {

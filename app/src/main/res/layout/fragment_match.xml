@@ -12,7 +12,7 @@
         android:orientation="vertical">
 
     <Spinner
-        android:id="@+id/base_spinner_id"
+        android:id="@+id/event_spinner_id"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:padding="18dp"/>
@@ -26,10 +26,18 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="1dp">
-        <include
-            layout="@layout/recycle_swipe_refresh"
+        <android.support.v4.widget.SwipeRefreshLayout
+            android:id="@+id/base_swipe_refresh"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            xmlns:android="http://schemas.android.com/apk/res/android">
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/rv_match"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_alignParentTop="true"
+                android:layout_marginTop="2dp" />
+        </android.support.v4.widget.SwipeRefreshLayout>
     </LinearLayout>
     </LinearLayout>
 

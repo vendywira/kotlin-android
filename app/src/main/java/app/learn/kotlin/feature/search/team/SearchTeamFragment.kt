@@ -9,10 +9,8 @@ import android.view.ViewGroup
 import android.widget.ProgressBar
 import app.learn.kotlin.R
 import app.learn.kotlin.feature.base.BaseFragment
-import app.learn.kotlin.feature.event.detail.MatchDetailActivity
-import app.learn.kotlin.feature.event.detail.TeamDetailPresenterImpl
 import app.learn.kotlin.feature.team.detail.TeamDetailActivity
-import app.learn.kotlin.feature.team.list.TeamListAdapter
+import app.learn.kotlin.feature.adapter.TeamAdapter
 import app.learn.kotlin.helper.invisible
 import app.learn.kotlin.helper.mapper
 import app.learn.kotlin.model.Constant
@@ -32,7 +30,7 @@ class SearchTeamFragment : BaseFragment<SearchTeamContract.Presenter>(), SearchT
 
     private lateinit var recycleView: RecyclerView
     private lateinit var progressBar: ProgressBar
-    private lateinit var adapterList: TeamListAdapter
+    private lateinit var adapter: TeamAdapter
 
     private var listResponseTeam: MutableList<TeamVo> = mutableListOf()
 
@@ -44,13 +42,13 @@ class SearchTeamFragment : BaseFragment<SearchTeamContract.Presenter>(), SearchT
         progressBar.invisible()
         recycleView = view.base_recycle_view_id
 
-        adapterList = TeamListAdapter(ctx, listResponseTeam) {
-            position -> ctx.startActivity<TeamDetailActivity>(
-                Constant.TEAM_INTENT to listResponseTeam[position])
+        adapter = TeamAdapter(ctx, listResponseTeam) { position ->
+            ctx.startActivity<TeamDetailActivity>(
+                    Constant.TEAM_INTENT to listResponseTeam[position])
         }
 
         recycleView.layoutManager = LinearLayoutManager(ctx)
-        recycleView.adapter = adapterList
+        recycleView.adapter = adapter
 
         return view
     }
@@ -68,7 +66,7 @@ class SearchTeamFragment : BaseFragment<SearchTeamContract.Presenter>(), SearchT
             teams.forEach { teamVoList.add(mapper.map(it, TeamVo::class.java)) }
             listResponseTeam.addAll(teamVoList)
         }
-        adapterList.notifyDataSetChanged()
+        adapter.notifyDataSetChanged()
     }
 
 }

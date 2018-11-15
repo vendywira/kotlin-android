@@ -5,8 +5,16 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <include layout="@layout/progress_bar"/>
-    <include
+    <android.support.v4.widget.SwipeRefreshLayout
+        android:id="@+id/base_swipe_refresh"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        layout="@layout/recycle_swipe_refresh"/>
+        xmlns:android="http://schemas.android.com/apk/res/android">
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/rv_favorite"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="2dp" />
+    </android.support.v4.widget.SwipeRefreshLayout>
 </android.support.constraint.ConstraintLayout>

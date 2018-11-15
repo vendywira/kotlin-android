@@ -2,6 +2,7 @@ package app.learn.kotlin.feature.event.detail
 
 import app.learn.kotlin.feature.event.detail.MatchDetailPresenterImpl.Companion.FAILED_GET_DATA_FROM_DB
 import app.learn.kotlin.feature.event.detail.MatchDetailPresenterImpl.Companion.FAILED_TO_REMOVE_FROM_FAVORITE
+import app.learn.kotlin.feature.event.match.MatchContract
 import app.learn.kotlin.model.entity.FavoriteEventEntity
 import app.learn.kotlin.model.response.Event
 import app.learn.kotlin.model.response.ListResponse
@@ -31,7 +32,7 @@ class MatchDetailPresenterImplTest {
     private lateinit var impl: MatchDetailPresenterImpl
 
     @Spy
-    private lateinit var view: MatchDetailView
+    private lateinit var view: MatchDetailContract.View
 
     @Spy
     private lateinit var apiService: TheSportDBApiService

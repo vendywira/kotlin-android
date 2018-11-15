@@ -11,13 +11,13 @@ import android.widget.ProgressBar
 import app.learn.kotlin.R
 import app.learn.kotlin.feature.base.BaseFragment
 import app.learn.kotlin.feature.event.detail.MatchDetailActivity
-import app.learn.kotlin.feature.event.match.MatchAdapter
+import app.learn.kotlin.feature.adapter.EventAdapter
 import app.learn.kotlin.helper.invisible
 import app.learn.kotlin.helper.mapper
 import app.learn.kotlin.model.Constant
 import app.learn.kotlin.model.response.Event
 import app.learn.kotlin.model.response.ListResponse
-import app.learn.kotlin.model.vo.MatchVo
+import app.learn.kotlin.model.vo.EventVo
 import kotlinx.android.synthetic.main.base_recycle_view.view.*
 import kotlinx.android.synthetic.main.fragment_match.view.*
 import org.jetbrains.anko.startActivity
@@ -30,9 +30,9 @@ class SearchEventFragment : BaseFragment<SearchEventContract.Presenter>(), Searc
     internal lateinit var presenter: SearchEventContract.Presenter
 
     private lateinit var recyclerView: RecyclerView
-    private lateinit var matchAdapter: MatchAdapter
+    private lateinit var eventAdapter: EventAdapter
     private lateinit var progressBar: ProgressBar
-    private var listOfMatch = mutableListOf<MatchVo>()
+    private var listOfMatch = mutableListOf<EventVo>()
     private var eventResponses = mutableListOf<Event>()
 
     override fun onInitView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View {
@@ -42,10 +42,12 @@ class SearchEventFragment : BaseFragment<SearchEventContract.Presenter>(), Searc
         progressBar.invisible()
 
         recyclerView.layoutManager = LinearLayoutManager(ctx)
-        matchAdapter = MatchAdapter(listOfMatch,
-                { position -> ctx.startActivity<MatchDetailActivity>(
-                Constant.MATCH_EVENT_ID to listOfMatch[position].eventId)}, {})
-        recyclerView.adapter = matchAdapter
+        eventAdapter = EventAdapter(listOfMatch,
+                { position ->
+                    ctx.startActivity<MatchDetailActivity>(
+                            Constant.MATCH_EVENT_ID to listOfMatch[position].eventId)
+                }, {})
+        recyclerView.adapter = eventAdapter
         return view
     }
 
@@ -60,12 +62,12 @@ class SearchEventFragment : BaseFragment<SearchEventContract.Presenter>(), Searc
             it.contents?.filter { i ->
                 i.teamAwayName != null && i.teamHomeName != null
             }?.forEach {
-                val match = mapper.map(it, MatchVo::class.java)
+                val match = mapper.map(it, EventVo::class.java)
                 listOfMatch.add(match)
             }
         }
         Log.d("list of match ", listOfMatch.size.toString())
-        matchAdapter.notifyDataSetChanged()
+        eventAdapter.notifyDataSetChanged()
     }
 
     override fun getPresenter(): SearchEventContract.Presenter? = presenter
