@@ -1,16 +1,16 @@
 package app.learn.kotlin.repository
 
-import app.learn.kotlin.model.entity.FavoriteTeamEntity
+import app.learn.kotlin.model.entity.TeamEntity
 import io.reactivex.Observable
 import io.reactivex.Single
 
 interface FavoriteTeamRepository {
 
-    fun insert(favoriteTeamEntity: FavoriteTeamEntity): Single<Boolean>
+    fun insert(teamEntity: TeamEntity): Single<Boolean>
 
-    fun find(teamId: String): Single<FavoriteTeamEntity>
+    fun find(teamId: String): Single<TeamEntity>
 
-    fun findAll(): Observable<FavoriteTeamEntity>
+    fun findAll(): Observable<TeamEntity>
 
     fun delete(teamId: String): Single<Boolean>
 

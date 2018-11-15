@@ -18,7 +18,7 @@ import app.learn.kotlin.helper.loadImageUrl
 import app.learn.kotlin.helper.mapper
 import app.learn.kotlin.helper.visible
 import app.learn.kotlin.model.Constant
-import app.learn.kotlin.model.entity.FavoriteTeamEntity
+import app.learn.kotlin.model.entity.TeamEntity
 import app.learn.kotlin.model.vo.TeamVo
 import kotlinx.android.synthetic.main.activity_team_detail.*
 import kotlinx.android.synthetic.main.progress_bar.*
@@ -138,7 +138,7 @@ class TeamDetailActivity : BaseActivity<TeamDetailContract.Presenter>(),
             }
             R.id.menu_unfavorite -> {
                 isFavorite = true
-                val favorite = mapper.map(team, FavoriteTeamEntity::class.java)
+                val favorite = mapper.map(team, TeamEntity::class.java)
                 presenter.insertTeamToFavorite(favorite)
                 showFavoriteToggle()
                 return true

@@ -4,7 +4,7 @@ import android.database.sqlite.SQLiteException
 import android.util.Log
 import app.learn.kotlin.helper.convertMapToContentValues
 import app.learn.kotlin.helper.objectMapper
-import app.learn.kotlin.model.entity.FavoriteEventEntity
+import app.learn.kotlin.model.entity.EventEntity
 import io.reactivex.Observable
 import io.reactivex.Single
 import org.jetbrains.anko.db.*
@@ -13,13 +13,13 @@ import javax.inject.Inject
 class FavoriteMatchRepositoryImpl @Inject constructor(private val db: DatabaseUtils)
     : FavoriteMatchRepository {
 
-    override fun insert(favoriteEventEntity: FavoriteEventEntity): Single<Boolean> {
+    override fun insert(eventEntity: EventEntity): Single<Boolean> {
         return Single.create {
             try {
                 db.use {
-                    insert(FavoriteEventEntity.TABLE_NAME, null,
+                    insert(EventEntity.TABLE_NAME, null,
                             convertMapToContentValues(objectMapper
-                                    .convertValue(favoriteEventEntity, Map::class.java)))
+                                    .convertValue(eventEntity, Map::class.java)))
                 }
                 it.onSuccess(true)
             } catch (e: Exception) {
@@ -29,13 +29,13 @@ class FavoriteMatchRepositoryImpl @Inject constructor(private val db: DatabaseUt
         }
     }
 
-    override fun find(eventId: String): Single<FavoriteEventEntity> {
+    override fun find(eventId: String): Single<EventEntity> {
         return Single.create {
             try {
                 it.onSuccess(db.use {
-                    select(FavoriteEventEntity.TABLE_NAME)
-                            .whereArgs("${FavoriteEventEntity.EVENT_ID} = {eventId}", "eventId" to eventId)
-                            .exec { parseSingle(classParser<FavoriteEventEntity>()) }
+                    select(EventEntity.TABLE_NAME)
+                            .whereArgs("${EventEntity.EVENT_ID} = {eventId}", "eventId" to eventId)
+                            .exec { parseSingle(classParser<EventEntity>()) }
                 })
             } catch (e: Exception) {
                 Log.e("Error", e.stackTrace.toString())
@@ -44,12 +44,12 @@ class FavoriteMatchRepositoryImpl @Inject constructor(private val db: DatabaseUt
         }
     }
 
-    override fun findAll(): Observable<FavoriteEventEntity> {
-        return Observable.create<FavoriteEventEntity> {
+    override fun findAll(): Observable<EventEntity> {
+        return Observable.create<EventEntity> {
             try {
                 val result = db.use {
-                    select(FavoriteEventEntity.TABLE_NAME)
-                            .exec { parseList(classParser<FavoriteEventEntity>()) }
+                    select(EventEntity.TABLE_NAME)
+                            .exec { parseList(classParser<EventEntity>()) }
                 }
                 for (r in result) it.onNext(r)
                 it.onComplete()
@@ -64,8 +64,8 @@ class FavoriteMatchRepositoryImpl @Inject constructor(private val db: DatabaseUt
         return Single.create { emitter ->
             try {
                 db.use {
-                    delete(FavoriteEventEntity.TABLE_NAME,
-                            "${FavoriteEventEntity.EVENT_ID} = {eventId}",
+                    delete(EventEntity.TABLE_NAME,
+                            "${EventEntity.EVENT_ID} = {eventId}",
                             "eventId" to eventId)
                 }
 
@@ -82,9 +82,9 @@ class FavoriteMatchRepositoryImpl @Inject constructor(private val db: DatabaseUt
         return Single.create {
             try {
                 val result = db.use {
-                    select(FavoriteEventEntity.TABLE_NAME)
-                            .whereArgs("${FavoriteEventEntity.EVENT_ID} = {eventId}", "eventId" to eventId)
-                            .exec { parseList(classParser<FavoriteEventEntity>()) }
+                    select(EventEntity.TABLE_NAME)
+                            .whereArgs("${EventEntity.EVENT_ID} = {eventId}", "eventId" to eventId)
+                            .exec { parseList(classParser<EventEntity>()) }
                 }
 
                 if(result.isNotEmpty()) {

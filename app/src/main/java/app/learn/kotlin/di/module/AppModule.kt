@@ -4,7 +4,6 @@ import android.app.Application
 import android.content.Context
 import app.learn.kotlin.di.scope.ApplicationContext
 import app.learn.kotlin.di.scope.ApplicationScope
-import app.learn.kotlin.feature.favorite.event.FavoriteEventModule
 import app.learn.kotlin.network.NetworkModule
 import app.learn.kotlin.repository.RepositoryModule
 import dagger.Module

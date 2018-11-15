@@ -9,7 +9,7 @@ import app.learn.kotlin.R
 import app.learn.kotlin.R.id.*
 import app.learn.kotlin.R.layout.acivity_home
 import app.learn.kotlin.feature.event.match.MatchTabFragment
-import app.learn.kotlin.feature.favorite.FavoriteTabFragment
+import app.learn.kotlin.feature.favourite.FavouriteTabFragment
 import app.learn.kotlin.feature.search.SearchActivity
 import app.learn.kotlin.feature.team.list.TeamListFragment
 import app.learn.kotlin.helper.invisible
@@ -47,7 +47,7 @@ class HomeActivity : AppCompatActivity() {
                 }
                 menu_favorite_id -> {
                     menu?.getItem(MENU_SEARCH)?.invisible()
-                    showFragment(savedInstanceState, FavoriteTabFragment())
+                    showFragment(savedInstanceState, FavouriteTabFragment())
                 }
             }
             true

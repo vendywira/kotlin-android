@@ -18,6 +18,7 @@ import com.fasterxml.jackson.databind.ObjectMapper
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 import org.modelmapper.ModelMapper
+import java.lang.IndexOutOfBoundsException
 import java.text.SimpleDateFormat
 import java.time.LocalTime
 import java.time.ZoneId
@@ -94,7 +95,7 @@ val Context.database: DatabaseUtils
 fun dateFormating(strDate: String?): String? {
     return try {
         val localeId = Locale("in", "ID")
-        SimpleDateFormat("dd/MM/yy").parse(strDate)
+        SimpleDateFormat("yyyy-MM-dd").parse(strDate)
                 .let(SimpleDateFormat("EEE, d MMM yyyy", localeId)::format)
     } catch (e: Exception) {
         strDate
@@ -117,14 +118,19 @@ fun timeFormating(time: String): String? {
         SimpleDateFormat("hh:mm:ssXXX").parse(time)
                 .let(SimpleDateFormat("hh:mm", localeId)::format)
     } catch (e: Exception) {
-        time
+        try {
+            time.substring(0, 5)
+        } catch (e: IndexOutOfBoundsException) {
+            time
+        }
     }
 }
 
 @SuppressLint("SimpleDateFormat")
 fun String?.toDate(): Date {
     return try {
-        val simpleDateFormat = SimpleDateFormat("dd/Mhh:mm:ssXXX")
+        val localeId = Locale("in", "ID")
+        val simpleDateFormat = SimpleDateFormat("yyyy-MM-dd.hh:mm:ssXXX", localeId)
         simpleDateFormat.parse(this)
     } catch (e: Exception) {
         Date()

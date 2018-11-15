@@ -4,8 +4,7 @@ import android.database.sqlite.SQLiteException
 import android.util.Log
 import app.learn.kotlin.helper.convertMapToContentValues
 import app.learn.kotlin.helper.objectMapper
-import app.learn.kotlin.model.entity.FavoriteEventEntity
-import app.learn.kotlin.model.entity.FavoriteTeamEntity
+import app.learn.kotlin.model.entity.TeamEntity
 import io.reactivex.Observable
 import io.reactivex.Single
 import org.jetbrains.anko.db.classParser
@@ -19,13 +18,13 @@ import javax.inject.Inject
 class FavoriteTeamRepositoryImpl @Inject constructor(private val db: DatabaseUtils)
     : FavoriteTeamRepository {
 
-    override fun insert(favoriteTeamEntity: FavoriteTeamEntity): Single<Boolean> {
+    override fun insert(teamEntity: TeamEntity): Single<Boolean> {
         return Single.create {
             try {
                 db.use {
-                    insert(FavoriteTeamEntity.TABLE_NAME, null,
+                    insert(TeamEntity.TABLE_NAME, null,
                             convertMapToContentValues(objectMapper
-                                    .convertValue(favoriteTeamEntity, Map::class.java)))
+                                    .convertValue(teamEntity, Map::class.java)))
                 }
                 it.onSuccess(true)
             } catch (e: Exception) {
@@ -35,13 +34,13 @@ class FavoriteTeamRepositoryImpl @Inject constructor(private val db: DatabaseUti
         }
     }
 
-    override fun find(teamId: String): Single<FavoriteTeamEntity> {
+    override fun find(teamId: String): Single<TeamEntity> {
         return Single.create {
             try {
                 it.onSuccess(db.use {
-                    select(FavoriteTeamEntity.TABLE_NAME)
-                            .whereArgs("${FavoriteTeamEntity.TEAM_ID} = {teamId}", "teamId" to teamId)
-                            .exec { parseSingle(classParser<FavoriteTeamEntity>()) }
+                    select(TeamEntity.TABLE_NAME)
+                            .whereArgs("${TeamEntity.TEAM_ID} = {teamId}", "teamId" to teamId)
+                            .exec { parseSingle(classParser<TeamEntity>()) }
                 })
             } catch (e: Exception) {
                 Log.e("Error", e.stackTrace.toString())
@@ -50,12 +49,12 @@ class FavoriteTeamRepositoryImpl @Inject constructor(private val db: DatabaseUti
         }
     }
 
-    override fun findAll(): Observable<FavoriteTeamEntity> {
-        return Observable.create<FavoriteTeamEntity> {
+    override fun findAll(): Observable<TeamEntity> {
+        return Observable.create<TeamEntity> {
             try {
                 val result = db.use {
-                    select(FavoriteTeamEntity.TABLE_NAME)
-                            .exec { parseList(classParser<FavoriteTeamEntity>()) }
+                    select(TeamEntity.TABLE_NAME)
+                            .exec { parseList(classParser<TeamEntity>()) }
                 }
                 for (r in result) it.onNext(r)
                 it.onComplete()
@@ -70,8 +69,8 @@ class FavoriteTeamRepositoryImpl @Inject constructor(private val db: DatabaseUti
         return Single.create { emitter ->
             try {
                 db.use {
-                    delete(FavoriteTeamEntity.TABLE_NAME,
-                            "${FavoriteTeamEntity.TEAM_ID} = {teamId}",
+                    delete(TeamEntity.TABLE_NAME,
+                            "${TeamEntity.TEAM_ID} = {teamId}",
                             "teamId" to teamId)
                 }
 
@@ -89,9 +88,9 @@ class FavoriteTeamRepositoryImpl @Inject constructor(private val db: DatabaseUti
         return Single.create {
             try {
                 val result = db.use {
-                    select(FavoriteTeamEntity.TABLE_NAME)
-                            .whereArgs("${FavoriteTeamEntity.TEAM_ID} = {teamId}", "teamId" to teamId)
-                            .exec { parseList(classParser<FavoriteTeamEntity>()) }
+                    select(TeamEntity.TABLE_NAME)
+                            .whereArgs("${TeamEntity.TEAM_ID} = {teamId}", "teamId" to teamId)
+                            .exec { parseList(classParser<TeamEntity>()) }
                 }
 
                 if(result.isNotEmpty()) {

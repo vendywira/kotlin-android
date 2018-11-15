@@ -7,7 +7,7 @@ import java.util.*
 @Parcelize
 data class EventVo (
         var eventId: String? = "",
-        var dateEvent: String? = null,
+        var dateEvent: String? = "",
         var time: String?,
         var teamHomeName: String? = "",
         var teamHomeScore: Int?,

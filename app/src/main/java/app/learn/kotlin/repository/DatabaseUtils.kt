@@ -3,8 +3,8 @@ package app.learn.kotlin.repository
 import android.content.Context
 import android.database.sqlite.SQLiteDatabase
 import app.learn.kotlin.model.Constant
-import app.learn.kotlin.model.entity.FavoriteEventEntity
-import app.learn.kotlin.model.entity.FavoriteTeamEntity
+import app.learn.kotlin.model.entity.EventEntity
+import app.learn.kotlin.model.entity.TeamEntity
 import org.jetbrains.anko.db.*
 
 class DatabaseUtils(ctx: Context) : ManagedSQLiteOpenHelper(ctx, Constant.DB_NAME, null, 1) {
@@ -22,29 +22,29 @@ class DatabaseUtils(ctx: Context) : ManagedSQLiteOpenHelper(ctx, Constant.DB_NAM
     }
 
     override fun onCreate(db: SQLiteDatabase) {
-        db.createTable(FavoriteEventEntity.TABLE_NAME, true,
-                FavoriteEventEntity.ID to INTEGER + PRIMARY_KEY + AUTOINCREMENT,
-                FavoriteEventEntity.EVENT_ID to TEXT + UNIQUE,
-                FavoriteEventEntity.TEAM_HOME_NAME to TEXT,
-                FavoriteEventEntity.TEAM_HOME_SCORE to INTEGER,
-                FavoriteEventEntity.TEAM_AWAY_NAME to TEXT,
-                FavoriteEventEntity.TEAM_AWAY_SCORE to INTEGER,
-                FavoriteEventEntity.START_DATE to TEXT,
-                FavoriteEventEntity.TIME to TEXT)
+        db.createTable(EventEntity.TABLE_NAME, true,
+                EventEntity.ID to INTEGER + PRIMARY_KEY + AUTOINCREMENT,
+                EventEntity.EVENT_ID to TEXT + UNIQUE,
+                EventEntity.TEAM_HOME_NAME to TEXT,
+                EventEntity.TEAM_HOME_SCORE to INTEGER,
+                EventEntity.TEAM_AWAY_NAME to TEXT,
+                EventEntity.TEAM_AWAY_SCORE to INTEGER,
+                EventEntity.DATE_EVENT to TEXT,
+                EventEntity.TIME to TEXT)
 
-        db.createTable(FavoriteTeamEntity.TABLE_NAME, true,
-                FavoriteTeamEntity.ID to INTEGER + PRIMARY_KEY + AUTOINCREMENT,
-                FavoriteTeamEntity.TEAM_ID to TEXT + UNIQUE,
-                FavoriteTeamEntity.TEAM_NAME to TEXT,
-                FavoriteTeamEntity.TEAM_LOGO_URL to TEXT,
-                FavoriteTeamEntity.TEAM_BANNER to TEXT,
-                FavoriteTeamEntity.TEAM_STADIUM_NAME to TEXT,
-                FavoriteTeamEntity.TEAM_FORMED_YEAR to TEXT,
-                FavoriteTeamEntity.TEAM_DESCRIPTION to TEXT)
+        db.createTable(TeamEntity.TABLE_NAME, true,
+                TeamEntity.ID to INTEGER + PRIMARY_KEY + AUTOINCREMENT,
+                TeamEntity.TEAM_ID to TEXT + UNIQUE,
+                TeamEntity.TEAM_NAME to TEXT,
+                TeamEntity.TEAM_LOGO_URL to TEXT,
+                TeamEntity.TEAM_BANNER to TEXT,
+                TeamEntity.TEAM_STADIUM_NAME to TEXT,
+                TeamEntity.TEAM_FORMED_YEAR to TEXT,
+                TeamEntity.TEAM_DESCRIPTION to TEXT)
     }
 
     override fun onUpgrade(db: SQLiteDatabase, oldVersion: Int, newVersion: Int) {
-        db.dropTable(FavoriteEventEntity.TABLE_NAME, true)
-        db.dropTable(FavoriteTeamEntity.TABLE_NAME, true)
+        db.dropTable(EventEntity.TABLE_NAME, true)
+        db.dropTable(TeamEntity.TABLE_NAME, true)
     }
 }

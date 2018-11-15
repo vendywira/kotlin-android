@@ -1,7 +1,7 @@
 package app.learn.kotlin.feature.event.detail
 
 import app.learn.kotlin.feature.base.BasePresenterImpl
-import app.learn.kotlin.model.entity.FavoriteTeamEntity
+import app.learn.kotlin.model.entity.TeamEntity
 import app.learn.kotlin.repository.FavoriteTeamRepository
 import io.reactivex.android.schedulers.AndroidSchedulers
 import javax.inject.Inject
@@ -19,8 +19,8 @@ class TeamDetailPresenterImpl @Inject constructor (
         const val FAILED_GET_DATA_FROM_DB = "Failed get data from db"
     }
 
-    override fun insertTeamToFavorite(favoriteTeamEntity: FavoriteTeamEntity) {
-        super.addDisposable(favoriteRepository.insert(favoriteTeamEntity)
+    override fun insertTeamToFavorite(teamEntity: TeamEntity) {
+        super.addDisposable(favoriteRepository.insert(teamEntity)
                 .doOnSubscribe { view.showLoading() }
                 .doAfterTerminate { view.hideLoading() }
                 .observeOn(AndroidSchedulers.mainThread())

@@ -1,6 +1,6 @@
 package app.learn.kotlin.model.entity
 
-data class FavoriteTeamEntity (
+data class TeamEntity (
     var id: Int?,
     var teamId: String?,
     var teamName: String?,
@@ -13,7 +13,7 @@ data class FavoriteTeamEntity (
 
     constructor() : this(null, null, null, null, null, null, null, null)
     companion object {
-        const val TABLE_NAME = "favorite_team"
+        const val TABLE_NAME = "team"
         const val ID = "id"
         const val TEAM_ID = "teamId"
         const val TEAM_NAME = "teamName"

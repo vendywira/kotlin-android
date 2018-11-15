@@ -1,4 +1,4 @@
-package app.learn.kotlin.feature.favorite
+package app.learn.kotlin.feature.favourite
 
 import android.os.Bundle
 import android.support.design.widget.TabLayout
@@ -9,10 +9,10 @@ import android.view.View
 import android.view.ViewGroup
 import app.learn.kotlin.R
 import app.learn.kotlin.feature.base.BasePagerAdapter
-import app.learn.kotlin.feature.favorite.event.FavoriteEventFragment
-import app.learn.kotlin.feature.favorite.team.FavoriteTeamFragment
+import app.learn.kotlin.feature.favourite.event.FavouriteEventFragment
+import app.learn.kotlin.feature.favourite.team.FavouriteTeamFragment
 
-class FavoriteTabFragment : Fragment() {
+class FavouriteTabFragment : Fragment() {
 
     private lateinit var tabLayout: TabLayout
     private lateinit var viewPager: ViewPager
@@ -28,8 +28,8 @@ class FavoriteTabFragment : Fragment() {
             BasePagerAdapter(it)
         }
         viewPagerAdapter.let {
-            it.addFragment(getString(R.string.tab_title_matches), FavoriteEventFragment())
-            it.addFragment(getString(R.string.tab_title_teams), FavoriteTeamFragment())
+            it.addFragment(getString(R.string.tab_title_matches), FavouriteEventFragment())
+            it.addFragment(getString(R.string.tab_title_teams), FavouriteTeamFragment())
             viewPager.adapter = it
             tabLayout.setupWithViewPager(viewPager)
             setHasOptionsMenu(true)

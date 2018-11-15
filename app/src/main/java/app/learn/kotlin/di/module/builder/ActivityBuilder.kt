@@ -6,10 +6,10 @@ import app.learn.kotlin.feature.event.detail.MatchDetailModule
 import app.learn.kotlin.feature.event.detail.TeamDetailModule
 import app.learn.kotlin.feature.event.match.MatchFragment
 import app.learn.kotlin.feature.event.match.MatchModule
-import app.learn.kotlin.feature.favorite.event.FavoriteEventFragment
-import app.learn.kotlin.feature.favorite.event.FavoriteEventModule
-import app.learn.kotlin.feature.favorite.team.FavoriteTeamFragment
-import app.learn.kotlin.feature.favorite.team.FavoriteTeamModule
+import app.learn.kotlin.feature.favourite.event.FavouriteEventFragment
+import app.learn.kotlin.feature.favourite.event.FavouriteEventModule
+import app.learn.kotlin.feature.favourite.team.FavouriteTeamFragment
+import app.learn.kotlin.feature.favourite.team.FavouriteTeamModule
 import app.learn.kotlin.feature.search.SearchActivity
 import app.learn.kotlin.feature.search.event.SearchEventFragment
 import app.learn.kotlin.feature.search.event.SearchEventModule
@@ -52,12 +52,12 @@ abstract class ActivityBuilder {
     abstract fun provideSearchTeam(): SearchTeamFragment
 
     @ActivityScope
-    @ContributesAndroidInjector(modules = [FavoriteTeamModule::class])
-    abstract fun provideFavoriteTeam(): FavoriteTeamFragment
+    @ContributesAndroidInjector(modules = [FavouriteTeamModule::class])
+    abstract fun provideFavoriteTeam(): FavouriteTeamFragment
 
     @ActivityScope
-    @ContributesAndroidInjector(modules = [FavoriteEventModule::class])
-    abstract fun provideFavoriteEvent(): FavoriteEventFragment
+    @ContributesAndroidInjector(modules = [FavouriteEventModule::class])
+    abstract fun provideFavoriteEvent(): FavouriteEventFragment
 
     @ActivityScope
     @ContributesAndroidInjector(modules = [TeamDetailModule::class])

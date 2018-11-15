@@ -2,7 +2,7 @@ package app.learn.kotlin.feature.event.detail
 
 import app.learn.kotlin.feature.base.BasePresenter
 import app.learn.kotlin.feature.base.BaseView
-import app.learn.kotlin.model.entity.FavoriteEventEntity
+import app.learn.kotlin.model.entity.EventEntity
 import app.learn.kotlin.model.response.Event
 import app.learn.kotlin.model.response.Team
 
@@ -12,7 +12,7 @@ class MatchDetailContract {
 
         fun getDetailEvent()
 
-        fun insertMatchToFavorite(favoriteEventEntity: FavoriteEventEntity)
+        fun insertMatchToFavorite(eventEntity: EventEntity)
 
         fun isExistFavoriteEvent(eventId: String?)
 

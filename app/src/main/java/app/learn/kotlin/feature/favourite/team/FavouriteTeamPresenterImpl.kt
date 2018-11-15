@@ -1,17 +1,17 @@
-package app.learn.kotlin.feature.favorite.team
+package app.learn.kotlin.feature.favourite.team
 
 import app.learn.kotlin.feature.base.BasePresenterImpl
-import app.learn.kotlin.feature.favorite.event.FavoriteTeamContract
+import app.learn.kotlin.feature.favorite.event.FavouriteTeamContract
 import app.learn.kotlin.model.Constant
-import app.learn.kotlin.model.entity.FavoriteTeamEntity
+import app.learn.kotlin.model.entity.TeamEntity
 import app.learn.kotlin.repository.FavoriteTeamRepository
 import io.reactivex.android.schedulers.AndroidSchedulers
 import javax.inject.Inject
 
-class FavoriteTeamPresenterImpl @Inject constructor(
-        private val view: FavoriteTeamContract.View,
+class FavouriteTeamPresenterImpl @Inject constructor(
+        private val view: FavouriteTeamContract.View,
         private val favoriteRepository: FavoriteTeamRepository
-): BasePresenterImpl(), FavoriteTeamContract.Presenter {
+): BasePresenterImpl(), FavouriteTeamContract.Presenter {
 
     override fun getListFavorite() {
         return super.addDisposable(favoriteRepository.findAll()
@@ -19,7 +19,7 @@ class FavoriteTeamPresenterImpl @Inject constructor(
                 .doOnSubscribe { view.showLoading() }
                 .doOnTerminate { view.hideLoading() }
                 .doOnError { view.showMessage(Constant.FAILED_GET_DATA) }
-                .onErrorReturn { FavoriteTeamEntity() }
+                .onErrorReturn { TeamEntity() }
                 .doOnComplete {
                     view.hideLoading()
                     view.notifyDataChange() }

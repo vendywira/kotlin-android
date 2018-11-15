@@ -9,7 +9,7 @@ import app.learn.kotlin.R.layout.activity_match_detail
 import app.learn.kotlin.feature.base.BaseActivity
 import app.learn.kotlin.helper.*
 import app.learn.kotlin.model.Constant
-import app.learn.kotlin.model.entity.FavoriteEventEntity
+import app.learn.kotlin.model.entity.EventEntity
 import app.learn.kotlin.model.response.Event
 import app.learn.kotlin.model.response.Team
 import kotlinx.android.synthetic.main.activity_match_detail.*
@@ -88,7 +88,7 @@ class MatchDetailActivity : BaseActivity<MatchDetailContract.Presenter>(),
             }
             R.id.menu_unfavorite -> {
                 isFavorite = true
-                val favorite = mapper.map(event, FavoriteEventEntity::class.java)
+                val favorite = mapper.map(event, EventEntity::class.java)
                 presenter.insertMatchToFavorite(favorite)
                 showFavoriteToggle()
                 return true
@@ -109,7 +109,7 @@ class MatchDetailActivity : BaseActivity<MatchDetailContract.Presenter>(),
     override fun setEventDetailModel(event: Event) {
         this.event = event
         event.let {
-            tv_start_date.text = dateFormating(it.strDate)
+            tv_start_date.text = dateFormating(it.dateEvent)
             tv_start_time.text = timeFormating(it.time.orEmpty())
             tv_home_team_name.text = it.teamHomeName
             tv_home_team_score.text = it.teamHomeScore?.toString()

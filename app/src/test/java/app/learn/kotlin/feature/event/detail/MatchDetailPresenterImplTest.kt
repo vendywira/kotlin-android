@@ -2,8 +2,7 @@ package app.learn.kotlin.feature.event.detail
 
 import app.learn.kotlin.feature.event.detail.MatchDetailPresenterImpl.Companion.FAILED_GET_DATA_FROM_DB
 import app.learn.kotlin.feature.event.detail.MatchDetailPresenterImpl.Companion.FAILED_TO_REMOVE_FROM_FAVORITE
-import app.learn.kotlin.feature.event.match.MatchContract
-import app.learn.kotlin.model.entity.FavoriteEventEntity
+import app.learn.kotlin.model.entity.EventEntity
 import app.learn.kotlin.model.response.Event
 import app.learn.kotlin.model.response.ListResponse
 import app.learn.kotlin.model.response.Team
@@ -40,7 +39,7 @@ class MatchDetailPresenterImplTest {
     @Spy
     private lateinit var favoriteRepository: FavoriteMatchRepository
 
-    private lateinit var favoriteEventEntity: FavoriteEventEntity
+    private lateinit var eventEntity: EventEntity
     private lateinit var event: Event
     private lateinit var listEventResponse: ListResponse<Event>
     private lateinit var responseEvents: Observable<ListResponse<Event>>
@@ -56,7 +55,7 @@ class MatchDetailPresenterImplTest {
     fun setUp() {
         MockitoAnnotations.initMocks(this)
         RxAndroidPlugins.setInitMainThreadSchedulerHandler { Schedulers.trampoline() }
-        favoriteEventEntity = FavoriteEventEntity()
+        eventEntity = EventEntity()
         event = Event(eventId = EVENT_ID, idHomeTeam = ID_HOME_TEAM, idAwayTeam = ID_AWAY_TEAM)
         listEventResponse = ListResponse(mutableListOf(event))
         responseEvents = Observable.just(listEventResponse)
@@ -71,11 +70,11 @@ class MatchDetailPresenterImplTest {
 
     @Test
     fun insertMatchToFavoriteTest_valid_true() {
-        Mockito.`when`(favoriteRepository.insert(favoriteEventEntity)).thenReturn(Single.just(true))
+        Mockito.`when`(favoriteRepository.insert(eventEntity)).thenReturn(Single.just(true))
 
-        impl.insertMatchToFavorite(favoriteEventEntity)
+        impl.insertMatchToFavorite(eventEntity)
 
-        Mockito.verify(favoriteRepository).insert(favoriteEventEntity)
+        Mockito.verify(favoriteRepository).insert(eventEntity)
         Mockito.verify(view).showLoading()
         Mockito.verify(view).hideLoading()
         Mockito.verify(view).showMessage("Added to favorite")
@@ -83,12 +82,12 @@ class MatchDetailPresenterImplTest {
 
     @Test
     fun insertMatchToFavoriteTest_valid_exception() {
-        Mockito.`when`(favoriteRepository.insert(favoriteEventEntity))
+        Mockito.`when`(favoriteRepository.insert(eventEntity))
                 .thenReturn(Single.error(Exception()))
 
-        impl.insertMatchToFavorite(favoriteEventEntity)
+        impl.insertMatchToFavorite(eventEntity)
 
-        Mockito.verify(favoriteRepository).insert(favoriteEventEntity)
+        Mockito.verify(favoriteRepository).insert(eventEntity)
         Mockito.verify(view).showLoading()
         Mockito.verify(view).hideLoading()
         Mockito.verify(view).showMessage("Failed add to favorite")

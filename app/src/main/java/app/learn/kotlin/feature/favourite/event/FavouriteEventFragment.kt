@@ -1,4 +1,4 @@
-package app.learn.kotlin.feature.favorite.team
+package app.learn.kotlin.feature.favourite.event
 
 import android.os.Bundle
 import android.support.v4.widget.SwipeRefreshLayout
@@ -11,49 +11,51 @@ import android.widget.ProgressBar
 import app.learn.kotlin.R
 import app.learn.kotlin.feature.HomeActivity
 import app.learn.kotlin.feature.base.BaseFragment
-import app.learn.kotlin.feature.team.detail.TeamDetailActivity
-import app.learn.kotlin.feature.adapter.TeamAdapter
-import app.learn.kotlin.feature.favorite.event.FavoriteTeamContract
+import app.learn.kotlin.feature.event.detail.MatchDetailActivity
+import app.learn.kotlin.feature.adapter.EventAdapter
 import app.learn.kotlin.helper.invisible
 import app.learn.kotlin.helper.mapper
 import app.learn.kotlin.model.Constant
-import app.learn.kotlin.model.entity.FavoriteTeamEntity
-import app.learn.kotlin.model.vo.TeamVo
-import kotlinx.android.synthetic.main.fragment_favorite.view.*
-import kotlinx.android.synthetic.main.progress_bar.view.*
+import app.learn.kotlin.model.entity.EventEntity
+import app.learn.kotlin.model.vo.EventVo
+import kotlinx.android.synthetic.main.activity_match_detail.view.*
+import kotlinx.android.synthetic.main.fragment_favourite.view.*
 import org.jetbrains.anko.startActivity
 import org.jetbrains.anko.support.v4.ctx
 import javax.inject.Inject
 
-class FavoriteTeamFragment : BaseFragment<FavoriteTeamContract.Presenter>(), FavoriteTeamContract.View {
+class FavouriteEventFragment : BaseFragment<FavouriteEventContract.Presenter>(), FavouriteEventContract.View {
 
     @Inject
-    internal lateinit var presenter: FavoriteTeamContract.Presenter
+    internal lateinit var presenter: FavouriteEventContract.Presenter
     private lateinit var progressBar: ProgressBar
     private lateinit var recycleView: RecyclerView
     private lateinit var swipeRefresh: SwipeRefreshLayout
-    private lateinit var favoriteTeamAdapter: TeamAdapter
-    private var listOfTeam = mutableListOf<TeamVo>()
+    private lateinit var favoriteEventAdapter: EventAdapter
+    private var listOfMatch = mutableListOf<EventVo>()
+
+    override fun getPresenter(): FavouriteEventContract.Presenter? = presenter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         HomeActivity.menu?.getItem(HomeActivity.MENU_SEARCH)?.invisible()
     }
 
-    override fun getPresenter(): FavoriteTeamContract.Presenter? = presenter
-
     override fun onInitView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View {
-        val view = LayoutInflater.from(context).inflate(R.layout.fragment_favorite, container, false)
+        val view = LayoutInflater.from(context).inflate(R.layout.fragment_favourite, container, false)
         recycleView = view.rv_favorite
         swipeRefresh = view.base_swipe_refresh
         progressBar = view.base_progress_bar_id
         recycleView.layoutManager = LinearLayoutManager(ctx)
-        favoriteTeamAdapter = TeamAdapter(ctx, listOfTeam) { position ->
-            ctx.startActivity<TeamDetailActivity>(
-                    Constant.TEAM_INTENT to listOfTeam[position])
-        }
-
-        recycleView.adapter = favoriteTeamAdapter
+        favoriteEventAdapter = EventAdapter(listOfMatch, { position ->
+            try {
+                ctx.startActivity<MatchDetailActivity>(
+                        Constant.MATCH_EVENT_ID to listOfMatch[position].eventId)
+            } catch (e: Exception) {
+                loadFavorite()
+            }
+        }, {})
+        recycleView.adapter = favoriteEventAdapter
         loadFavorite()
 
         swipeRefresh.setOnRefreshListener {
@@ -68,28 +70,26 @@ class FavoriteTeamFragment : BaseFragment<FavoriteTeamContract.Presenter>(), Fav
         loadFavorite()
     }
 
-    override fun setViewModel(data: FavoriteTeamEntity) {
-        val teamVo = mapper.map(data, TeamVo::class.java)
-        if (data.teamId != null && !listOfTeam.contains(teamVo)) {
-            listOfTeam.add(teamVo)
+    override fun setViewModel(data: EventEntity) {
+        val eventVo = mapper.map(data, EventVo::class.java)
+        if (eventVo.eventId != null && !listOfMatch.contains(eventVo)) {
+            listOfMatch.add(eventVo)
         }
     }
 
     override fun notifyDataChange() {
-        favoriteTeamAdapter.notifyDataSetChanged()
+        favoriteEventAdapter.notifyDataSetChanged()
     }
 
     private fun loadFavorite() {
-        listOfTeam.clear()
+        listOfMatch.clear()
         presenter.getListFavorite()
     }
 
     override fun getProgressBar(): ProgressBar? = progressBar
 
-
     override fun hideLoading() {
         swipeRefresh.isRefreshing = false
         super.hideLoading()
     }
-
 }
