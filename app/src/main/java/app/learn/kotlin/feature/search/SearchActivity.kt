@@ -16,6 +16,7 @@ import app.learn.kotlin.model.Constant.FRAGMENT_TEAM
 import app.learn.kotlin.model.response.Event
 import app.learn.kotlin.model.response.ListResponse
 import app.learn.kotlin.model.response.Team
+import com.airbnb.lottie.LottieAnimationView
 import kotlinx.android.synthetic.main.fragment_search.*
 import javax.inject.Inject
 
@@ -27,7 +28,7 @@ class SearchActivity : BaseActivity<SearchContract.Presenter> (), SearchContract
     private lateinit var searchEvent: SearchEventContract.View
     private lateinit var searchTeam: SearchTeamContract.View
 
-    private lateinit var progressBar: ProgressBar
+    private lateinit var progressBar: LottieAnimationView
     private lateinit var flag: String
 
     override fun onInitView() {
@@ -96,5 +97,5 @@ class SearchActivity : BaseActivity<SearchContract.Presenter> (), SearchContract
 
     override fun getPresenter(): SearchContract.Presenter? = presenter
 
-    override fun getProgressBar(): ProgressBar?  = progressBar
+    override fun getProgressBar(): LottieAnimationView?  = progressBar
 }

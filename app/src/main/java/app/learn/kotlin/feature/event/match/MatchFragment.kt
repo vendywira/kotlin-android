@@ -32,7 +32,9 @@ import app.learn.kotlin.model.response.Event
 import app.learn.kotlin.model.response.League
 import app.learn.kotlin.model.response.ListResponse
 import app.learn.kotlin.model.vo.EventVo
+import com.airbnb.lottie.LottieAnimationView
 import kotlinx.android.synthetic.main.fragment_match.view.*
+import kotlinx.android.synthetic.main.progress_bar.view.*
 import org.jetbrains.anko.startActivity
 import org.jetbrains.anko.support.v4.ctx
 import javax.inject.Inject
@@ -43,7 +45,7 @@ open class MatchFragment : BaseFragment<MatchContract.Presenter>(), MatchContrac
     internal open lateinit var presenter: MatchContract.Presenter
     private lateinit var contentUi: RecyclerView
     private lateinit var eventAdapter: EventAdapter
-    private lateinit var progressBar: ProgressBar
+    private lateinit var progressBar: LottieAnimationView
     private lateinit var swipeRefresh: SwipeRefreshLayout
     private lateinit var spinner: Spinner
     private var leagueId: String? = null
@@ -70,7 +72,7 @@ open class MatchFragment : BaseFragment<MatchContract.Presenter>(), MatchContrac
 
     override fun getPresenter(): MatchContract.Presenter? = presenter
 
-    override fun getProgressBar(): ProgressBar? = progressBar
+    override fun getProgressBar(): LottieAnimationView? = progressBar
 
     @RequiresApi(Build.VERSION_CODES.JELLY_BEAN_MR2)
     override fun onInitView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View {

@@ -17,6 +17,7 @@ import app.learn.kotlin.model.Constant
 import app.learn.kotlin.model.response.ListResponse
 import app.learn.kotlin.model.response.Player
 import app.learn.kotlin.model.vo.PlayerVo
+import com.airbnb.lottie.LottieAnimationView
 import org.jetbrains.anko.find
 import org.jetbrains.anko.startActivity
 import org.jetbrains.anko.support.v4.ctx
@@ -27,7 +28,7 @@ class PlayerListFragment : BaseFragment<PlayerListContract.Presenter>(), PlayerL
 
     @Inject
     internal lateinit var presenter: PlayerListContract.Presenter
-    private lateinit var progressBar: ProgressBar
+    private lateinit var progressBar: LottieAnimationView
     private lateinit var recyclerView: RecyclerView
     private lateinit var swipeRefresh: SwipeRefreshLayout
     private lateinit var adapter: PlayerAdapter
@@ -60,7 +61,7 @@ class PlayerListFragment : BaseFragment<PlayerListContract.Presenter>(), PlayerL
         return view
     }
 
-    override fun getProgressBar(): ProgressBar? = progressBar
+    override fun getProgressBar(): LottieAnimationView? = progressBar
 
     override fun setPlayerViewModel(listPlayer: ListResponse<Player>) {
         swipeRefresh.isRefreshing = false

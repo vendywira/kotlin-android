@@ -66,9 +66,5 @@
                     tools:text="keeper" />
             </LinearLayout>
         </FrameLayout>
-
     </android.support.v7.widget.CardView>
-
-    <include layout="@layout/progress_bar" />
-
 </RelativeLayout>

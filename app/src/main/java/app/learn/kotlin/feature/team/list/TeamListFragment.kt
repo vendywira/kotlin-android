@@ -21,6 +21,7 @@ import app.learn.kotlin.model.response.League
 import app.learn.kotlin.model.response.ListResponse
 import app.learn.kotlin.model.response.Team
 import app.learn.kotlin.model.vo.TeamVo
+import com.airbnb.lottie.LottieAnimationView
 import org.jetbrains.anko.find
 import org.jetbrains.anko.startActivity
 import org.jetbrains.anko.support.v4.ctx
@@ -33,7 +34,7 @@ class TeamListFragment : BaseFragment<TeamListContract.Presenter>(), TeamListCon
     internal lateinit var presenter : TeamListContract.Presenter
 
     private lateinit var listTeam: RecyclerView
-    private lateinit var progressBar: ProgressBar
+    private lateinit var progressBar: LottieAnimationView
     private lateinit var swipeRefresh: SwipeRefreshLayout
     private lateinit var spinner: Spinner
     private lateinit var leagueName: String
@@ -68,7 +69,7 @@ class TeamListFragment : BaseFragment<TeamListContract.Presenter>(), TeamListCon
 
     override fun getPresenter(): TeamListContract.Presenter? = presenter
 
-    override fun getProgressBar(): ProgressBar? = progressBar
+    override fun getProgressBar(): LottieAnimationView? = progressBar
 
     override fun leagueName(): String = leagueName
 

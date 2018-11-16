@@ -17,8 +17,10 @@ import app.learn.kotlin.model.Constant
 import app.learn.kotlin.model.response.ListResponse
 import app.learn.kotlin.model.response.Team
 import app.learn.kotlin.model.vo.TeamVo
+import com.airbnb.lottie.LottieAnimationView
 import kotlinx.android.synthetic.main.base_recycle_view.view.*
 import kotlinx.android.synthetic.main.fragment_match.view.*
+import kotlinx.android.synthetic.main.progress_bar.view.*
 import org.jetbrains.anko.startActivity
 import org.jetbrains.anko.support.v4.ctx
 import javax.inject.Inject
@@ -29,7 +31,7 @@ class SearchTeamFragment : BaseFragment<SearchTeamContract.Presenter>(), SearchT
     internal lateinit var presenter: SearchTeamContract.Presenter
 
     private lateinit var recycleView: RecyclerView
-    private lateinit var progressBar: ProgressBar
+    private lateinit var progressBar: LottieAnimationView
     private lateinit var adapter: TeamAdapter
 
     private var listResponseTeam: MutableList<TeamVo> = mutableListOf()
@@ -53,7 +55,7 @@ class SearchTeamFragment : BaseFragment<SearchTeamContract.Presenter>(), SearchT
         return view
     }
 
-    override fun getProgressBar(): ProgressBar? = progressBar
+    override fun getProgressBar(): LottieAnimationView? = progressBar
 
     override fun search(query: String) {
         presenter.searchTeams(query)

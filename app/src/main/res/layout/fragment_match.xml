@@ -40,13 +40,5 @@
         </android.support.v4.widget.SwipeRefreshLayout>
     </LinearLayout>
     </LinearLayout>
-
-    <ProgressBar
-        android:id="@+id/base_progress_bar_id"
-        android:layout_width="wrap_content"
-        android:layout_gravity="center"
-        android:foregroundGravity="center_horizontal"
-        android:layout_height="wrap_content" >
-    </ProgressBar>
-
+    <include layout="@layout/progress_bar" />
 </FrameLayout>

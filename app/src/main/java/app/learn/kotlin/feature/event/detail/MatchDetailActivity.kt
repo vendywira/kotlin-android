@@ -12,7 +12,9 @@ import app.learn.kotlin.model.Constant
 import app.learn.kotlin.model.entity.EventEntity
 import app.learn.kotlin.model.response.Event
 import app.learn.kotlin.model.response.Team
+import com.airbnb.lottie.LottieAnimationView
 import kotlinx.android.synthetic.main.activity_match_detail.*
+import kotlinx.android.synthetic.main.progress_bar.*
 import org.jetbrains.anko.design.snackbar
 import javax.inject.Inject
 
@@ -23,7 +25,7 @@ class MatchDetailActivity : BaseActivity<MatchDetailContract.Presenter>(),
     @Inject
     internal lateinit var presenter: MatchDetailContract.Presenter
 
-    private lateinit var progressBar: ProgressBar
+    private lateinit var progressBar: LottieAnimationView
     private lateinit var menu: Menu
 
     private var isFavorite: Boolean = false
@@ -41,7 +43,7 @@ class MatchDetailActivity : BaseActivity<MatchDetailContract.Presenter>(),
 
     override fun getPresenter(): MatchDetailContract.Presenter? = presenter
 
-    override fun getProgressBar(): ProgressBar? = progressBar
+    override fun getProgressBar(): LottieAnimationView? = progressBar
 
     override fun onInitView() {
         setContentView(activity_match_detail)

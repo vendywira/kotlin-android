@@ -18,8 +18,10 @@ import app.learn.kotlin.model.Constant
 import app.learn.kotlin.model.response.Event
 import app.learn.kotlin.model.response.ListResponse
 import app.learn.kotlin.model.vo.EventVo
+import com.airbnb.lottie.LottieAnimationView
 import kotlinx.android.synthetic.main.base_recycle_view.view.*
 import kotlinx.android.synthetic.main.fragment_match.view.*
+import kotlinx.android.synthetic.main.progress_bar.view.*
 import org.jetbrains.anko.startActivity
 import org.jetbrains.anko.support.v4.ctx
 import javax.inject.Inject
@@ -31,7 +33,7 @@ class SearchEventFragment : BaseFragment<SearchEventContract.Presenter>(), Searc
 
     private lateinit var recyclerView: RecyclerView
     private lateinit var eventAdapter: EventAdapter
-    private lateinit var progressBar: ProgressBar
+    private lateinit var progressBar: LottieAnimationView
     private var listOfMatch = mutableListOf<EventVo>()
     private var eventResponses = mutableListOf<Event>()
 
@@ -72,5 +74,5 @@ class SearchEventFragment : BaseFragment<SearchEventContract.Presenter>(), Searc
 
     override fun getPresenter(): SearchEventContract.Presenter? = presenter
 
-    override fun getProgressBar(): ProgressBar? = progressBar
+    override fun getProgressBar(): LottieAnimationView? = progressBar
 }

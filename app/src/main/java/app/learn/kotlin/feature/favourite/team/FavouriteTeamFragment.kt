@@ -19,6 +19,7 @@ import app.learn.kotlin.helper.mapper
 import app.learn.kotlin.model.Constant
 import app.learn.kotlin.model.entity.TeamEntity
 import app.learn.kotlin.model.vo.TeamVo
+import com.airbnb.lottie.LottieAnimationView
 import kotlinx.android.synthetic.main.fragment_favourite.view.*
 import kotlinx.android.synthetic.main.progress_bar.view.*
 import org.jetbrains.anko.startActivity
@@ -29,7 +30,7 @@ class FavouriteTeamFragment : BaseFragment<FavouriteTeamContract.Presenter>(), F
 
     @Inject
     internal lateinit var presenter: FavouriteTeamContract.Presenter
-    private lateinit var progressBar: ProgressBar
+    private lateinit var progressBar: LottieAnimationView
     private lateinit var recycleView: RecyclerView
     private lateinit var swipeRefresh: SwipeRefreshLayout
     private lateinit var favoriteTeamAdapter: TeamAdapter
@@ -84,7 +85,7 @@ class FavouriteTeamFragment : BaseFragment<FavouriteTeamContract.Presenter>(), F
         presenter.getListFavorite()
     }
 
-    override fun getProgressBar(): ProgressBar? = progressBar
+    override fun getProgressBar(): LottieAnimationView? = progressBar
 
 
     override fun hideLoading() {

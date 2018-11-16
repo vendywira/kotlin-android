@@ -26,10 +26,7 @@ import org.jetbrains.anko.design.snackbar
 import javax.inject.Inject
 import android.support.design.widget.AppBarLayout
 import android.support.design.widget.CollapsingToolbarLayout
-
-
-
-
+import com.airbnb.lottie.LottieAnimationView
 
 
 class TeamDetailActivity : BaseActivity<TeamDetailContract.Presenter>(),
@@ -38,7 +35,7 @@ class TeamDetailActivity : BaseActivity<TeamDetailContract.Presenter>(),
     @Inject
     internal lateinit var presenter: TeamDetailContract.Presenter
 
-    private lateinit var progressBar: ProgressBar
+    private lateinit var progressBar: LottieAnimationView
     private lateinit var team: TeamVo
     private lateinit var menu: Menu
     private lateinit var tabLayout: TabLayout
@@ -56,7 +53,7 @@ class TeamDetailActivity : BaseActivity<TeamDetailContract.Presenter>(),
 
     override fun getPresenter(): TeamDetailContract.Presenter? = presenter
 
-    override fun getProgressBar(): ProgressBar? = progressBar
+    override fun getProgressBar(): LottieAnimationView? = progressBar
 
     override fun onInitView() {
         setContentView(activity_team_detail)

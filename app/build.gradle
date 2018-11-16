@@ -79,6 +79,7 @@ dependencies {
     implementation "org.modelmapper:modelmapper:2.3.0"
 
     implementation 'com.android.support:support-v4:28.0.0'
+    implementation 'com.airbnb.android:lottie:2.7.0'
 
     // unit test
     testImplementation "junit:junit:4.12"
