@@ -1,5 +1,8 @@
 # Dicoding training (Kotlin Android Developer Expert)
 
+<img src="https://github.com/vendywira/kotlin-android/blob/master/screenshot/screen-capture.gif" width="190" height="380" />
+
+
 ## Feature
 ### Teams information
 - [x] List of teams based on choosen league.
