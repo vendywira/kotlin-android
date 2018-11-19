@@ -1,5 +1,6 @@
 package app.learn.kotlin.feature.favorite
 
+import app.learn.kotlin.feature.base.BaseIdleListener
 import app.learn.kotlin.feature.favourite.event.FavouriteEventContract
 import app.learn.kotlin.feature.favourite.event.FavouriteEventPresenterImpl
 import app.learn.kotlin.model.entity.EventEntity
@@ -24,6 +25,9 @@ class FavouriteEventPresenterImplTest {
 
     @InjectMocks
     private lateinit var impl: FavouriteEventPresenterImpl
+
+    @Spy
+    private lateinit var idleListener: BaseIdleListener
 
     @Spy
     private lateinit var view: FavouriteEventContract.View
@@ -57,7 +61,9 @@ class FavouriteEventPresenterImplTest {
 
     @After
     fun tearDown() {
-        Mockito.verifyNoMoreInteractions(view, favouriteRepository)
+        verify(idleListener).increment()
+        verify(idleListener).decrement()
+        Mockito.verifyNoMoreInteractions(view, favouriteRepository, idleListener)
     }
 
     @Test

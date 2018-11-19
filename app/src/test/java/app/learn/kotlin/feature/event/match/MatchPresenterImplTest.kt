@@ -1,5 +1,6 @@
 package app.learn.kotlin.feature.event.match
 
+import app.learn.kotlin.feature.base.BaseIdleListener
 import app.learn.kotlin.model.Constant
 import app.learn.kotlin.model.response.Event
 import app.learn.kotlin.model.response.League
@@ -23,6 +24,9 @@ class MatchPresenterImplTest {
 
     @InjectMocks
     private lateinit var impl: MatchPresenterImpl
+
+    @Spy
+    private lateinit var idleListener: BaseIdleListener
 
     @Spy
     private lateinit var view: MatchContract.View
@@ -72,7 +76,9 @@ class MatchPresenterImplTest {
 
     @After
     fun tearDown() {
-        verifyNoMoreInteractions(view, apiService)
+        verify(idleListener).increment()
+        verify(idleListener).decrement()
+        verifyNoMoreInteractions(view, apiService, idleListener)
     }
 
     @Test

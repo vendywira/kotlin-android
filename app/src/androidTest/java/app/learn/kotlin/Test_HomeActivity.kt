@@ -21,11 +21,17 @@ import app.learn.kotlin.feature.HomeActivity
 import app.learn.kotlin.feature.adapter.TeamAdapter
 import app.learn.kotlin.feature.event.detail.MatchDetailPresenterImpl.Companion.ADDED_TO_FAVORITE
 import app.learn.kotlin.feature.event.detail.MatchDetailPresenterImpl.Companion.REMOVED_FROM_FAVORITE
+import org.junit.Before
 import org.junit.FixMethodOrder
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.junit.runners.MethodSorters
+import android.support.test.espresso.Espresso
+import android.support.test.espresso.IdlingRegistry
+import android.support.test.espresso.idling.CountingIdlingResource
+
+
 
 
 @RunWith(AndroidJUnit4::class)
@@ -36,17 +42,20 @@ class Test_HomeActivity {
     @JvmField
     var homeActivityRule = ActivityTestRule(HomeActivity::class.java)
 
+    @Before
+    fun setUp() {
+        IdlingRegistry.getInstance().register(homeActivityRule.activity.getCountingIdlingResource())
+    }
+
     @Test
     fun openDetailTeamTest() {
         onView(withId(R.id.bottom_navigation)).check(matches(isDisplayed()))
         onView(withId(R.id.main_container)).check(matches(isDisplayed()))
         onView(withId(R.id.team_spinner_id)).check(matches(isDisplayed()))
-        Thread.sleep(3000)
         onView(withId(R.id.team_spinner_id)).perform(click())
         onView(withText("Italian Serie A")).perform(click())
         onView(withId(R.id.base_recycle_view_id))
                 .perform(scrollToPosition<TeamAdapter.TeamHolder>(5), click())
-        Thread.sleep(3000)
         try {
             clickFavoriteIcon()
         } catch (e: NoMatchingViewException) {
@@ -62,17 +71,13 @@ class Test_HomeActivity {
         onView(withId(R.id.bottom_navigation)).check(matches(isDisplayed()))
         onView(withId(R.id.menu_match_id)).check(matches(isCompletelyDisplayed())).perform(click())
         onView(withId(R.id.menu_match_id)).check(matches(isFocusable()))
-        Thread.sleep(3000)
         onView(withId(R.id.main_container)).check(matches(isDisplayed()))
         onView(TestHelper.withIndex(withId(R.id.event_spinner_id), 0))
                 .check(matches(isDisplayed()))
-        Thread.sleep(3000)
         onView(TestHelper.withIndex(withId(R.id.event_spinner_id), 0)).perform(click())
         onView(withText("Italian Serie A")).perform(click())
-        Thread.sleep(5000)
         onView(TestHelper.withIndex(withId(R.id.rv_match),0)).perform(
                 RecyclerViewActions.actionOnItemAtPosition<RecyclerView.ViewHolder>(4, click()))
-        Thread.sleep(3000)
         onView(withId(R.id.iv_home_team_icon)).check(matches(isDisplayed()))
         onView(withId(R.id.iv_away_team_icon)).check(matches(isDisplayed()))
         pressBack()
@@ -84,17 +89,14 @@ class Test_HomeActivity {
         onView(withId(R.id.bottom_navigation)).check(matches(isDisplayed()))
         onView(withId(R.id.menu_match_id)).check(matches(isCompletelyDisplayed())).perform(click())
         onView(withId(R.id.menu_match_id)).check(matches(isFocusable()))
-        Thread.sleep(3000)
         onView(withId(R.id.main_container)).check(matches(isDisplayed()))
         onView(TestHelper.withIndex(withId(R.id.event_spinner_id), 0))
                 .check(matches(isDisplayed()))
         onView(withText("Last")).perform(click())
         onView(TestHelper.withIndex(withId(R.id.event_spinner_id), 1)).perform(click())
         onView(withText("Italian Serie A")).perform(click())
-        Thread.sleep(5000)
         onView(TestHelper.withIndex(withId(R.id.rv_match),1))
                 .perform(RecyclerViewActions.actionOnItemAtPosition<RecyclerView.ViewHolder>(2, click()))
-        Thread.sleep(3000)
         onView(withId(R.id.iv_home_team_icon
                 .and(R.id.iv_away_team_icon)))
                 .check(matches(isDisplayed()))
@@ -127,11 +129,9 @@ class Test_HomeActivity {
                 .check(matches(isCompletelyDisplayed()))
                 .perform(click())
                 .check(matches(isFocusable()))
-        Thread.sleep(3000)
         onView(withId(R.id.main_container)).check(matches(isDisplayed()))
         onView(TestHelper.withIndex(withId(R.id.rv_favorite),0))
                 .perform(actionOnItemAtPosition<RecyclerView.ViewHolder>(0, click()))
-        Thread.sleep(1000)
         onView(withId(R.id.iv_home_team_icon
                 .and(R.id.iv_away_team_icon)))
                 .check(matches(isDisplayed()))
@@ -139,7 +139,6 @@ class Test_HomeActivity {
         pressBack()
         onView(TestHelper.withIndex(withId(R.id.rv_favorite),0))
                 .perform(actionOnItemAtPosition<RecyclerView.ViewHolder>(0, click()))
-        Thread.sleep(1000)
         onView(withId(R.id.iv_home_team_icon
                 .and(R.id.iv_away_team_icon)))
                 .check(matches(isDisplayed()))
@@ -152,17 +151,13 @@ class Test_HomeActivity {
         onView(withId(R.id.bottom_navigation)).check(matches(isDisplayed()))
         onView(withId(R.id.menu_match_id)).check(matches(isCompletelyDisplayed())).perform(click())
         onView(withId(R.id.menu_match_id)).check(matches(isFocusable()))
-        Thread.sleep(3000)
         onView(withId(R.id.main_container)).check(matches(isDisplayed()))
         onView(TestHelper.withIndex(withId(R.id.event_spinner_id), 0))
                 .check(matches(isDisplayed()))
-        Thread.sleep(3000)
         onView(TestHelper.withIndex(withId(R.id.event_spinner_id), 0)).perform(click())
         onView(withText("Italian Serie A")).perform(click())
-        Thread.sleep(5000)
         onView(TestHelper.withIndex(withId(R.id.rv_match),0)).perform(
                 RecyclerViewActions.actionOnItemAtPosition<RecyclerView.ViewHolder>(index, click()))
-        Thread.sleep(3000)
         onView(withId(R.id.iv_home_team_icon
                 .and(R.id.iv_away_team_icon)))
                 .check(matches(isDisplayed()))
@@ -181,17 +176,14 @@ class Test_HomeActivity {
         onView(withId(R.id.bottom_navigation)).check(matches(isDisplayed()))
         onView(withId(R.id.menu_match_id)).check(matches(isCompletelyDisplayed())).perform(click())
         onView(withId(R.id.menu_match_id)).check(matches(isFocusable()))
-        Thread.sleep(3000)
         onView(withId(R.id.main_container)).check(matches(isDisplayed()))
         onView(TestHelper.withIndex(withId(R.id.event_spinner_id), 0))
                 .check(matches(isDisplayed()))
         onView(withText("Last")).perform(click())
         onView(TestHelper.withIndex(withId(R.id.event_spinner_id), 1)).perform(click())
         onView(withText("Italian Serie A")).perform(click())
-        Thread.sleep(3000)
         onView(TestHelper.withIndex(withId(R.id.rv_match),1))
                 .perform(RecyclerViewActions.actionOnItemAtPosition<RecyclerView.ViewHolder>(index, click()))
-        Thread.sleep(3000)
         onView(withId(R.id.iv_home_team_icon
                 .and(R.id.iv_away_team_icon)))
                 .check(matches(isDisplayed()))
@@ -219,9 +211,5 @@ class Test_HomeActivity {
                 .perform(click())
         onView(withText(REMOVED_FROM_FAVORITE)).check(matches(isDisplayed()))
         onView(withId(R.id.menu_unfavorite)).check(matches(isDisplayed()))
-    }
-
-    private fun withTimeout(time: Long) {
-        Thread.sleep(time)
     }
 }

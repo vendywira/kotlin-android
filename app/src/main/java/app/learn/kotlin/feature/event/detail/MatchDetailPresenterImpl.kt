@@ -1,5 +1,7 @@
 package app.learn.kotlin.feature.event.detail
 
+import app.learn.kotlin.feature.base.BaseIdleListener
+import app.learn.kotlin.feature.base.BaseIdleResource
 import app.learn.kotlin.feature.base.BasePresenterImpl
 import app.learn.kotlin.model.entity.EventEntity
 import app.learn.kotlin.network.TheSportDBApiService
@@ -7,7 +9,8 @@ import app.learn.kotlin.repository.FavouriteMatchRepository
 import io.reactivex.android.schedulers.AndroidSchedulers
 import javax.inject.Inject
 
-class MatchDetailPresenterImpl @Inject constructor (
+class MatchDetailPresenterImpl @Inject constructor(
+        private val idleListener: BaseIdleListener,
         private val view: MatchDetailContract.View,
         private val apiService: TheSportDBApiService,
         private val favouriteRepository: FavouriteMatchRepository)
@@ -23,8 +26,14 @@ class MatchDetailPresenterImpl @Inject constructor (
 
     override fun insertMatchToFavorite(eventEntity: EventEntity) {
         super.addDisposable(favouriteRepository.insert(eventEntity)
-                .doOnSubscribe { view.showLoading() }
-                .doAfterTerminate { view.hideLoading() }
+                .doOnSubscribe {
+                    view.showLoading()
+                    idleListener.increment()
+                }
+                .doAfterTerminate {
+                    view.hideLoading()
+                    idleListener.decrement()
+                }
                 .observeOn(AndroidSchedulers.mainThread())
                 .doOnError { view.showMessage(FAILED_ADD_TO_FAVORITE) }
                 .doOnSuccess { view.showMessage(ADDED_TO_FAVORITE) }
@@ -33,8 +42,14 @@ class MatchDetailPresenterImpl @Inject constructor (
 
     override fun deleteMatchFromFavorite(eventId: String?) {
         super.addDisposable(favouriteRepository.delete(eventId.orEmpty())
-                .doOnSubscribe { view.showLoading() }
-                .doAfterTerminate { view.hideLoading() }
+                .doOnSubscribe {
+                    view.showLoading()
+                    idleListener.increment()
+                }
+                .doAfterTerminate {
+                    view.hideLoading()
+                    idleListener.decrement()
+                }
                 .observeOn(AndroidSchedulers.mainThread())
                 .doOnError { view.showMessage(FAILED_TO_REMOVE_FROM_FAVORITE) }
                 .doOnSuccess { view.showMessage(REMOVED_FROM_FAVORITE) }
@@ -43,8 +58,14 @@ class MatchDetailPresenterImpl @Inject constructor (
 
     override fun isExistFavoriteEvent(eventId: String?) {
         super.addDisposable(favouriteRepository.isExist(eventId.orEmpty())
-                .doOnSubscribe { view.showLoading() }
-                .doAfterTerminate { view.hideLoading() }
+                .doOnSubscribe {
+                    view.showLoading()
+                    idleListener.increment()
+                }
+                .doAfterTerminate {
+                    view.hideLoading()
+                    idleListener.decrement()
+                }
                 .observeOn(AndroidSchedulers.mainThread())
                 .doOnError { view.showMessage(FAILED_GET_DATA_FROM_DB) }
                 .doOnSuccess { i -> view.isExistFavoriteEvent(i) }
@@ -59,8 +80,14 @@ class MatchDetailPresenterImpl @Inject constructor (
                         getTeamDetail(it.idAwayTeam.orEmpty())
                     }
                 }
-                .doOnSubscribe { view.showLoading() }
-                .doOnTerminate { view.hideLoading() }
+                .doOnSubscribe {
+                    view.showLoading()
+                    idleListener.increment()
+                }
+                .doOnTerminate {
+                    view.hideLoading()
+                    idleListener.decrement()
+                }
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe { it ->
                     it?.contents?.get(0)?.let {

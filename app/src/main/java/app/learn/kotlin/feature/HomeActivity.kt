@@ -18,6 +18,10 @@ import app.learn.kotlin.model.Constant
 import kotlinx.android.synthetic.main.acivity_home.*
 import kotlinx.android.synthetic.main.nav_bar_view.*
 import org.jetbrains.anko.startActivity
+import android.support.test.espresso.IdlingResource
+import android.support.annotation.VisibleForTesting
+import app.learn.kotlin.feature.base.BaseIdleResource
+
 
 class HomeActivity : AppCompatActivity() {
 
@@ -78,5 +82,8 @@ class HomeActivity : AppCompatActivity() {
         }
     }
 
-
+    @VisibleForTesting
+    fun getCountingIdlingResource(): IdlingResource {
+        return BaseIdleResource.getIdlingResource()
+    }
 }

@@ -4,10 +4,13 @@ import android.app.Application
 import android.content.Context
 import app.learn.kotlin.di.scope.ApplicationContext
 import app.learn.kotlin.di.scope.ApplicationScope
+import app.learn.kotlin.feature.base.BaseIdleListener
+import app.learn.kotlin.feature.base.BaseIdleResource
 import app.learn.kotlin.network.NetworkModule
 import app.learn.kotlin.repository.RepositoryModule
 import dagger.Module
 import dagger.Provides
+import dagger.Reusable
 
 @Module(includes = [NetworkModule::class, RepositoryModule::class])
 class AppModule {
@@ -24,4 +27,8 @@ class AppModule {
     internal fun provideContext(@ApplicationContext application: Application) : Context {
         return application
     }
+
+    @Provides
+    @Reusable
+    internal fun provideBaseIdleResource(): BaseIdleListener = BaseIdleResource
 }

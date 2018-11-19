@@ -1,5 +1,6 @@
 package app.learn.kotlin.feature.event.detail
 
+import app.learn.kotlin.feature.base.BaseIdleListener
 import app.learn.kotlin.feature.event.detail.MatchDetailPresenterImpl.Companion.FAILED_GET_DATA_FROM_DB
 import app.learn.kotlin.feature.event.detail.MatchDetailPresenterImpl.Companion.FAILED_TO_REMOVE_FROM_FAVORITE
 import app.learn.kotlin.model.entity.EventEntity
@@ -29,6 +30,9 @@ class MatchDetailPresenterImplTest {
 
     @InjectMocks
     private lateinit var impl: MatchDetailPresenterImpl
+
+    @Spy
+    private lateinit var idleListener: BaseIdleListener
 
     @Spy
     private lateinit var view: MatchDetailContract.View
@@ -65,7 +69,9 @@ class MatchDetailPresenterImplTest {
 
     @After
     fun tearDown() {
-        Mockito.verifyNoMoreInteractions(view, apiService, favouriteRepository)
+        verify(idleListener).increment()
+        verify(idleListener).decrement()
+        Mockito.verifyNoMoreInteractions(view, apiService, favouriteRepository, idleListener)
     }
 
     @Test
