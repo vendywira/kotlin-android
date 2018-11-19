@@ -6,7 +6,7 @@ import app.learn.kotlin.model.response.Team
 
 interface MatchDetailView : BaseView {
 
-    fun isExistFavoriteEvent()
+    fun isExistFavoriteEvent(isFavorite: Boolean)
 
     fun getEventId(): String?
 

@@ -49,12 +49,11 @@ class MatchDetailActivity : BaseActivity<MatchDetailPresenter>(), MatchDetailVie
         supportActionBar?.setHomeButtonEnabled(true)
         eventId = intent.getStringExtra(Constant.MATCH_EVENT_ID)
         progressBar = base_progress_bar_id
-        isFavorite = presenter.isExistFavoriteEvent(eventId)
         presenter.getDetailEvent()
     }
 
-    override fun isExistFavoriteEvent() {
-        isFavorite = presenter.isExistFavoriteEvent(eventId)
+    override fun isExistFavoriteEvent(isFavorite: Boolean) {
+        this.isFavorite = isFavorite
         showFavoriteToggle()
     }
 
@@ -72,7 +71,7 @@ class MatchDetailActivity : BaseActivity<MatchDetailPresenter>(), MatchDetailVie
         val inflater = menuInflater
         inflater.inflate(R.menu.toolbar, menu)
         this.menu = menu
-        showFavoriteToggle()
+        presenter.isExistFavoriteEvent(eventId)
         return true
     }
 
@@ -86,7 +85,6 @@ class MatchDetailActivity : BaseActivity<MatchDetailPresenter>(), MatchDetailVie
                 return true
             }
             R.id.menu_unfavorite -> {
-                snackbar(findViewById(android.R.id.content), "Added to favorite")
                 isFavorite = true
                 val favorite = mapper.map(event, FavoriteEventEntity::class.java)
                 presenter.insertMatchToFavorite(favorite)
@@ -100,6 +98,10 @@ class MatchDetailActivity : BaseActivity<MatchDetailPresenter>(), MatchDetailVie
         }
 
         return super.onOptionsItemSelected(item)
+    }
+
+    override fun showMessage(message: String) {
+        snackbar(findViewById(android.R.id.content), message)
     }
 
     override fun setEventDetailModel(event: Event) {
