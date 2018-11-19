@@ -14,7 +14,6 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
-import android.widget.ProgressBar
 import android.widget.Spinner
 import app.learn.kotlin.R.layout.fragment_match
 import app.learn.kotlin.feature.adapter.EventAdapter

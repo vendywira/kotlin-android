@@ -1,7 +1,6 @@
 package app.learn.kotlin.feature.favourite.team
 
 import app.learn.kotlin.feature.base.BasePresenterImpl
-import app.learn.kotlin.feature.favorite.event.FavouriteTeamContract
 import app.learn.kotlin.model.Constant
 import app.learn.kotlin.model.entity.TeamEntity
 import app.learn.kotlin.repository.FavoriteTeamRepository

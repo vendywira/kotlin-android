@@ -13,6 +13,7 @@ data class PlayerVo (
         var position: String? = null,
         var weight: String? = "0",
         var height: String? = "0",
-        var description: String? = null ) : Parcelable {
+        var description: String? = null
+) : Parcelable {
     constructor() : this( null,null, null, null, null, null, null, null, null)
 }

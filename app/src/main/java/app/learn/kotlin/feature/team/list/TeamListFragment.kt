@@ -9,7 +9,6 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
-import android.widget.ProgressBar
 import android.widget.Spinner
 import app.learn.kotlin.R
 import app.learn.kotlin.feature.adapter.TeamAdapter
@@ -45,7 +44,7 @@ class TeamListFragment : BaseFragment<TeamListContract.Presenter>(), TeamListCon
 
     override fun onInitView(inflater: LayoutInflater?, container: ViewGroup?,
                             savedInstanceState: Bundle?): View {
-        val view = layoutInflater.inflate(R.layout.fragment_team, container, false);
+        val view = layoutInflater.inflate(R.layout.fragment_team, container, false)
         spinner = view.find(R.id.team_spinner_id)
         listTeam = view.find(R.id.base_recycle_view_id)
         swipeRefresh = view.find(R.id.base_swipe_refresh)

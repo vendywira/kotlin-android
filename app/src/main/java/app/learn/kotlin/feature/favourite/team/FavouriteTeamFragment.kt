@@ -7,13 +7,11 @@ import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ProgressBar
 import app.learn.kotlin.R
 import app.learn.kotlin.feature.HomeActivity
+import app.learn.kotlin.feature.adapter.TeamAdapter
 import app.learn.kotlin.feature.base.BaseFragment
 import app.learn.kotlin.feature.team.detail.TeamDetailActivity
-import app.learn.kotlin.feature.adapter.TeamAdapter
-import app.learn.kotlin.feature.favorite.event.FavouriteTeamContract
 import app.learn.kotlin.helper.invisible
 import app.learn.kotlin.helper.mapper
 import app.learn.kotlin.model.Constant

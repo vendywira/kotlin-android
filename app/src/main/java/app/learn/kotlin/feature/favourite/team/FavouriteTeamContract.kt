@@ -1,4 +1,4 @@
-package app.learn.kotlin.feature.favorite.event
+package app.learn.kotlin.feature.favourite.team
 
 import app.learn.kotlin.feature.base.BasePresenter
 import app.learn.kotlin.feature.base.BaseView

@@ -77,14 +77,14 @@ val objectMapper = ObjectMapper()
 fun convertObjectToPair(ob: Any): ContentValues {
     val parcel: Parcel = Parcel.obtain()
     parcel.writeMap(objectMapper.convertValue(ob, Map::class.java))
-    parcel.setDataPosition(0);
+    parcel.setDataPosition(0)
     return ContentValues.CREATOR.createFromParcel(parcel)
 }
 
 fun convertMapToContentValues(map: Map<*, *>): ContentValues {
     val parcel: Parcel = Parcel.obtain()
     parcel.writeMap(map)
-    parcel.setDataPosition(0);
+    parcel.setDataPosition(0)
     return ContentValues.CREATOR.createFromParcel(parcel)
 }
 

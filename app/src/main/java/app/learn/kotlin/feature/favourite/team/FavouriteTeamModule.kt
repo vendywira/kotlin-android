@@ -1,7 +1,6 @@
 package app.learn.kotlin.feature.favourite.team
 
 import app.learn.kotlin.di.scope.ActivityScope
-import app.learn.kotlin.feature.favorite.event.FavouriteTeamContract
 import dagger.Binds
 import dagger.Module
 

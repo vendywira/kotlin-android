@@ -7,11 +7,10 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ProgressBar
 import app.learn.kotlin.R
+import app.learn.kotlin.feature.adapter.EventAdapter
 import app.learn.kotlin.feature.base.BaseFragment
 import app.learn.kotlin.feature.event.detail.MatchDetailActivity
-import app.learn.kotlin.feature.adapter.EventAdapter
 import app.learn.kotlin.helper.invisible
 import app.learn.kotlin.helper.mapper
 import app.learn.kotlin.model.Constant
@@ -20,7 +19,6 @@ import app.learn.kotlin.model.response.ListResponse
 import app.learn.kotlin.model.vo.EventVo
 import com.airbnb.lottie.LottieAnimationView
 import kotlinx.android.synthetic.main.base_recycle_view.view.*
-import kotlinx.android.synthetic.main.fragment_match.view.*
 import kotlinx.android.synthetic.main.progress_bar.view.*
 import org.jetbrains.anko.startActivity
 import org.jetbrains.anko.support.v4.ctx

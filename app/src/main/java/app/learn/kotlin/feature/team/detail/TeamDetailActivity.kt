@@ -1,17 +1,18 @@
 package app.learn.kotlin.feature.team.detail
 
 import android.os.Bundle
+import android.support.design.widget.AppBarLayout
+import android.support.design.widget.CollapsingToolbarLayout
 import android.support.design.widget.TabLayout
 import android.support.v4.view.ViewPager
 import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
-import android.widget.ProgressBar
 import app.learn.kotlin.R
 import app.learn.kotlin.R.layout.activity_team_detail
 import app.learn.kotlin.feature.base.BaseActivity
-import app.learn.kotlin.feature.event.detail.TeamDetailContract
 import app.learn.kotlin.feature.base.BasePagerAdapter
+import app.learn.kotlin.feature.event.detail.TeamDetailContract
 import app.learn.kotlin.feature.team.player.PlayerListFragment
 import app.learn.kotlin.helper.invisible
 import app.learn.kotlin.helper.loadImageUrl
@@ -20,13 +21,11 @@ import app.learn.kotlin.helper.visible
 import app.learn.kotlin.model.Constant
 import app.learn.kotlin.model.entity.TeamEntity
 import app.learn.kotlin.model.vo.TeamVo
+import com.airbnb.lottie.LottieAnimationView
 import kotlinx.android.synthetic.main.activity_team_detail.*
 import kotlinx.android.synthetic.main.progress_bar.*
 import org.jetbrains.anko.design.snackbar
 import javax.inject.Inject
-import android.support.design.widget.AppBarLayout
-import android.support.design.widget.CollapsingToolbarLayout
-import com.airbnb.lottie.LottieAnimationView
 
 
 class TeamDetailActivity : BaseActivity<TeamDetailContract.Presenter>(),

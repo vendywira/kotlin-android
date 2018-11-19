@@ -6,9 +6,9 @@ import org.hamcrest.Matcher
 import org.hamcrest.TypeSafeMatcher
 
 object TestHelper {
-    fun withIndex(matcher: Matcher<View>, index: Int): Matcher<View> {
+    internal fun withIndex(matcher: Matcher<View>, index: Int): Matcher<View> {
         return object : TypeSafeMatcher<View>() {
-            internal var currentIndex = 0
+            var currentIndex = 0
 
             override fun describeTo(description: Description) {
                 description.appendText("with index: ")

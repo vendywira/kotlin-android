@@ -105,7 +105,7 @@ class MatchPresenterImplTest {
         verify(apiService).getLastMatchByLeagueId(LEAGUE_ID)
         verify(view).showLoading()
         verify(view).hideLoading()
-        verify(view).showMessage(Constant.FAILED_GET_DATA);
+        verify(view).showMessage(Constant.FAILED_GET_DATA)
         verify(view).setViewModel(responseEventCaptor.capture())
 
         val response = responseEventCaptor.value

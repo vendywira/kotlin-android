@@ -8,7 +8,6 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ProgressBar
 import app.learn.kotlin.R
 import app.learn.kotlin.feature.adapter.PlayerAdapter
 import app.learn.kotlin.feature.base.BaseFragment

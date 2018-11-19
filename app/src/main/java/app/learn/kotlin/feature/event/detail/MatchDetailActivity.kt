@@ -3,11 +3,15 @@ package app.learn.kotlin.feature.event.detail
 import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
-import android.widget.ProgressBar
 import app.learn.kotlin.R
 import app.learn.kotlin.R.layout.activity_match_detail
 import app.learn.kotlin.feature.base.BaseActivity
-import app.learn.kotlin.helper.*
+import app.learn.kotlin.helper.dateFormating
+import app.learn.kotlin.helper.invisible
+import app.learn.kotlin.helper.loadImageUrl
+import app.learn.kotlin.helper.mapper
+import app.learn.kotlin.helper.timeFormating
+import app.learn.kotlin.helper.visible
 import app.learn.kotlin.model.Constant
 import app.learn.kotlin.model.entity.EventEntity
 import app.learn.kotlin.model.response.Event
@@ -79,7 +83,7 @@ class MatchDetailActivity : BaseActivity<MatchDetailContract.Presenter>(),
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        Log.d("test menu","hit menu "+item.itemId)
+        Log.d("test menu", "hit menu " + item.itemId)
         when (item.itemId) {
             R.id.menu_favorite -> {
                 snackbar(findViewById(android.R.id.content), "Removed from favorite")
@@ -135,7 +139,7 @@ class MatchDetailActivity : BaseActivity<MatchDetailContract.Presenter>(),
             tv_away_team_formation.text = it.awayFormation
             tv_away_substitutes.text = it.awayLineupSubstitutes
         }
-       supportActionBar?.title = "${event.teamHomeName} vs ${event.teamAwayName}"
+        supportActionBar?.title = "${event.teamHomeName} vs ${event.teamAwayName}"
     }
 
     override fun setTeamDetailModel(team: Team) {
