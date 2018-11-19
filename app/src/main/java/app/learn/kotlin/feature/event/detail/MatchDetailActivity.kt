@@ -1,27 +1,35 @@
 package app.learn.kotlin.feature.event.detail
 
+import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
-import android.widget.ProgressBar
 import app.learn.kotlin.R
+import app.learn.kotlin.R.layout.activity_match_detail
 import app.learn.kotlin.feature.base.BaseActivity
-import app.learn.kotlin.helper.*
+import app.learn.kotlin.helper.dateFormating
+import app.learn.kotlin.helper.invisible
+import app.learn.kotlin.helper.loadImageUrl
+import app.learn.kotlin.helper.mapper
+import app.learn.kotlin.helper.timeFormating
+import app.learn.kotlin.helper.visible
 import app.learn.kotlin.model.Constant
-import app.learn.kotlin.model.entity.FavoriteEventEntity
+import app.learn.kotlin.model.entity.EventEntity
 import app.learn.kotlin.model.response.Event
 import app.learn.kotlin.model.response.Team
-import dagger.android.AndroidInjection
+import com.airbnb.lottie.LottieAnimationView
 import kotlinx.android.synthetic.main.activity_match_detail.*
+import kotlinx.android.synthetic.main.progress_bar.*
 import org.jetbrains.anko.design.snackbar
 import javax.inject.Inject
 
 
-class MatchDetailActivity : BaseActivity<MatchDetailPresenter>(), MatchDetailView {
+class MatchDetailActivity : BaseActivity<MatchDetailContract.Presenter>(),
+        MatchDetailContract.View {
 
     @Inject
-    internal lateinit var presenter: MatchDetailPresenter
+    internal lateinit var presenter: MatchDetailContract.Presenter
 
-    private lateinit var progressBar: ProgressBar
+    private lateinit var progressBar: LottieAnimationView
     private lateinit var menu: Menu
 
     private var isFavorite: Boolean = false
@@ -37,16 +45,15 @@ class MatchDetailActivity : BaseActivity<MatchDetailPresenter>(), MatchDetailVie
 
     override fun getEventId(): String? = eventId
 
-    override fun getPresenter(): MatchDetailPresenter? = presenter
+    override fun getPresenter(): MatchDetailContract.Presenter? = presenter
 
-    override fun getProgressBar(): ProgressBar? = progressBar
+    override fun getProgressBar(): LottieAnimationView? = progressBar
 
     override fun onInitView() {
-        AndroidInjection.inject(this)
-        setContentView(R.layout.activity_match_detail)
-        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        setContentView(activity_match_detail)
         supportActionBar?.setDisplayShowHomeEnabled(true)
         supportActionBar?.setHomeButtonEnabled(true)
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
         eventId = intent.getStringExtra(Constant.MATCH_EVENT_ID)
         progressBar = base_progress_bar_id
         presenter.getDetailEvent()
@@ -72,10 +79,11 @@ class MatchDetailActivity : BaseActivity<MatchDetailPresenter>(), MatchDetailVie
         inflater.inflate(R.menu.toolbar, menu)
         this.menu = menu
         presenter.isExistFavoriteEvent(eventId)
-        return true
+        return super.onCreateOptionsMenu(menu)
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        Log.d("test menu", "hit menu " + item.itemId)
         when (item.itemId) {
             R.id.menu_favorite -> {
                 snackbar(findViewById(android.R.id.content), "Removed from favorite")
@@ -86,7 +94,7 @@ class MatchDetailActivity : BaseActivity<MatchDetailPresenter>(), MatchDetailVie
             }
             R.id.menu_unfavorite -> {
                 isFavorite = true
-                val favorite = mapper.map(event, FavoriteEventEntity::class.java)
+                val favorite = mapper.map(event, EventEntity::class.java)
                 presenter.insertMatchToFavorite(favorite)
                 showFavoriteToggle()
                 return true
@@ -107,8 +115,8 @@ class MatchDetailActivity : BaseActivity<MatchDetailPresenter>(), MatchDetailVie
     override fun setEventDetailModel(event: Event) {
         this.event = event
         event.let {
-            tv_start_date.text = toSimpleString(it.strDate)
-
+            tv_start_date.text = dateFormating(it.dateEvent)
+            tv_start_time.text = timeFormating(it.time.orEmpty())
             tv_home_team_name.text = it.teamHomeName
             tv_home_team_score.text = it.teamHomeScore?.toString()
             tv_home_foward.text = it.homeLineupForward
@@ -131,15 +139,16 @@ class MatchDetailActivity : BaseActivity<MatchDetailPresenter>(), MatchDetailVie
             tv_away_team_formation.text = it.awayFormation
             tv_away_substitutes.text = it.awayLineupSubstitutes
         }
+        supportActionBar?.title = "${event.teamHomeName} vs ${event.teamAwayName}"
     }
 
     override fun setTeamDetailModel(team: Team) {
-        if (team.id.orEmpty() == event?.idHomeTeam) {
+        if (team.teamId.orEmpty() == event?.idHomeTeam) {
             teamHome = team
-            iv_home_team_icon.loadImageUrl(teamHome?.image.orEmpty())
+            iv_home_team_icon.loadImageUrl(teamHome?.teamLogoUrl.orEmpty())
         } else {
             teamAway = team
-            iv_away_team_icon.loadImageUrl(teamAway?.image.orEmpty())
+            iv_away_team_icon.loadImageUrl(teamAway?.teamLogoUrl.orEmpty())
         }
     }
 

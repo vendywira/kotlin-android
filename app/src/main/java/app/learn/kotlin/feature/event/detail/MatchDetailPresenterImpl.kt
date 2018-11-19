@@ -1,17 +1,20 @@
 package app.learn.kotlin.feature.event.detail
 
+import app.learn.kotlin.feature.base.BaseIdleListener
+import app.learn.kotlin.feature.base.BaseIdleResource
 import app.learn.kotlin.feature.base.BasePresenterImpl
-import app.learn.kotlin.model.entity.FavoriteEventEntity
+import app.learn.kotlin.model.entity.EventEntity
 import app.learn.kotlin.network.TheSportDBApiService
-import app.learn.kotlin.repository.FavoriteMatchRepository
+import app.learn.kotlin.repository.FavouriteMatchRepository
 import io.reactivex.android.schedulers.AndroidSchedulers
 import javax.inject.Inject
 
-class MatchDetailPresenterImpl @Inject constructor (
-        private val view: MatchDetailView,
+class MatchDetailPresenterImpl @Inject constructor(
+        private val idleListener: BaseIdleListener,
+        private val view: MatchDetailContract.View,
         private val apiService: TheSportDBApiService,
-        private val favoriteRepository: FavoriteMatchRepository)
-    : BasePresenterImpl(), MatchDetailPresenter {
+        private val favouriteRepository: FavouriteMatchRepository)
+    : BasePresenterImpl(), MatchDetailContract.Presenter {
 
     companion object {
         const val FAILED_ADD_TO_FAVORITE = "Failed add to favorite"
@@ -21,10 +24,16 @@ class MatchDetailPresenterImpl @Inject constructor (
         const val FAILED_GET_DATA_FROM_DB = "Failed get data from db"
     }
 
-    override fun insertMatchToFavorite(favoriteEventEntity: FavoriteEventEntity) {
-        super.addDisposable(favoriteRepository.insertEvent(favoriteEventEntity)
-                .doOnSubscribe { view.showLoading() }
-                .doAfterTerminate { view.hideLoading() }
+    override fun insertMatchToFavorite(eventEntity: EventEntity) {
+        super.addDisposable(favouriteRepository.insert(eventEntity)
+                .doOnSubscribe {
+                    view.showLoading()
+                    idleListener.increment()
+                }
+                .doAfterTerminate {
+                    view.hideLoading()
+                    idleListener.decrement()
+                }
                 .observeOn(AndroidSchedulers.mainThread())
                 .doOnError { view.showMessage(FAILED_ADD_TO_FAVORITE) }
                 .doOnSuccess { view.showMessage(ADDED_TO_FAVORITE) }
@@ -32,9 +41,15 @@ class MatchDetailPresenterImpl @Inject constructor (
     }
 
     override fun deleteMatchFromFavorite(eventId: String?) {
-        super.addDisposable(favoriteRepository.deleteEvent(eventId.orEmpty())
-                .doOnSubscribe { view.showLoading() }
-                .doAfterTerminate { view.hideLoading() }
+        super.addDisposable(favouriteRepository.delete(eventId.orEmpty())
+                .doOnSubscribe {
+                    view.showLoading()
+                    idleListener.increment()
+                }
+                .doAfterTerminate {
+                    view.hideLoading()
+                    idleListener.decrement()
+                }
                 .observeOn(AndroidSchedulers.mainThread())
                 .doOnError { view.showMessage(FAILED_TO_REMOVE_FROM_FAVORITE) }
                 .doOnSuccess { view.showMessage(REMOVED_FROM_FAVORITE) }
@@ -42,9 +57,15 @@ class MatchDetailPresenterImpl @Inject constructor (
     }
 
     override fun isExistFavoriteEvent(eventId: String?) {
-        super.addDisposable(favoriteRepository.isExistEvent(eventId.orEmpty())
-                .doOnSubscribe { view.showLoading() }
-                .doAfterTerminate { view.hideLoading() }
+        super.addDisposable(favouriteRepository.isExist(eventId.orEmpty())
+                .doOnSubscribe {
+                    view.showLoading()
+                    idleListener.increment()
+                }
+                .doAfterTerminate {
+                    view.hideLoading()
+                    idleListener.decrement()
+                }
                 .observeOn(AndroidSchedulers.mainThread())
                 .doOnError { view.showMessage(FAILED_GET_DATA_FROM_DB) }
                 .doOnSuccess { i -> view.isExistFavoriteEvent(i) }
@@ -59,8 +80,14 @@ class MatchDetailPresenterImpl @Inject constructor (
                         getTeamDetail(it.idAwayTeam.orEmpty())
                     }
                 }
-                .doOnSubscribe { view.showLoading() }
-                .doOnTerminate { view.hideLoading() }
+                .doOnSubscribe {
+                    view.showLoading()
+                    idleListener.increment()
+                }
+                .doOnTerminate {
+                    view.hideLoading()
+                    idleListener.decrement()
+                }
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe { it ->
                     it?.contents?.get(0)?.let {

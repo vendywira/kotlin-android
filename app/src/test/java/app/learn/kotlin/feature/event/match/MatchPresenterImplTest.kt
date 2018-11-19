@@ -1,5 +1,6 @@
 package app.learn.kotlin.feature.event.match
 
+import app.learn.kotlin.feature.base.BaseIdleListener
 import app.learn.kotlin.model.Constant
 import app.learn.kotlin.model.response.Event
 import app.learn.kotlin.model.response.League
@@ -25,7 +26,10 @@ class MatchPresenterImplTest {
     private lateinit var impl: MatchPresenterImpl
 
     @Spy
-    private lateinit var view: MatchView
+    private lateinit var idleListener: BaseIdleListener
+
+    @Spy
+    private lateinit var view: MatchContract.View
 
     @Spy
     private lateinit var apiService: TheSportDBApiService
@@ -72,7 +76,9 @@ class MatchPresenterImplTest {
 
     @After
     fun tearDown() {
-        verifyNoMoreInteractions(view, apiService)
+        verify(idleListener).increment()
+        verify(idleListener).decrement()
+        verifyNoMoreInteractions(view, apiService, idleListener)
     }
 
     @Test
@@ -105,7 +111,7 @@ class MatchPresenterImplTest {
         verify(apiService).getLastMatchByLeagueId(LEAGUE_ID)
         verify(view).showLoading()
         verify(view).hideLoading()
-        verify(view).showMessage(Constant.FAILED_GET_DATA);
+        verify(view).showMessage(Constant.FAILED_GET_DATA)
         verify(view).setViewModel(responseEventCaptor.capture())
 
         val response = responseEventCaptor.value

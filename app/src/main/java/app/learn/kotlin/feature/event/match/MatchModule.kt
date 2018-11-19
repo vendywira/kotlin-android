@@ -9,9 +9,9 @@ abstract class MatchModule {
 
     @ActivityScope
     @Binds
-    abstract fun provideMatchView(matchFragment: MatchFragment): MatchView
+    abstract fun provideMatchView(matchFragment: MatchFragment): MatchContract.View
 
     @ActivityScope
     @Binds
-    abstract fun provideMatchPresenter(matchPresenterImpl: MatchPresenterImpl): MatchPresenter
+    abstract fun provideMatchPresenter(matchPresenterImpl: MatchPresenterImpl): MatchContract.Presenter
 }

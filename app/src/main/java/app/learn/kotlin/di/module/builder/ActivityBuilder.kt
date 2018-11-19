@@ -3,12 +3,22 @@ package app.learn.kotlin.di.module.builder
 import app.learn.kotlin.di.scope.ActivityScope
 import app.learn.kotlin.feature.event.detail.MatchDetailActivity
 import app.learn.kotlin.feature.event.detail.MatchDetailModule
+import app.learn.kotlin.feature.event.detail.TeamDetailModule
 import app.learn.kotlin.feature.event.match.MatchFragment
 import app.learn.kotlin.feature.event.match.MatchModule
-import app.learn.kotlin.feature.favorite.FavoriteFragment
-import app.learn.kotlin.feature.favorite.FavoriteModule
-import app.learn.kotlin.feature.league.MainActivity
-import app.learn.kotlin.feature.league.MainModule
+import app.learn.kotlin.feature.favourite.event.FavouriteEventFragment
+import app.learn.kotlin.feature.favourite.event.FavouriteEventModule
+import app.learn.kotlin.feature.favourite.team.FavouriteTeamFragment
+import app.learn.kotlin.feature.favourite.team.FavouriteTeamModule
+import app.learn.kotlin.feature.search.event.SearchEventFragment
+import app.learn.kotlin.feature.search.event.SearchEventModule
+import app.learn.kotlin.feature.search.team.SearchTeamFragment
+import app.learn.kotlin.feature.search.team.SearchTeamModule
+import app.learn.kotlin.feature.team.detail.TeamDetailActivity
+import app.learn.kotlin.feature.team.list.TeamListFragment
+import app.learn.kotlin.feature.team.list.TeamListModule
+import app.learn.kotlin.feature.team.player.PlayerListFragment
+import app.learn.kotlin.feature.team.player.PlayerListModule
 import dagger.Module
 import dagger.android.ContributesAndroidInjector
 
@@ -16,8 +26,8 @@ import dagger.android.ContributesAndroidInjector
 abstract class ActivityBuilder {
 
     @ActivityScope
-    @ContributesAndroidInjector(modules = [MainModule::class])
-    internal abstract fun provideMainActivity() : MainActivity
+    @ContributesAndroidInjector(modules = [TeamListModule::class])
+    internal abstract fun provideTeamListActivity() : TeamListFragment
 
     @ActivityScope
     @ContributesAndroidInjector(modules = [MatchModule::class])
@@ -28,6 +38,27 @@ abstract class ActivityBuilder {
     abstract fun provideMatchDetailActvity(): MatchDetailActivity
 
     @ActivityScope
-    @ContributesAndroidInjector(modules = [FavoriteModule::class])
-    abstract fun provideFavoriteFragment(): FavoriteFragment
+    @ContributesAndroidInjector(modules = [SearchEventModule::class])
+    abstract fun provideSearchEvent(): SearchEventFragment
+
+    @ActivityScope
+    @ContributesAndroidInjector(modules = [SearchTeamModule::class])
+    abstract fun provideSearchTeam(): SearchTeamFragment
+
+    @ActivityScope
+    @ContributesAndroidInjector(modules = [FavouriteTeamModule::class])
+    abstract fun provideFavoriteTeam(): FavouriteTeamFragment
+
+    @ActivityScope
+    @ContributesAndroidInjector(modules = [FavouriteEventModule::class])
+    abstract fun provideFavoriteEvent(): FavouriteEventFragment
+
+    @ActivityScope
+    @ContributesAndroidInjector(modules = [TeamDetailModule::class])
+    abstract fun provideTeamDetailActivity(): TeamDetailActivity
+
+    @ActivityScope
+    @ContributesAndroidInjector(modules = [PlayerListModule::class])
+    abstract fun providePlayerListFragment(): PlayerListFragment
+
 }

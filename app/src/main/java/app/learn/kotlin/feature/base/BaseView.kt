@@ -1,10 +1,10 @@
 package app.learn.kotlin.feature.base
 
-import android.widget.ProgressBar
+import com.airbnb.lottie.LottieAnimationView
 
 open interface BaseView{
 
-    fun getProgressBar() : ProgressBar?
+    fun getProgressBar() : LottieAnimationView?
 
     fun showLoading()
 

@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_height="wrap_content"
+    android:padding="@dimen/small_margin_8">
+
+    <android.support.v7.widget.CardView
+        android:id="@+id/itemPlayerContainer"
+        android:layout_width="140dp"
+        android:layout_height="180dp">
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@drawable/background">
+
+            <ImageView
+                android:id="@+id/img_player"
+                android:layout_width="match_parent"
+                android:layout_height="120dp"
+                android:layout_marginTop="@dimen/small_margin_8"
+                android:background="@drawable/shadow"
+                tools:src="@drawable/img_madrid"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:layout_marginTop="130dp">
+                <TextView
+                    android:id="@+id/tv_palyer_name"
+                    android:layout_width="match_parent"
+                    android:layout_height="20dp"
+                    android:textStyle="bold"
+                    android:textAlignment="center"
+                    android:textSize="14sp"
+                    android:background="@color/black"
+                    android:textColor="@color/white"
+                    tools:text="Real Madrid"/>
+                <FrameLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="0.1dp">
+                    <View
+                        android:layout_width="100dp"
+                        android:layout_height="0.1dp"
+                        android:layout_gravity="center_horizontal"
+                        android:background="@color/black" />
+
+                    <View
+                        android:layout_width="100dp"
+                        android:layout_height="0.1dp"
+                        android:layout_gravity="center_horizontal"
+                        android:background="@color/white"
+                    />
+                </FrameLayout>
+                <TextView
+                    android:id="@+id/tv_player_position"
+                    android:layout_width="match_parent"
+                    android:layout_height="18dp"
+                    android:layout_marginBottom="8dp"
+                    android:background="@color/black"
+                    android:textSize="12sp"
+                    android:gravity="center_horizontal"
+                    android:textColor="@color/white"
+                    tools:text="keeper" />
+            </LinearLayout>
+        </FrameLayout>
+    </android.support.v7.widget.CardView>
+</RelativeLayout>

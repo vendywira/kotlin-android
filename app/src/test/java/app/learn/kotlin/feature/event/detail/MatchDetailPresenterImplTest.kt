@@ -1,13 +1,14 @@
 package app.learn.kotlin.feature.event.detail
 
+import app.learn.kotlin.feature.base.BaseIdleListener
 import app.learn.kotlin.feature.event.detail.MatchDetailPresenterImpl.Companion.FAILED_GET_DATA_FROM_DB
 import app.learn.kotlin.feature.event.detail.MatchDetailPresenterImpl.Companion.FAILED_TO_REMOVE_FROM_FAVORITE
-import app.learn.kotlin.model.entity.FavoriteEventEntity
+import app.learn.kotlin.model.entity.EventEntity
 import app.learn.kotlin.model.response.Event
 import app.learn.kotlin.model.response.ListResponse
 import app.learn.kotlin.model.response.Team
 import app.learn.kotlin.network.TheSportDBApiService
-import app.learn.kotlin.repository.FavoriteMatchRepository
+import app.learn.kotlin.repository.FavouriteMatchRepository
 import io.reactivex.Observable
 import io.reactivex.Single
 import io.reactivex.android.plugins.RxAndroidPlugins
@@ -31,15 +32,18 @@ class MatchDetailPresenterImplTest {
     private lateinit var impl: MatchDetailPresenterImpl
 
     @Spy
-    private lateinit var view: MatchDetailView
+    private lateinit var idleListener: BaseIdleListener
+
+    @Spy
+    private lateinit var view: MatchDetailContract.View
 
     @Spy
     private lateinit var apiService: TheSportDBApiService
 
     @Spy
-    private lateinit var favoriteRepository: FavoriteMatchRepository
+    private lateinit var favouriteRepository: FavouriteMatchRepository
 
-    private lateinit var favoriteEventEntity: FavoriteEventEntity
+    private lateinit var eventEntity: EventEntity
     private lateinit var event: Event
     private lateinit var listEventResponse: ListResponse<Event>
     private lateinit var responseEvents: Observable<ListResponse<Event>>
@@ -55,26 +59,28 @@ class MatchDetailPresenterImplTest {
     fun setUp() {
         MockitoAnnotations.initMocks(this)
         RxAndroidPlugins.setInitMainThreadSchedulerHandler { Schedulers.trampoline() }
-        favoriteEventEntity = FavoriteEventEntity()
+        eventEntity = EventEntity()
         event = Event(eventId = EVENT_ID, idHomeTeam = ID_HOME_TEAM, idAwayTeam = ID_AWAY_TEAM)
         listEventResponse = ListResponse(mutableListOf(event))
         responseEvents = Observable.just(listEventResponse)
-        teamHome = Team(id = ID_HOME_TEAM)
-        teamAway = Team(id = ID_AWAY_TEAM)
+        teamHome = Team(teamId = ID_HOME_TEAM)
+        teamAway = Team(teamId = ID_AWAY_TEAM)
     }
 
     @After
     fun tearDown() {
-        Mockito.verifyNoMoreInteractions(view, apiService, favoriteRepository)
+        verify(idleListener).increment()
+        verify(idleListener).decrement()
+        Mockito.verifyNoMoreInteractions(view, apiService, favouriteRepository, idleListener)
     }
 
     @Test
     fun insertMatchToFavoriteTest_valid_true() {
-        Mockito.`when`(favoriteRepository.insertEvent(favoriteEventEntity)).thenReturn(Single.just(true))
+        Mockito.`when`(favouriteRepository.insert(eventEntity)).thenReturn(Single.just(true))
 
-        impl.insertMatchToFavorite(favoriteEventEntity)
+        impl.insertMatchToFavorite(eventEntity)
 
-        Mockito.verify(favoriteRepository).insertEvent(favoriteEventEntity)
+        Mockito.verify(favouriteRepository).insert(eventEntity)
         Mockito.verify(view).showLoading()
         Mockito.verify(view).hideLoading()
         Mockito.verify(view).showMessage("Added to favorite")
@@ -82,12 +88,12 @@ class MatchDetailPresenterImplTest {
 
     @Test
     fun insertMatchToFavoriteTest_valid_exception() {
-        Mockito.`when`(favoriteRepository.insertEvent(favoriteEventEntity))
+        Mockito.`when`(favouriteRepository.insert(eventEntity))
                 .thenReturn(Single.error(Exception()))
 
-        impl.insertMatchToFavorite(favoriteEventEntity)
+        impl.insertMatchToFavorite(eventEntity)
 
-        Mockito.verify(favoriteRepository).insertEvent(favoriteEventEntity)
+        Mockito.verify(favouriteRepository).insert(eventEntity)
         Mockito.verify(view).showLoading()
         Mockito.verify(view).hideLoading()
         Mockito.verify(view).showMessage("Failed add to favorite")
@@ -95,11 +101,11 @@ class MatchDetailPresenterImplTest {
 
     @Test
     fun deleteMatchFromFavoriteTest_valid_success() {
-        `when`(favoriteRepository.deleteEvent(EVENT_ID)).thenReturn(Single.just(true))
+        `when`(favouriteRepository.delete(EVENT_ID)).thenReturn(Single.just(true))
 
         impl.deleteMatchFromFavorite(EVENT_ID)
 
-        verify(favoriteRepository).deleteEvent(EVENT_ID)
+        verify(favouriteRepository).delete(EVENT_ID)
         verify(view).showLoading()
         verify(view).hideLoading()
         verify(view).showMessage("Removed from favorite")
@@ -107,12 +113,12 @@ class MatchDetailPresenterImplTest {
 
     @Test
     fun deleteMatchFromFavoriteTest_valid_failed() {
-        `when`(favoriteRepository.deleteEvent(EVENT_ID))
+        `when`(favouriteRepository.delete(EVENT_ID))
                 .thenReturn(Single.error(Exception()))
 
         impl.deleteMatchFromFavorite(EVENT_ID)
 
-        verify(favoriteRepository).deleteEvent(EVENT_ID)
+        verify(favouriteRepository).delete(EVENT_ID)
         verify(view).showLoading()
         verify(view).hideLoading()
         verify(view).showMessage(FAILED_TO_REMOVE_FROM_FAVORITE)
@@ -120,11 +126,11 @@ class MatchDetailPresenterImplTest {
 
     @Test
     fun isExistFavoriteEventTest_valid_true() {
-        `when`(favoriteRepository.isExistEvent(EVENT_ID)).thenReturn(Single.just(true))
+        `when`(favouriteRepository.isExist(EVENT_ID)).thenReturn(Single.just(true))
 
         impl.isExistFavoriteEvent(EVENT_ID)
 
-        verify(favoriteRepository).isExistEvent(EVENT_ID)
+        verify(favouriteRepository).isExist(EVENT_ID)
         verify(view).showLoading()
         verify(view).hideLoading()
         verify(view).isExistFavoriteEvent(true)
@@ -132,11 +138,11 @@ class MatchDetailPresenterImplTest {
 
     @Test
     fun isExistFavoriteEventTest_valid_false() {
-        `when`(favoriteRepository.isExistEvent(EVENT_ID)).thenReturn(Single.just(false))
+        `when`(favouriteRepository.isExist(EVENT_ID)).thenReturn(Single.just(false))
 
         impl.isExistFavoriteEvent(EVENT_ID)
 
-        verify(favoriteRepository).isExistEvent(EVENT_ID)
+        verify(favouriteRepository).isExist(EVENT_ID)
         verify(view).showLoading()
         verify(view).hideLoading()
         verify(view).isExistFavoriteEvent(false)
@@ -144,11 +150,11 @@ class MatchDetailPresenterImplTest {
 
     @Test
     fun isExistFavoriteEventTest_valid_exception() {
-        `when`(favoriteRepository.isExistEvent(EVENT_ID)).thenReturn(Single.error(Exception()))
+        `when`(favouriteRepository.isExist(EVENT_ID)).thenReturn(Single.error(Exception()))
 
         impl.isExistFavoriteEvent(EVENT_ID)
 
-        verify(favoriteRepository).isExistEvent(EVENT_ID)
+        verify(favouriteRepository).isExist(EVENT_ID)
         verify(view).showLoading()
         verify(view).hideLoading()
         verify(view).showMessage(FAILED_GET_DATA_FROM_DB)

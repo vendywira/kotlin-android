@@ -3,23 +3,30 @@
     package="app.learn.kotlin">
 
     <application
-        android:name=".AppController"
+        android:name=".di.AppController"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name="app.learn.kotlin.feature.HomeActivity">
+        <activity
+            android:name="app.learn.kotlin.feature.HomeActivity"
+            android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".feature.event.match.MatchActivity"/>
         <activity android:name=".feature.event.detail.MatchDetailActivity"/>
-        <activity android:name=".feature.league.MainActivity"/>
+        <activity
+            android:theme="@style/AppTheme.NoActionBar"
+            android:name=".feature.search.SearchActivity"/>
+        <activity android:name=".feature.team.detail.TeamDetailActivity"
+            android:theme="@style/AppTheme.NoActionBar"/>
+        <activity android:name=".feature.team.player.PlayerDetailActivity"
+            android:theme="@style/AppTheme.NoActionBar"/>
     </application>
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />

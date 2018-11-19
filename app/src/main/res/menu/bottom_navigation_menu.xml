@@ -2,22 +2,22 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <item
-        android:id="@+id/prev_matchs"
+        android:id="@+id/menu_team_id"
         android:enabled="true"
-        android:title="@string/prev_match"
-        android:icon="@drawable/ic_prev_match"
+        android:title="@string/ic_team"
+        android:icon="@drawable/ic_team"
         app:showAsAction="ifRoom"/>
     <item
-        android:id="@+id/next_matchs"
+        android:id="@+id/menu_match_id"
         android:enabled="true"
-        android:title="@string/next_match"
+        android:title="@string/ic_match"
         android:icon="@drawable/ic_next_match"
         app:showAsAction="ifRoom"/>
 
     <item
-        android:id="@+id/favorites"
+        android:id="@+id/menu_favorite_id"
         android:enabled="true"
         android:icon="@drawable/ic_favorites"
-        android:title="@string/favorites"
+        android:title="@string/ic_favorites"
         app:showAsAction="ifRoom" />
 </menu>

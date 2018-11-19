@@ -3,7 +3,6 @@ package app.learn.kotlin.repository
 import android.app.Application
 import app.learn.kotlin.di.scope.ApplicationContext
 import app.learn.kotlin.di.scope.ApplicationScope
-import app.learn.kotlin.helper.DatabaseUtils
 import app.learn.kotlin.helper.database
 import dagger.Module
 import dagger.Provides
@@ -19,7 +18,13 @@ class RepositoryModule {
 
     @ApplicationScope
     @Provides
-    internal fun provideFavoriteEventRepository(databaseUtils: DatabaseUtils): FavoriteMatchRepository {
-        return FavoriteMatchRepositoryImpl(databaseUtils)
+    internal fun provideFavoriteEventRepository(databaseUtils: DatabaseUtils): FavouriteMatchRepository {
+        return FavouriteMatchRepositoryImpl(databaseUtils)
+    }
+
+    @ApplicationScope
+    @Provides
+    internal fun provideFavoriteTeamRepository(databaseUtils: DatabaseUtils): FavoriteTeamRepository {
+        return FavoriteTeamRepositoryImpl(databaseUtils)
     }
 }

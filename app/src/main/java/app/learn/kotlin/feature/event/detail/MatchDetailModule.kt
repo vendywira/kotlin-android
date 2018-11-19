@@ -9,9 +9,9 @@ abstract class MatchDetailModule {
 
     @ActivityScope
     @Binds
-    abstract fun provideMatchDetailView(matchDetailFragment: MatchDetailActivity): MatchDetailView
+    abstract fun provideMatchDetailView(matchDetailFragment: MatchDetailActivity): MatchDetailContract.View
 
     @ActivityScope
     @Binds
-    abstract fun provideMatchPresenter(matchDetailPresenterImpl: MatchDetailPresenterImpl): MatchDetailPresenter
+    abstract fun provideMatchPresenter(matchDetailPresenterImpl: MatchDetailPresenterImpl): MatchDetailContract.Presenter
 }
