@@ -5,11 +5,11 @@
 
 ## Feature
 ### Teams information
-- [x] List of teams based on choosen league.
-- [x] Team search.
-- [x] Team detail.
-- [x] List of players.
-- [x] Player detail.
+ - [x] List of teams based on choosen league.
+ - [x] Team search.
+ - [x] Team detail.
+ - [x] List of players.
+ - [x] Player detail.
 
 ### Match schedules
  - [x] show list based on choosen league.
@@ -37,10 +37,10 @@
 - [x] Retrofit 2
 - [x] Anko
 - [x] Glide
-- [x] lottie animation view
-- [x] mockito unit testing
-- [x] idling resource
-- [ ] cache layer / offline mode
+- [x] Lottie animation view
+- [x] Mockito unit testing
+- [x] Idling resource
+- [ ] Cache layer / offline mode (onprogress)
 
 ## License
 The MIT License (MIT)
