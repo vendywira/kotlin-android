@@ -41,10 +41,10 @@
 - [ ] Cache layer / offline mode (onprogress)
 
 ## The Best Facilitator GDK 2018
-<img src="https://github.com/vendywira/kotlin-android/blob/master/screenshot/the_best_facilitators_GDK_2018.jpg" width="640" height="480" />
+<img src="https://github.com/vendywira/kotlin-android/blob/master/screenshot/the_best_facilitators_GDK_2018.jpg" width="640" height="360" />
 
 ## The Best Participants GDK 2018
-<img src="https://github.com/vendywira/kotlin-android/blob/master/screenshot/the_best_participants_GDK_2018.jpg" width="640" height="480" />
+<img src="https://github.com/vendywira/kotlin-android/blob/master/screenshot/the_best_participants_GDK_2018.jpg" width="640" height="360" />
 
 ## License
 The MIT License (MIT)
