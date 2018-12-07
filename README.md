@@ -1,7 +1,5 @@
-# Dicoding training (Kotlin Android Developer Expert)
-
+# GDK 2018 Dicoding Android (Kotlin Android Developer Expert)
 <img src="https://github.com/vendywira/kotlin-android/blob/master/screenshot/screen-capture.gif" width="190" height="380" />
-
 
 ## Feature
 ### Teams information
@@ -41,6 +39,12 @@
 - [x] Mockito unit testing
 - [x] Idling resource
 - [ ] Cache layer / offline mode (onprogress)
+
+## The Best Facilitator GDK 2018
+<img src="https://github.com/vendywira/kotlin-android/blob/master/screenshot/the_best_facilitators_GDK_2018.jpg" width="640" height="480" />
+
+## The Best Participants GDK 2018
+<img src="https://github.com/vendywira/kotlin-android/blob/master/screenshot/the_best_participants_GDK_2018.jpg" width="640" height="480" />
 
 ## License
 The MIT License (MIT)
