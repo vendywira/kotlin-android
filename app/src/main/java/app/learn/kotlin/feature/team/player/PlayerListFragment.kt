@@ -38,7 +38,7 @@ class PlayerListFragment : BaseFragment<PlayerListContract.Presenter>(), PlayerL
 
     override fun onInitView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View {
         val view = LayoutInflater.from(context).inflate(R.layout.fragment_player, container, false)
-        progressBar = view.find(R.id.base_progress_bar_id)
+        progressBar = view.findViewById(R.id.base_progress_bar_id)
         swipeRefresh = view.find(R.id.base_swipe_refresh)
         recyclerView = view.find(R.id.base_recycle_view_id)
 

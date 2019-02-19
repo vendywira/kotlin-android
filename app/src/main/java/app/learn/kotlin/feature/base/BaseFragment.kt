@@ -38,7 +38,7 @@ abstract class BaseFragment<out T : BasePresenter> : Fragment(), BaseView {
 
     override fun onAttach(context: Context?) {
         super.onAttach(context)
-        AndroidSupportInjection.inject(this)
+//        AndroidSupportInjection.inject(this)
     }
 
     override fun showLoading() {

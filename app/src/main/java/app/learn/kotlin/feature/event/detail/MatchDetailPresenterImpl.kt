@@ -3,18 +3,25 @@ package app.learn.kotlin.feature.event.detail
 import app.learn.kotlin.feature.base.BaseIdleListener
 import app.learn.kotlin.feature.base.BaseIdleResource
 import app.learn.kotlin.feature.base.BasePresenterImpl
+import app.learn.kotlin.feature.base.BaseView
+import app.learn.kotlin.feature.event.match.MatchContract
 import app.learn.kotlin.model.entity.EventEntity
 import app.learn.kotlin.network.TheSportDBApiService
 import app.learn.kotlin.repository.FavouriteMatchRepository
 import io.reactivex.android.schedulers.AndroidSchedulers
 import javax.inject.Inject
 
-class MatchDetailPresenterImpl @Inject constructor(
+class MatchDetailPresenterImpl(
         private val idleListener: BaseIdleListener,
-        private val view: MatchDetailContract.View,
         private val apiService: TheSportDBApiService,
         private val favouriteRepository: FavouriteMatchRepository)
     : BasePresenterImpl(), MatchDetailContract.Presenter {
+
+    lateinit var view: MatchDetailContract.View
+
+    override fun <T : BaseView> setupView(view: T) {
+        this.view = view as MatchDetailContract.View
+    }
 
     companion object {
         const val FAILED_ADD_TO_FAVORITE = "Failed add to favorite"

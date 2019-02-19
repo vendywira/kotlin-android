@@ -2,17 +2,23 @@ package app.learn.kotlin.feature.event.match
 
 import app.learn.kotlin.feature.base.BaseIdleListener
 import app.learn.kotlin.feature.base.BasePresenterImpl
+import app.learn.kotlin.feature.base.BaseView
 import app.learn.kotlin.model.Constant
 import app.learn.kotlin.model.response.ListResponse
 import app.learn.kotlin.network.TheSportDBApiService
 import io.reactivex.android.schedulers.AndroidSchedulers
 import javax.inject.Inject
 
-class MatchPresenterImpl @Inject constructor(
+class MatchPresenterImpl (
         private val idleListener: BaseIdleListener,
-        private val view: MatchContract.View,
         private val apiService: TheSportDBApiService)
     : BasePresenterImpl(), MatchContract.Presenter {
+
+    lateinit var view: MatchContract.View
+
+    override fun <T : BaseView> setupView(view: T) {
+        this.view = view as MatchContract.View
+    }
 
     override fun getLastMatch() {
         super.addDisposable(apiService.getLastMatchByLeagueId(view.getSelectedLeagueId().orEmpty())

@@ -2,6 +2,8 @@ package app.learn.kotlin.feature.event.detail
 
 import app.learn.kotlin.feature.base.BaseIdleListener
 import app.learn.kotlin.feature.base.BasePresenterImpl
+import app.learn.kotlin.feature.base.BaseView
+import app.learn.kotlin.feature.search.team.SearchTeamContract
 import app.learn.kotlin.model.entity.TeamEntity
 import app.learn.kotlin.repository.FavoriteTeamRepository
 import io.reactivex.android.schedulers.AndroidSchedulers
@@ -9,7 +11,6 @@ import javax.inject.Inject
 
 class TeamDetailPresenterImpl @Inject constructor(
         private val idleListener: BaseIdleListener,
-        private val view: TeamDetailContract.View,
         private val favoriteRepository: FavoriteTeamRepository)
     : BasePresenterImpl(), TeamDetailContract.Presenter {
 
@@ -19,6 +20,12 @@ class TeamDetailPresenterImpl @Inject constructor(
         const val FAILED_TO_REMOVE_FROM_FAVORITE = "Failed to remove from favorite"
         const val REMOVED_FROM_FAVORITE = "Removed from favorite"
         const val FAILED_GET_DATA_FROM_DB = "Failed get data from db"
+    }
+
+    lateinit var view: TeamDetailContract.View
+
+    override fun <T : BaseView> setupView(view: T) {
+        this.view = view as TeamDetailContract.View
     }
 
     override fun insertTeamToFavorite(teamEntity: TeamEntity) {
