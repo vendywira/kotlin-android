@@ -12,7 +12,6 @@ abstract class BaseActivity<out T : BasePresenter> : AppCompatActivity(), BaseVi
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        AndroidInjection.inject(this)
         onInitView()
 
         getPresenter()?.run { this.onAttach() }

@@ -13,6 +13,7 @@ import app.learn.kotlin.R.layout.activity_team_detail
 import app.learn.kotlin.feature.base.BaseActivity
 import app.learn.kotlin.feature.base.BasePagerAdapter
 import app.learn.kotlin.feature.event.detail.TeamDetailContract
+import app.learn.kotlin.feature.event.detail.TeamDetailPresenterImpl
 import app.learn.kotlin.feature.team.player.PlayerListFragment
 import app.learn.kotlin.helper.invisible
 import app.learn.kotlin.helper.loadImageUrl
@@ -25,14 +26,14 @@ import com.airbnb.lottie.LottieAnimationView
 import kotlinx.android.synthetic.main.activity_team_detail.*
 import kotlinx.android.synthetic.main.progress_bar.*
 import org.jetbrains.anko.design.snackbar
+import org.koin.android.ext.android.inject
 import javax.inject.Inject
 
 
 class TeamDetailActivity : BaseActivity<TeamDetailContract.Presenter>(),
         TeamDetailContract.View {
 
-    @Inject
-    internal lateinit var presenter: TeamDetailContract.Presenter
+    private val presenter: TeamDetailPresenterImpl by inject()
 
     private lateinit var progressBar: LottieAnimationView
     private lateinit var team: TeamVo
@@ -55,6 +56,7 @@ class TeamDetailActivity : BaseActivity<TeamDetailContract.Presenter>(),
     override fun getProgressBar(): LottieAnimationView? = progressBar
 
     override fun onInitView() {
+        presenter.setupView(this)
         setContentView(activity_team_detail)
         progressBar = base_progress_bar_id
         team = intent.getParcelableExtra(Constant.TEAM_INTENT)

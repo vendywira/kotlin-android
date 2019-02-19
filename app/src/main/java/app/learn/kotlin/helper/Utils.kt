@@ -3,9 +3,7 @@ package app.learn.kotlin.helper
 import android.annotation.SuppressLint
 import android.content.ContentValues
 import android.content.Context
-import android.os.Build
 import android.os.Parcel
-import android.support.annotation.RequiresApi
 import android.support.v4.widget.CircularProgressDrawable
 import android.view.MenuItem
 import android.view.View
@@ -18,11 +16,7 @@ import com.fasterxml.jackson.databind.ObjectMapper
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 import org.modelmapper.ModelMapper
-import java.lang.IndexOutOfBoundsException
 import java.text.SimpleDateFormat
-import java.time.LocalTime
-import java.time.ZoneId
-import java.time.format.DateTimeFormatter
 import java.util.*
 
 fun View.visible() {

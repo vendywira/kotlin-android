@@ -22,12 +22,12 @@ import kotlinx.android.synthetic.main.base_recycle_view.view.*
 import kotlinx.android.synthetic.main.progress_bar.view.*
 import org.jetbrains.anko.startActivity
 import org.jetbrains.anko.support.v4.ctx
+import org.koin.android.ext.android.inject
 import javax.inject.Inject
 
 class SearchEventFragment : BaseFragment<SearchEventContract.Presenter>(), SearchEventContract.View {
 
-    @Inject
-    internal lateinit var presenter: SearchEventContract.Presenter
+    private val presenter: SearchEventPresenterImpl by inject()
 
     private lateinit var recyclerView: RecyclerView
     private lateinit var eventAdapter: EventAdapter
@@ -36,6 +36,7 @@ class SearchEventFragment : BaseFragment<SearchEventContract.Presenter>(), Searc
     private var eventResponses = mutableListOf<Event>()
 
     override fun onInitView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View {
+        presenter.setupView(this)
         val view = LayoutInflater.from(context).inflate(R.layout.fragment_search_match, container, false)
         recyclerView = view.base_recycle_view_id
         progressBar = view.base_progress_bar_id

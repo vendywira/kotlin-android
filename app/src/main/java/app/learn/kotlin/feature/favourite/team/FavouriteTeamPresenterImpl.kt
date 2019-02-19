@@ -2,6 +2,8 @@ package app.learn.kotlin.feature.favourite.team
 
 import app.learn.kotlin.feature.base.BaseIdleListener
 import app.learn.kotlin.feature.base.BasePresenterImpl
+import app.learn.kotlin.feature.base.BaseView
+import app.learn.kotlin.feature.favourite.event.FavouriteEventContract
 import app.learn.kotlin.model.Constant
 import app.learn.kotlin.model.entity.TeamEntity
 import app.learn.kotlin.repository.FavoriteTeamRepository
@@ -10,9 +12,14 @@ import javax.inject.Inject
 
 class FavouriteTeamPresenterImpl @Inject constructor(
         private val idleListener: BaseIdleListener,
-        private val view: FavouriteTeamContract.View,
         private val favoriteRepository: FavoriteTeamRepository
 ) : BasePresenterImpl(), FavouriteTeamContract.Presenter {
+
+    lateinit var view: FavouriteTeamContract.View
+
+    override fun <T : BaseView> setupView(view: T) {
+        this.view = view as FavouriteTeamContract.View
+    }
 
     override fun getListFavorite() {
         return super.addDisposable(favoriteRepository.findAll()

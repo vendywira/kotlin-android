@@ -21,12 +21,12 @@ import kotlinx.android.synthetic.main.base_recycle_view.view.*
 import kotlinx.android.synthetic.main.progress_bar.view.*
 import org.jetbrains.anko.startActivity
 import org.jetbrains.anko.support.v4.ctx
+import org.koin.android.ext.android.inject
 import javax.inject.Inject
 
 class SearchTeamFragment : BaseFragment<SearchTeamContract.Presenter>(), SearchTeamContract.View {
 
-    @Inject
-    internal lateinit var presenter: SearchTeamContract.Presenter
+    private val presenter: SearchTeamPresenterImpl by inject()
 
     private lateinit var recycleView: RecyclerView
     private lateinit var progressBar: LottieAnimationView
@@ -37,6 +37,7 @@ class SearchTeamFragment : BaseFragment<SearchTeamContract.Presenter>(), SearchT
     override fun getPresenter(): SearchTeamContract.Presenter? = presenter
 
     override fun onInitView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View {
+        presenter.setupView(this)
         val view = layoutInflater.inflate(R.layout.fragment_search_team, container, false)
         progressBar = view.base_progress_bar_id
         progressBar.invisible()

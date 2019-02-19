@@ -25,12 +25,12 @@ import org.jetbrains.anko.find
 import org.jetbrains.anko.startActivity
 import org.jetbrains.anko.support.v4.ctx
 import org.jetbrains.anko.support.v4.onRefresh
+import org.koin.android.ext.android.inject
 import javax.inject.Inject
 
 class TeamListFragment : BaseFragment<TeamListContract.Presenter>(), TeamListContract.View {
 
-    @Inject
-    internal lateinit var presenter : TeamListContract.Presenter
+    private val presenter : TeamListPresenterImpl by inject()
 
     private lateinit var listTeam: RecyclerView
     private lateinit var progressBar: LottieAnimationView
@@ -44,11 +44,12 @@ class TeamListFragment : BaseFragment<TeamListContract.Presenter>(), TeamListCon
 
     override fun onInitView(inflater: LayoutInflater?, container: ViewGroup?,
                             savedInstanceState: Bundle?): View {
+        presenter.setupView(this)
         val view = layoutInflater.inflate(R.layout.fragment_team, container, false)
         spinner = view.find(R.id.team_spinner_id)
         listTeam = view.find(R.id.base_recycle_view_id)
         swipeRefresh = view.find(R.id.base_swipe_refresh)
-        progressBar = view.find(R.id.base_progress_bar_id)
+        progressBar = view.findViewById(R.id.base_progress_bar_id)
 
         presenter.getLeagueList()
         adapter = TeamAdapter(ctx, listResponseTeam) {

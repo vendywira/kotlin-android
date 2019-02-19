@@ -36,12 +36,13 @@ import kotlinx.android.synthetic.main.fragment_match.view.*
 import kotlinx.android.synthetic.main.progress_bar.view.*
 import org.jetbrains.anko.startActivity
 import org.jetbrains.anko.support.v4.ctx
+import org.koin.android.ext.android.inject
 import javax.inject.Inject
 
 open class MatchFragment : BaseFragment<MatchContract.Presenter>(), MatchContract.View {
 
-    @Inject
-    internal open lateinit var presenter: MatchContract.Presenter
+    private val presenter: MatchPresenterImpl by inject()
+
     private lateinit var contentUi: RecyclerView
     private lateinit var eventAdapter: EventAdapter
     private lateinit var progressBar: LottieAnimationView
@@ -75,6 +76,7 @@ open class MatchFragment : BaseFragment<MatchContract.Presenter>(), MatchContrac
 
     @RequiresApi(Build.VERSION_CODES.JELLY_BEAN_MR2)
     override fun onInitView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View {
+        presenter.setupView(this)
         val view = LayoutInflater.from(context).inflate(fragment_match, container, false)
         progressBar = view.base_progress_bar_id
         contentUi = view.rv_match

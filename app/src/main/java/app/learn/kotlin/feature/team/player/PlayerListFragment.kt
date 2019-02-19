@@ -21,12 +21,12 @@ import org.jetbrains.anko.find
 import org.jetbrains.anko.startActivity
 import org.jetbrains.anko.support.v4.ctx
 import org.jetbrains.anko.support.v4.onRefresh
+import org.koin.android.ext.android.inject
 import javax.inject.Inject
 
 class PlayerListFragment : BaseFragment<PlayerListContract.Presenter>(), PlayerListContract.View {
 
-    @Inject
-    internal lateinit var presenter: PlayerListContract.Presenter
+    private val presenter: PlayerListPresenterImpl by inject()
     private lateinit var progressBar: LottieAnimationView
     private lateinit var recyclerView: RecyclerView
     private lateinit var swipeRefresh: SwipeRefreshLayout
@@ -37,8 +37,9 @@ class PlayerListFragment : BaseFragment<PlayerListContract.Presenter>(), PlayerL
     override fun getPresenter(): PlayerListContract.Presenter? = presenter
 
     override fun onInitView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View {
+        presenter.setupView(this)
         val view = LayoutInflater.from(context).inflate(R.layout.fragment_player, container, false)
-        progressBar = view.find(R.id.base_progress_bar_id)
+        progressBar = view.findViewById(R.id.base_progress_bar_id)
         swipeRefresh = view.find(R.id.base_swipe_refresh)
         recyclerView = view.find(R.id.base_recycle_view_id)
 

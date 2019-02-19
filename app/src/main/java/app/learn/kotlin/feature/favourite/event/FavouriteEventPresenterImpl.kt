@@ -3,6 +3,8 @@ package app.learn.kotlin.feature.favourite.event
 import app.learn.kotlin.feature.base.BaseIdleListener
 import app.learn.kotlin.feature.base.BaseIdleResource
 import app.learn.kotlin.feature.base.BasePresenterImpl
+import app.learn.kotlin.feature.base.BaseView
+import app.learn.kotlin.feature.event.match.MatchContract
 import app.learn.kotlin.model.Constant
 import app.learn.kotlin.model.entity.EventEntity
 import app.learn.kotlin.repository.FavouriteMatchRepository
@@ -11,9 +13,14 @@ import javax.inject.Inject
 
 class FavouriteEventPresenterImpl @Inject constructor(
         private val idleListener: BaseIdleListener,
-        private val view: FavouriteEventContract.View,
         private val favouriteRepository: FavouriteMatchRepository
 ) : BasePresenterImpl(), FavouriteEventContract.Presenter {
+
+    lateinit var view: FavouriteEventContract.View
+
+    override fun <T : BaseView> setupView(view: T) {
+        this.view = view as FavouriteEventContract.View
+    }
 
     override fun getListFavorite() {
         return super.addDisposable(favouriteRepository.findAll()

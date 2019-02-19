@@ -20,14 +20,13 @@ import com.airbnb.lottie.LottieAnimationView
 import kotlinx.android.synthetic.main.activity_match_detail.*
 import kotlinx.android.synthetic.main.progress_bar.*
 import org.jetbrains.anko.design.snackbar
-import javax.inject.Inject
+import org.koin.android.ext.android.inject
 
 
 class MatchDetailActivity : BaseActivity<MatchDetailContract.Presenter>(),
         MatchDetailContract.View {
 
-    @Inject
-    internal lateinit var presenter: MatchDetailContract.Presenter
+    private val presenter: MatchDetailPresenterImpl by inject()
 
     private lateinit var progressBar: LottieAnimationView
     private lateinit var menu: Menu
@@ -50,6 +49,7 @@ class MatchDetailActivity : BaseActivity<MatchDetailContract.Presenter>(),
     override fun getProgressBar(): LottieAnimationView? = progressBar
 
     override fun onInitView() {
+        presenter.setupView(this)
         setContentView(activity_match_detail)
         supportActionBar?.setDisplayShowHomeEnabled(true)
         supportActionBar?.setHomeButtonEnabled(true)
