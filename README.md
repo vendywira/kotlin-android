@@ -30,7 +30,7 @@
 
 ## Tech Stack
 - [x] MPV Approach
-- [x] Dagger 2
+- [x] ~~Dagger 2~~ KOIN
 - [x] Object mapper
 - [x] Kotlin
 - [x] RxJava 2 and RxAndroid
