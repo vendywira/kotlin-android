@@ -3,6 +3,8 @@ package app.learn.kotlin.koin
 import android.util.Log
 import app.learn.kotlin.BuildConfig
 import app.learn.kotlin.network.TheSportDBApiService
+import io.reactivex.schedulers.Schedulers
+import io.reactivex.schedulers.Schedulers.single
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import org.koin.dsl.module.module
@@ -21,10 +23,7 @@ fun createOkHttpClient(): OkHttpClient {
         Log.e("football club", it)
     })
     httpInterceptor.level = HttpLoggingInterceptor.Level.BASIC
-    return OkHttpClient.Builder()
-            .connectTimeout(60L, TimeUnit.SECONDS)
-            .readTimeout(60L, TimeUnit.SECONDS)
-            .addInterceptor(httpInterceptor).build()
+    return OkHttpClient.Builder().addInterceptor(httpInterceptor).build()
 }
 
 inline fun <reified T> apiService(okHttpClient: OkHttpClient, url: String): T {
@@ -32,6 +31,8 @@ inline fun <reified T> apiService(okHttpClient: OkHttpClient, url: String): T {
             .baseUrl(url)
             .client(okHttpClient)
             .addConverterFactory(GsonConverterFactory.create())
-            .addCallAdapterFactory(RxJava2CallAdapterFactory.create()).build()
+            .addCallAdapterFactory(RxJava2CallAdapterFactory.createWithScheduler(Schedulers.io()))
+            .build()
+
     return retrofit.create(T::class.java)
 }

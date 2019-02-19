@@ -9,7 +9,7 @@ import app.learn.kotlin.repository.FavoriteTeamRepository
 import io.reactivex.android.schedulers.AndroidSchedulers
 import javax.inject.Inject
 
-class TeamDetailPresenterImpl @Inject constructor(
+class TeamDetailPresenterImpl(
         private val idleListener: BaseIdleListener,
         private val favoriteRepository: FavoriteTeamRepository)
     : BasePresenterImpl(), TeamDetailContract.Presenter {

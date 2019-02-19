@@ -26,7 +26,7 @@ import org.koin.android.ext.android.inject
 class MatchDetailActivity : BaseActivity<MatchDetailContract.Presenter>(),
         MatchDetailContract.View {
 
-    val presenter: MatchDetailPresenterImpl by inject()
+    private val presenter: MatchDetailPresenterImpl by inject()
 
     private lateinit var progressBar: LottieAnimationView
     private lateinit var menu: Menu
@@ -49,6 +49,7 @@ class MatchDetailActivity : BaseActivity<MatchDetailContract.Presenter>(),
     override fun getProgressBar(): LottieAnimationView? = progressBar
 
     override fun onInitView() {
+        presenter.setupView(this)
         setContentView(activity_match_detail)
         supportActionBar?.setDisplayShowHomeEnabled(true)
         supportActionBar?.setHomeButtonEnabled(true)

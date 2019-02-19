@@ -41,7 +41,7 @@ import javax.inject.Inject
 
 open class MatchFragment : BaseFragment<MatchContract.Presenter>(), MatchContract.View {
 
-    val presenter: MatchPresenterImpl by inject()
+    private val presenter: MatchPresenterImpl by inject()
 
     private lateinit var contentUi: RecyclerView
     private lateinit var eventAdapter: EventAdapter
@@ -76,6 +76,7 @@ open class MatchFragment : BaseFragment<MatchContract.Presenter>(), MatchContrac
 
     @RequiresApi(Build.VERSION_CODES.JELLY_BEAN_MR2)
     override fun onInitView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View {
+        presenter.setupView(this)
         val view = LayoutInflater.from(context).inflate(fragment_match, container, false)
         progressBar = view.base_progress_bar_id
         contentUi = view.rv_match

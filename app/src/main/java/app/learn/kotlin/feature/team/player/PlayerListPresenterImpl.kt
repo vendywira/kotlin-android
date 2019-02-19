@@ -6,9 +6,8 @@ import app.learn.kotlin.feature.base.BaseView
 import app.learn.kotlin.feature.event.detail.TeamDetailPresenterImpl
 import app.learn.kotlin.network.TheSportDBApiService
 import io.reactivex.android.schedulers.AndroidSchedulers
-import javax.inject.Inject
 
-class PlayerListPresenterImpl @Inject constructor(
+class PlayerListPresenterImpl(
         private val idleListener: BaseIdleListener,
         private val apiService: TheSportDBApiService
 ) : BasePresenterImpl(), PlayerListContract.Presenter {

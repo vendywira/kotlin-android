@@ -34,7 +34,7 @@ class HomeActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(acivity_home)
+        setContentView(R.layout.acivity_home)
         toolbar_home.setTitle(R.string.app_name)
         setSupportActionBar(toolbar_home)
         bottom_navigation.setOnNavigationItemSelectedListener { item ->

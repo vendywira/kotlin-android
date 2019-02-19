@@ -30,7 +30,7 @@ import javax.inject.Inject
 
 class TeamListFragment : BaseFragment<TeamListContract.Presenter>(), TeamListContract.View {
 
-    val presenter : TeamListPresenterImpl by inject()
+    private val presenter : TeamListPresenterImpl by inject()
 
     private lateinit var listTeam: RecyclerView
     private lateinit var progressBar: LottieAnimationView
