@@ -3,14 +3,12 @@ package app.learn.kotlin.feature.favourite.team
 import app.learn.kotlin.feature.base.BaseIdleListener
 import app.learn.kotlin.feature.base.BasePresenterImpl
 import app.learn.kotlin.feature.base.BaseView
-import app.learn.kotlin.feature.favourite.event.FavouriteEventContract
 import app.learn.kotlin.model.Constant
 import app.learn.kotlin.model.entity.TeamEntity
 import app.learn.kotlin.repository.FavoriteTeamRepository
 import io.reactivex.android.schedulers.AndroidSchedulers
-import javax.inject.Inject
 
-class FavouriteTeamPresenterImpl @Inject constructor(
+class FavouriteTeamPresenterImpl(
         private val idleListener: BaseIdleListener,
         private val favoriteRepository: FavoriteTeamRepository
 ) : BasePresenterImpl(), FavouriteTeamContract.Presenter {

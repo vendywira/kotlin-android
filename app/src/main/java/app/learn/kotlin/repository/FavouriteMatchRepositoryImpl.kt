@@ -8,9 +8,8 @@ import app.learn.kotlin.model.entity.EventEntity
 import io.reactivex.Observable
 import io.reactivex.Single
 import org.jetbrains.anko.db.*
-import javax.inject.Inject
 
-class FavouriteMatchRepositoryImpl @Inject constructor(private val db: DatabaseUtils)
+class FavouriteMatchRepositoryImpl(private val db: DatabaseUtils)
     : FavouriteMatchRepository {
 
     override fun insert(eventEntity: EventEntity): Single<Boolean> {

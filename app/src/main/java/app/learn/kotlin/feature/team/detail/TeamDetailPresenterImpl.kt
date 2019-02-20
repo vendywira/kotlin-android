@@ -7,7 +7,6 @@ import app.learn.kotlin.feature.search.team.SearchTeamContract
 import app.learn.kotlin.model.entity.TeamEntity
 import app.learn.kotlin.repository.FavoriteTeamRepository
 import io.reactivex.android.schedulers.AndroidSchedulers
-import javax.inject.Inject
 
 class TeamDetailPresenterImpl(
         private val idleListener: BaseIdleListener,

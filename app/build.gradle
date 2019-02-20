@@ -45,16 +45,6 @@ dependencies {
     implementation "org.jetbrains.anko:anko-sqlite:$anko_version"
 
     // Dependency Injection
-    implementation "com.google.dagger:dagger:$dagger2_version"
-    implementation "com.google.dagger:dagger-android:$dagger2_version"
-    implementation "com.google.dagger:dagger-android-support:$dagger2_version"
-    annotationProcessor "com.google.dagger:dagger-compiler:$dagger2_version"
-    annotationProcessor "com.google.dagger:dagger-android-processor:$dagger2_version"
-    kapt "com.google.dagger:dagger-compiler:$dagger2_version"
-    kapt "com.google.dagger:dagger-android-processor:$dagger2_version"
-    compileOnly 'javax.annotation:jsr250-api:1.0'
-    implementation 'javax.inject:javax.inject:1'
-
     implementation "org.koin:koin-android:$koin_version"
 
     // Retrofit + Gson
@@ -82,6 +72,9 @@ dependencies {
 
     implementation 'com.android.support:support-v4:28.0.0'
     implementation 'com.airbnb.android:lottie:2.7.0'
+
+    // db debuger
+    debugImplementation 'com.amitshekhar.android:debug-db:1.0.5'
 
     // unit test
     testImplementation "junit:junit:4.12"

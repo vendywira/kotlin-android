@@ -4,7 +4,6 @@ import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import app.learn.kotlin.helper.invisible
 import app.learn.kotlin.helper.visible
-import dagger.android.AndroidInjection
 import org.jetbrains.anko.contentView
 import org.jetbrains.anko.design.snackbar
 

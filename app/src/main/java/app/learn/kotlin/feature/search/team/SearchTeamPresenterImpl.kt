@@ -3,14 +3,12 @@ package app.learn.kotlin.feature.search.team
 import app.learn.kotlin.feature.base.BaseIdleListener
 import app.learn.kotlin.feature.base.BasePresenterImpl
 import app.learn.kotlin.feature.base.BaseView
-import app.learn.kotlin.feature.search.event.SearchEventContract
 import app.learn.kotlin.model.Constant
 import app.learn.kotlin.model.response.ListResponse
 import app.learn.kotlin.network.TheSportDBApiService
 import io.reactivex.android.schedulers.AndroidSchedulers
-import javax.inject.Inject
 
-class SearchTeamPresenterImpl @Inject constructor(
+class SearchTeamPresenterImpl(
         private val idleListener: BaseIdleListener,
         private val apiService: TheSportDBApiService)
     : BasePresenterImpl(), SearchTeamContract.Presenter {

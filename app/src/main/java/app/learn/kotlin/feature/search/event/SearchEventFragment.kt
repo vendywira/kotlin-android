@@ -23,7 +23,6 @@ import kotlinx.android.synthetic.main.progress_bar.view.*
 import org.jetbrains.anko.startActivity
 import org.jetbrains.anko.support.v4.ctx
 import org.koin.android.ext.android.inject
-import javax.inject.Inject
 
 class SearchEventFragment : BaseFragment<SearchEventContract.Presenter>(), SearchEventContract.View {
 

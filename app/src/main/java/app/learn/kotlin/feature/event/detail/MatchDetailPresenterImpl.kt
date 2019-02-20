@@ -9,7 +9,6 @@ import app.learn.kotlin.model.entity.EventEntity
 import app.learn.kotlin.network.TheSportDBApiService
 import app.learn.kotlin.repository.FavouriteMatchRepository
 import io.reactivex.android.schedulers.AndroidSchedulers
-import javax.inject.Inject
 
 class MatchDetailPresenterImpl(
         private val idleListener: BaseIdleListener,

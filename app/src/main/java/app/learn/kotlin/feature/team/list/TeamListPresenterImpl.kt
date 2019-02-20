@@ -8,8 +8,6 @@ import app.learn.kotlin.model.Constant
 import app.learn.kotlin.model.response.ListResponse
 import app.learn.kotlin.network.TheSportDBApiService
 import io.reactivex.android.schedulers.AndroidSchedulers
-import javax.inject.Inject
-
 
 class TeamListPresenterImpl(
         private val idleListener: BaseIdleListener,

@@ -27,8 +27,6 @@ import kotlinx.android.synthetic.main.activity_team_detail.*
 import kotlinx.android.synthetic.main.progress_bar.*
 import org.jetbrains.anko.design.snackbar
 import org.koin.android.ext.android.inject
-import javax.inject.Inject
-
 
 class TeamDetailActivity : BaseActivity<TeamDetailContract.Presenter>(),
         TeamDetailContract.View {

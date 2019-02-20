@@ -7,9 +7,8 @@ import app.learn.kotlin.model.Constant
 import app.learn.kotlin.model.response.ListResponse
 import app.learn.kotlin.network.TheSportDBApiService
 import io.reactivex.android.schedulers.AndroidSchedulers
-import javax.inject.Inject
 
-class MatchPresenterImpl (
+class MatchPresenterImpl(
         private val idleListener: BaseIdleListener,
         private val apiService: TheSportDBApiService)
     : BasePresenterImpl(), MatchContract.Presenter {

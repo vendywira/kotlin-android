@@ -12,10 +12,9 @@ import org.jetbrains.anko.db.delete
 import org.jetbrains.anko.db.parseList
 import org.jetbrains.anko.db.parseSingle
 import org.jetbrains.anko.db.select
-import javax.inject.Inject
 
 
-class FavoriteTeamRepositoryImpl @Inject constructor(private val db: DatabaseUtils)
+class FavoriteTeamRepositoryImpl(private val db: DatabaseUtils)
     : FavoriteTeamRepository {
 
     override fun insert(teamEntity: TeamEntity): Single<Boolean> {
